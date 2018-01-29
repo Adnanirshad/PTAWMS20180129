@@ -1,0 +1,889 @@
+﻿@model PTAWMS.Models.HR_Employee
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        }
+    }
+</script>
+<script type="text/javascript">
+    function fileCheck(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#myimage')
+                    .attr('src', e.target.result)
+                    .width(90)
+                    .height(90);
+                document.getElementById("myimage").style.marginTop = "20px";
+                document.getElementById("myimage").style.marginLeft = "30px";
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<p>
+
+<h3>Edit Employee <span class="h4">with ID: @Model.EmployeeID</span></h3>
+<hr />
+
+@using (Html.BeginForm("Edit", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{     
+    
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.EmployeeID)
+        <section class="col-md-12">
+         <section class="col-md-8">
+            <div class="form-group">
+            <label class="control-label col-md-4">Employee No<span style="color:red;"> *</span></label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.EmpNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EmpNo)
+                </div>
+            </div>
+             <div class="form-group">
+                <label class="control-label col-md-4">Select Emp Photo</label>
+                <div class="col-md-8">
+                    <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);"/>            
+                    <div class="upload-file-notice">Maximum size: <span id="avatar-max-size"></span> MB</div>
+                </div>
+            </div>
+        </section>        
+        <section class="col-md-4">  
+            <div class="list-group">
+          <a href="#" style="background-color:#fcfcfc;">
+            <img id="blah" style="width:90px; height:100px" class="img-responsive" src="@Url.Action("RetrieveImage", "Employee", new { id = Model.EmployeeID})"/>
+          </a>        
+        </div>                       
+        </section>
+        </section>     
+
+        <ul class="nav nav-tabs" role="tablist" id="myTab">
+           @if(user.MHREmpPersonal==true){<li class="active"><a href="#Personel" role="tab" data-toggle="tab">Personel</a></li>}
+            @if(user.MHREmpJob==true){<li><a href="#Job" role="tab" data-toggle="tab">Job</a></li>}
+            @if(user.MHREmpPersonal==true){<li><a href="#Contact" role="tab" data-toggle="tab">Contact</a></li>}
+            @if(user.MHREmpAtt==true){<li><a href="#Attendance" role="tab" data-toggle="tab">Attendance</a></li>}
+            @if(user.MHREmpSalary==true){<li><a href="#Salary" role="tab" data-toggle="tab">Salary</a></li>}
+            @if(user.MHREmpSalary==true){<li><a href="#TAX" role="tab" data-toggle="tab">Tax</a></li>}
+        </ul>
+        <p></p>
+        <div class="tab-content">
+            <div class="tab-pane active fade in active" id="Personel">
+                <p></p>
+                <div class="Outer">
+                    <div class="InnerLeft1">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">First Name<span style="color:red;"> *</span></label>
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FirstName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Middle Name<span style="color:red;"> </span></label>
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MiddleName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Last Name<span style="color:red;"> *</span></label>
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LastName)
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Old IKAN No</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.OldIKNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FathersName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">CNIC No</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.CNICNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Nationality)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Passport No</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.PassportNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BloodGroup)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Date Of Birth</label>
+                            <div class="col-md-5">
+                                @*@Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @type = "date" })*@
+                                @Html.TextBoxFor(x => x.DOB, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"}) 
+                                @Html.ValidationMessageFor(model => model.DOB)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Father Name</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.FathersName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FathersName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">PEC No</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.PECNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PECNo)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="InnerRight1">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-3" })
+                            <div class="col-md-5">
+                                @Html.DropDownList("Gender", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.Gender)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Blood Group</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("BloodGroup", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.BloodGroup)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Marital Status</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("MaritalStatus", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.MaritalStatus)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Religion</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("Religion", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.Religion)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Nationality</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("Nationality", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.Nationality)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*end of div tab*@
+            <div class="tab-pane" id="Job">
+                <div class="Outer">
+                    <p></p>
+                    <div class="InnerLeft1">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Business Area</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("BusinessAreaID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.BusinessAreaID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Division</label>
+                            <div class="col-md-6">
+                                @*@Html.DropDownList("DivisionID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })*@
+                                <select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DivisionID" name="DivisionID"></select>
+                                 @Html.HiddenFor(model => model.HR_Section.HR_Department.DivsionID, new { id = "selectedDivisionIdHidden" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="DeptDivID">
+                            <label class="control-label col-md-3">Department</label>
+                            <div class="col-md-6">
+                                @*@Html.DropDownList("SectionID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            @Html.ValidationMessageFor(model => model.SectionID)*@
+                                <select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DeptID" name="DeptID"></select>
+                                @Html.HiddenFor(model => model.HR_Section.DepartmentID, new { id = "selectedDeptIDHidden" })
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="SectionDivID">
+                            <label class="control-label col-md-3">Section</label>
+                            <div class="col-md-5">
+                                @* @Html.DropDownList("SectionID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                @Html.ValidationMessageFor(model => model.SectionID)*@
+                                <select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="SectionID" name="SectionID"></select>
+                                @Html.HiddenFor(model => model.SectionID, new { id = "selectedSectionIdHidden" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Category</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("CatID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })   
+                                 @Html.ValidationMessageFor(model => model.HR_EmpType.CategoryID)                            
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Employee type</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("EmpTypeID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.EmpTypeID)
+                            </div>
+                        </div>
+                        <div id="EmpTypeDiv">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Permanent Date</label>
+                                <div class="col-md-6">   
+                                    @Html.TextBoxFor(x => x.PermanentDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"}) 
+                                    @Html.ValidationMessageFor(model => model.PermanentDate)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Location</label>
+                            <div class="col-md-6"> 
+                            @Html.DropDownList("LocationID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            @Html.ValidationMessageFor(model => model.BusinessAreaID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Grade</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("GradeID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.GradeID)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="InnerRight1">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Designation</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("DesignationID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.DesignationID)
+                                @*<select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DesigID" name="DesigID"></select>
+                           *@
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Group</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("GroupID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.GroupID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Job Title</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("JobTitleID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.JobTitleID)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Join Date</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(x => x.DOJ, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"}) 
+                                @Html.ValidationMessageFor(model => model.DOJ)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Status</label>
+                            <div class="col-md-5">
+                                @Html.DropDownList("Status", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.Status)
+                            </div>
+                        </div>
+                        <div id="ResignedControls">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Resign Date</label>
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(x => x.LeavingDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"}) 
+                                    @Html.ValidationMessageFor(model => model.LeavingDate)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Reason For Leaving</label>
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.ReasonToLeave, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ReasonToLeave)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-6"> 
+                                    @Html.CheckBox("Clereance")<label >Clearence</label>
+                                    @Html.ValidationMessageFor(model => model.Clereance)
+                                </div>
+                            </div>
+                            <div id="ClearenceDiv">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Clearence Date</label>
+                                    <div class="col-md-6">  
+                                        @Html.TextBoxFor(x => x.ClearenceDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})  
+                                        @Html.ValidationMessageFor(model => model.ClearenceDate)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-6"> 
+                            @Html.CheckBox("SAPIntegrated")<label >SAP Integeration</label>
+                            @Html.ValidationMessageFor(model => model.SAPIntegrated)
+                            </div>
+                        </div>
+                         <div id="SAPidDiv">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">SAP ID</label>
+                                <div class="col-md-6"> 
+                                @Html.TextBoxFor(model => model.SAPID, new { @class = "form-control", @value="SAPID"})
+                                @Html.ValidationMessageFor(model => model.SAPID)
+                                </div>
+                            </div>   
+                        </div>
+
+                    </div>
+
+                </div>
+                @*// div of tab*@
+            </div>
+            <div class="tab-pane" id="Contact">
+                <p></p>
+                <div class="Outer">
+                    <div class="InnerLeft1">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Address</label>
+                            <div class="col-md-5">
+                                @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">City</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.City)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Country, new { @class = "control-label col-md-3" })
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.Country, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Country)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Local Telephone</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.LandLine, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LandLine)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Mobile No</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MobileNo)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="InnerRight1">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Emergency Contact No</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.EmergencyContactNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EmergencyContactNo)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4">E-mail</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.EmailID, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EmailID)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Official Contact No</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.OfficialContactNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.OfficialContactNo)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Official E-mail</label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.OfficialEmailID, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.OfficialEmailID)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*end of div tab*@
+
+            <div class="tab-pane" id="Attendance">
+                <p></p>
+                <div class="Outer">
+                    <div class="InnerLeft1">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Shift</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("ShiftID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.ShiftID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">OT Policy</label>
+                            <div class="col-md-6">
+                                @Html.DropDownList("OvertimePolicyID", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth" })
+                                @Html.ValidationMessageFor(model => model.OvertimePolicyID)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Pin Code</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.PinCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PinCode)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Valid Date </label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(x => x.ValidDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"}) 
+                                @Html.ValidationMessageFor(model => model.ValidDate)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-6">
+                                @Html.CheckBox("ProcessAttendance")<label>Process Attendance</label>
+                                @Html.ValidationMessageFor(model => model.ProcessAttendance)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-6"> 
+                                @Html.CheckBox("ProcessOnlyMonth")<label >Exempt Daily Attendance</label>
+                                @Html.ValidationMessageFor(model => model.ProcessOnlyMonth)
+                                </div>
+                            </div>  
+                        <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-6"> 
+                                @Html.CheckBox("FPTemp")<label >Fingerprint Template</label>
+                                @Html.ValidationMessageFor(model => model.FPTemp)
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <label class="control-label col-md-3"></label>
+                                <div class="col-md-6"> 
+                                @Html.CheckBox("FaceTemp")<label >Face Template</label>
+                                @Html.ValidationMessageFor(model => model.FaceTemp)
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Card Number</label>
+                                <div class="col-md-6"> 
+                                @Html.TextBoxFor(model => model.CardNo, new { @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.CardNo)
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="InnerRight1">
+                            @if (ViewBag.HasAPolicy!="No"){
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Casual</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyA",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                            }
+                            @if (ViewBag.HasBPolicy!="No"){
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Sick</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyB",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasCPolicy!="No"){
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Annual</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyC",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasDPolicy!="No"){
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Ex Pakistan Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyD",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasEPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Study Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyE",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasFPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Accidental Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyF",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasGPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Maternity Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyG",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasHPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">CPL</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyH",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasIPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Special Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyI",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasJPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Recreation Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyJ",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasKPolicy != "No")
+                            {
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Extraordinary Leave</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyK",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                                }
+                            @if (ViewBag.HasLPolicy!="No"){
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Leave preparatory to Retirement</label>
+                                <div class="col-md-6">  
+                                @Html.DropDownList("LeavePolicyL",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                 @Html.ValidationMessageFor(model => model.ShiftID)
+                                </div>
+                             </div>
+                            }
+                                </div>
+                </div>
+            </div>
+            @*end of div tab*@
+             <div class="tab-pane" id="Salary">
+                    <p></p>
+                <div class="Outer">
+                    <div class="InnerLeft1">
+                        <div class="form-group">
+                                    <label class="control-label col-md-3">Gross Salary</label>
+                                    <div class="col-md-6"> 
+                                    @Html.TextBoxFor(model => model.GrossSalary, new { @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.GrossSalary)
+                                    </div>
+                                </div>  
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Parent Emp No</label>
+                                <div class="col-md-6">
+                                     <input type="text" id="ParentEmpNo" name="ParentEmpNo"class="form-control" value="0"/>
+                                    @Html.ValidationMessageFor(model => model.ParentEmpID)
+                                </div>
+                            </div>
+                         <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-6"> 
+                                @Html.CheckBox("EOBIContri")<label >EOBI Contribution</label>
+                                @Html.ValidationMessageFor(model => model.EOBIContri)
+                            </div>
+                        </div>
+                         <div id="EobiDiv">
+                             <div class="form-group">
+                                <label class="control-label col-md-3">EOBI No</label>
+                                <div class="col-md-6"> 
+                                    @Html.TextBoxFor(model => model.EOBINo, new { @class = "form-control"})
+                                    @Html.ValidationMessageFor(model => model.EOBINo)
+                                </div>
+                            </div>  
+                        </div>                                
+                    </div>         
+                </div>
+                 <div class="InnerRight1">
+                     
+                         <div class="form-group">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-6"> 
+                                @Html.CheckBox("PFContri")<label >PF Contribution</label>
+                                @Html.ValidationMessageFor(model => model.PFContri)
+                            </div>
+                        </div>
+                         <div id="pfcontibutionid">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PF Amount</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="PFAmount" class="form-control"/>
+                                </div>
+                            </div>    
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PF Paid Amount</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="PFPaidAmount" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PF Monthly Deduction</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="PFMonthly" class="form-control"/>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                        <label class="control-label col-md-3">Sidat ID</label>
+                        <div class="col-md-6"> 
+                             @Html.TextBoxFor(model => model.SidatID, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.SidatID)
+                        </div>
+                    </div>
+                        </div> 
+                         <div class="form-group">
+                        <label class="control-label col-md-3"></label>
+                        <div class="col-md-6"> 
+                            @Html.CheckBox("OvertimeCashable")<label >Cashable Overtime</label>
+                            @Html.ValidationMessageFor(model => model.OvertimeCashable)
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label col-md-3">Payment Mode</label>
+                        <div class="col-md-6"> 
+                           @Html.DropDownList("PaymentMode",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                             
+                        </div>
+                    </div>
+                     <div id="CompanyAccountDiv">
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Company Account</label>
+                            <div class="col-md-6"> 
+                               @Html.DropDownList("CompAcountID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hasacountid">
+                        <div class="form-group" id="BankDivID">
+                            <label class="control-label col-md-3">Bank</label>
+                            <div class="col-md-5">
+                               @Html.DropDownList("BankID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                @Html.ValidationMessageFor(model => model.BankID) 
+                              </div>
+                         </div>                         
+                        <div class="form-group" id="BranchDivID">
+                            <label class="control-label col-md-3">Branch Code</label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.BranchCode, new { @class = "form-control"})
+
+                           </div>                          
+                         </div>
+                    </div>   
+                     <div id ="AccountNoDiv">
+                         <div class="form-group">
+                            <label class="control-label col-md-3">Acount No</label>
+                            <div class="col-md-6"> 
+                            @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.AccountNo)
+                            </div>
+                        </div> 
+                     </div>            
+                 </div>
+        </div>
+            <div class="tab-pane" id="TAX">
+                <div class="form-group">
+                    <label class="control-label col-md-1"></label>
+                    <div class="col-md-6"> 
+                        @Html.CheckBox("Taxable")<label > Taxable</label>
+                        @Html.ValidationMessageFor(model => model.Taxable)
+                    </div>
+                </div>
+                <div class="form-group">
+                            <label class="control-label col-md-1"></label>
+                            <div class="col-md-6"> 
+                                @Html.CheckBox("TaxableBonus")<label >Taxable Bonus</label>
+                                @Html.ValidationMessageFor(model => model.TaxableBonus)
+                            </div>
+                        </div>
+                <div class="Outer" id="taxableid">
+                    <div class="InnerLeft1">
+                            <div class="form-group">
+                                <label id="TaxCriteria" class="control-label">Rs. 2,000 + 5% of the amount exceeding Rs.500,000				
+</label>
+                                <div class="col-md-6"> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Yearly Income</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="YearlyIncome" class="form-control"/>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Exceeding Amount</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="ExceedingAmount" class="form-control"/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Tax Exceeding Amount</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="TaxExceedingAmount" class="form-control"/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Fixed Amount</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="FixedAmount" class="form-control"/>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Total Tax Payable</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="TotalTaxPayable" class="form-control"/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Tax after Return</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="TaxAfterReturn" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Tax Monthly</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="TaxMonthly" class="form-control"/>
+                                </div>
+                            </div>                             
+                    </div>  
+                    <div class="InnerRight1">
+                        <div class="form-group">
+                                <label class="control-label col-md-3">Paid Tax</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="PaidTax" class="form-control"/>
+                                </div>
+                            </div> 
+                        <div class="form-group">
+                                <label class="control-label col-md-3">CF Exemption</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="CFExemption" class="form-control"/>
+                                </div>
+                            </div> 
+                         <div class="form-group">
+                                <label class="control-label col-md-3">Old Age Exemption</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="ExemptionForAge" class="form-control"/>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="control-label col-md-3">With Holding Taxes</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="WithHolding" class="form-control"/>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Credit Taxes</label>
+                                <div class="col-md-6"> 
+                                    <input type="text" id="CreditTax" class="form-control"/>
+                                </div>
+                            </div>
+                    </div>       
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default btn-success" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary " })
+            </div>
+        </div>
+    </div>
+    }
+}
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.Jcrop.js"></script>
+<script src="~/Scripts/jquery.form.js"></script>
+<script src="~/Scripts/respond.js"></script>
+<script src="~/Scripts/site.avatar.js"></script>
+
+
+<link href="~/Content/site.avatar.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/jquery.jcrop.css" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/DpDivDeptEdit.js")"></script>
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/ResignInEdit.js")"></script>
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/BankBranchEdit.js")"></script>
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/TaxInfo.js")"></script>  
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/SAPControl.js")"></script>   

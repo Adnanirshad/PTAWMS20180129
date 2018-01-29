@@ -1,0 +1,300 @@
+﻿@model PTAWMS.Areas.HumanResource.Models.ModelLeaveRequest
+<link href="~/assets/css/jquery-ui1.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-customselect-1.9.1.min.js"></script>
+<link href="~/assets/css/jquery-customselect.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="~/assets/css/select2.min.css" />
+<script src="~/assets/js/select2.min.js"></script>*@
+
+
+
+<div class="modal-content">
+    <div class="widget-header widget-header-small">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"><i class="ace-icon fa fa-check"></i> Leave Request Form</h4>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("AddNewLeave", "Profile", FormMethod.Post, new { id = "AddPreJobHistory", enctype = "multipart/form-data" }))
+    {
+        <input type="hidden" id="hidPermanentAddress" value="@ViewBag.PermanentAddress" />
+        <input type="hidden" id="hidTemporaryAddress" value="@ViewBag.TemporaryAddress" />
+        <input type="hidden" id="hidCLeave" value="@ViewBag.CLeave" />
+        <input type="hidden" id="hidELeave" value="@ViewBag.ELeave" />
+        <input type="hidden" id="hidPersonID" value="@ViewBag.PersonID" />
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+
+            <div class="form-horizontal">
+                <div class="tab-content">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="alert alert-danger" id="errMsg" style="display:none;"></div>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Leave Type</div>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(model => model.LEAVETYPE, new SelectList(ViewBag.Type, "DESCR", "DESCR"), null, new { @class = "form-control", @type = "text", @required = "required" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    <small class="text-primary"><span id="divDueDays">Leave Due: @ViewBag.CLeave Days</span></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">From Date</div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(model => model.FROMDATE, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.FROMDATE, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="control-label col-md-1">To Date</div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(model => model.TODATE, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.TODATE, "", new { @class = "text-danger" })
+
+                                    @Html.HiddenFor(model => model.DUELEAVE)
+                                </div>
+                                <div class="col-md-2">
+                                    <small class="text-primary"><span id="divDays"></span></small>
+
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Reason</div>
+                                <div class="col-md-7">
+                                    @Html.TextAreaFor(model => model.REASON, new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.REASON, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Permission Station </div>
+                                <div class="col-md-1">
+                                    <label>
+                                        <input name="STATIONLEAVE" id="STATIONLEAVE" class="ace ace-switch ace-switch-5" type="checkbox" checked="checked">
+                                        <span class="lbl"></span>
+                                    </label>
+                                </div>
+                                <div class="control-label col-md-3">Address During Leave</div>
+                                <div class="col-md-4">
+
+                                    <div class="radio">
+                                        <label>
+                                            <input name="Permanent" type="radio" class="ace" checked="checked" value="Permanent">
+                                            <span class="lbl"> Permanent</span>
+                                        </label>
+                                        <label>
+                                            <input name="Permanent" type="radio" class="ace" value="Temporary">
+                                            <span class="lbl"> Temporary</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Contact No.</div>
+                                <div class="col-md-7">
+                                    @Html.TextBoxFor(model => model.TELNO, new { @class = "form-control", @type = "text", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.TELNO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Address</div>
+                                <div class="col-md-7">
+                                    @Html.TextAreaFor(model => model.ADDRESS, new { @class = "form-control", @type = "text", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.REASON, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Substitute Name</div>
+                                <div class="col-md-7">
+                                    @Html.DropDownListFor(model => model.SUBSTITUTEID, (SelectList)Model.SUBSTITUTENAMELIST, "Click to Choose...", new { @class = "form-control custom-select" })
+
+                                    <input type="hidden" id="hidDesigID" value="@ViewBag.Designation" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2">Refer To (Supervisor)</div>
+                                <div class="col-md-7">
+
+                                    @Html.DropDownListFor(model => model.REFERNAMEID, (SelectList)Model.REFERNAMELIST, null, new { @class = "form-control custom-select" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-2"></div>
+                                <div class="col-md-6">
+                                    <small class="text-primary">Approval of this Request Subject to Leave Management System.</small>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-10">
+                                    <input type="submit" id="AddPreJobHistory" value="Save" class="btn btn-default btn-success" />
+                                    <input type="button" id="btnCancel" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@<link href="~/assets/css/jquery-ui-new.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/jquery-ui-1-12-1.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#REFERNAMEID").customselect();
+        $("#SUBSTITUTEID").customselect();
+
+
+        //$('.select2').css('width', '200px').select2({ allowClear: true })
+        //$('#select2-multiple-style .btn').on('click', function (e) {
+        //    var target = $(this).find('input[type=radio]');
+        //    var which = parseInt(target.val());
+        //    if (which == 2) $('.select2').addClass('tag-input-style');
+        //    else $('.select2').removeClass('tag-input-style');
+        //});
+
+
+        if (!$.datepicker.initialized) {
+            $(document).mousedown($.datepicker._checkExternalClick)
+                // !!!!!!!!!!
+                // The next code line has to be added again so that the date picker
+                // shows up when the popup is opened more than once without reloading
+                // the "base" page.
+                // !!!!!!!!!!
+                .find(document.body).append($.datepicker.dpDiv);
+            $.datepicker.initialized = true;
+            ($.datepicker.dpDiv).hide();
+        }
+        $("#ADDRESS").val($("#hidPermanentAddress").val());
+        $("input[type='radio']").click(function () {
+            var selectedValue = $("input[name='Permanent']:checked").val();
+            if (selectedValue == 'Permanent') {
+                $("#ADDRESS").attr("readonly", true);
+                $("#TELNO").attr("readonly", true);
+                $("#ADDRESS").val($("#hidPermanentAddress").val());
+            }
+            if (selectedValue == 'Temporary') {
+                $("#ADDRESS").attr("readonly", false);
+                $("#TELNO").prop('readonly', false);
+                $("#ADDRESS").val($("#hidTemporaryAddress").val());
+            }
+        });
+
+        if ($("#hidDesigID").val() > 0)
+            $("#meal option:contains(" + $("#hidDesigID").val() + ")").attr('selected', 'selected')
+
+
+        $("#LEAVETYPE").on('change', function () {
+
+            if (this.value == 'CASUAL')
+                $("#divDueDays").html("Leave Due: " + $("#hidCLeave").val()+ " Days");
+            else if (this.value == 'EARNED' || this.value == 'EX-PAKISTAN LEAVE' || this.value == 'HAJJ LEAVE') {
+                $("#divDueDays").html("Leave Due: " + $("#hidELeave").val() + " Days");
+            }
+            else {
+
+                $("#divDueDays").html("");
+            }
+        });
+
+
+        $('#AddPreJobHistory').submit(function () {
+            var start = $('#FROMDATE').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+            var end = $('#TODATE').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+            var empID = $("#hidPersonID").val();
+            var urls = LoadUrl('HumanResource/Profile/LeaveOverLapping');
+            var resp = 0;
+            $.ajax({
+                async: false,
+                type: "GET",
+                url: urls,
+                data: { txtLeaveFrom: start, txtLeaveTo: end, EmpID: empID },
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (response) {
+                    resp = response
+                    if (response == '1') {
+                        $("#errMsg").show();
+                        $("#errMsg").html("Leaves applied are overlapping with other leaves, please try again with different dates.");
+
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+            if (resp == '1')
+                return false;
+            return true;
+        });
+
+        $("#FROMDATE").datepicker({
+            dateFormat: 'dd/mm/yy', changeMonth: true,
+            changeYear: true
+        });
+        $("#FROMDATE").bind("change", function () {
+            var minValue = $("#FROMDATE").val();
+            minValue = $.datepicker.parseDate("dd/mm/yy", minValue);
+            minValue.setDate(minValue.getDate());
+            $("#TODATE").datepicker("option", "minDate", minValue);
+        })
+
+        $("#TODATE").datepicker({
+            dateFormat: 'dd/mm/yy', changeMonth: true,
+            changeYear: true,
+            onSelect: function (dateText, inst) {
+                //var start = $('#FROMDATE').datepicker("getDate");
+                var start = $('#FROMDATE').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                var end = $('#TODATE').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+                var type = $("#LEAVETYPE").val();
+                var diff = new Date(end - start);
+                // get days
+                //var days = diff / 1000 / 60 / 60 / 24;
+                //$("#divDays").html("Total Days: " + days);
+                //$("#DUELEAVE").val(days);
+                var urls = LoadUrl('HumanResource/Profile/CalculateDays');
+                $.ajax({
+                    type: "GET",
+                    url: urls,
+                    data: { txtLeaveFrom: start, txtLeaveTo: end, LeaveType: type},
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    success: function (response) {
+                        $("#divDays").html("Total Days: " + response);
+                        $("#DUELEAVE").val(response);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+
+            }
+        }).bind("change", function () {
+            var minValue = $("#FROMDATE").val();
+            minValue = $.datepicker.parseDate("dd/mm/yy", minValue);
+            minValue.setDate(minValue.getDate() + 1);
+            $("#TODATE").datepicker("option", "minDate", minValue);
+        })
+
+
+    });
+</script>

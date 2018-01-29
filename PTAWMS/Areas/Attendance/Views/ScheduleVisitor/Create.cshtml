@@ -1,0 +1,190 @@
+﻿@model PTAWMS.Models.VMS_SVisitor
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Visitors Entry</li>
+				</li>
+				<li class="active">Visitors Request</li>
+                <li class="active">Create</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+       <div class="page-header">
+            <h1>
+			   Visitors Requests
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Create New Visitors Request             												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Schedule Visitor</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Visitor Name</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.VisitorName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VisitorName)
+            </div>
+        </div>
+
+        <div class="form-group">
+           <div class="control-label col-md-2">Company</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Company,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Company)
+            </div>
+        </div>
+         <div class="form-group">
+           <div class="control-label col-md-2">Nature</div>
+            <div class="col-md-4">
+                @Html.DropDownList("ReasonID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+            </div>
+        </div>
+        <div id="reson">
+        <div class="form-group">
+           <div class="control-label col-md-2">Reason</div>
+            <div class="col-md-4">
+                @Html.DropDownList("VisitTypeID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+            </div>
+        </div> 
+       </div>  
+        <div id="purpose">
+        <div class="form-group">
+           <div class="control-label col-md-2">Purpose</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.Remarks,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Remarks)
+            </div>
+            </div>
+        </div> 
+        <div class="form-group">
+            <label class="control-label col-lg-2 col-md-2 col-sm-6 col-xs-12"></label>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h6 style="color:red">@ViewBag.TimeError</h6>
+            </div>
+        </div>
+        <div class="form-group">
+                            <div class="control-label col-md-2">Arrival Time</div>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.ArrivalTime, new { @class = "form-control",@type = "time"})
+                                @Html.ValidationMessageFor(model => model.ArrivalTime)
+                           </div>
+                        </div> 
+        <div class="form-group">
+                            <div class="control-label col-md-2">Arrival Date</div>
+                            <div class="col-md-4">
+                                @Html.TextBoxFor(model => model.Arrival_Date, "{0:yyyy-MM-dd}", new { @class = "form-control",@type = "date", @id="datetimepicker2"})
+                                @Html.ValidationMessageFor(model => model.Arrival_Date)
+                                <h4 style="color:red">@ViewBag.Date</h4>
+                            </div>
+                        </div> 
+        <div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div  class="col-md-6 col-sm-6 col-xs-6">
+                @Html.CheckBox("VehicleAccess") <label>Vehicle Access</label> 
+                @Html.ValidationMessageFor(model => model.VehicleAccess)
+            </div>
+        </div> 
+        <div id ="VehicleAccessDiv">     
+        <div class="form-group">
+            <div class="control-label col-md-2">Vehicle No</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.VehicleNo,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VehicleNo)
+            </div>
+        </div>
+            </div>
+
+        @*<div class="form-group">
+           <div class="control-label col-md-2">Created Date</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.CDateTime, new { @class = "form-control",@type = "date"})
+                @Html.ValidationMessageFor(model => model.CDateTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Approved Date</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.ApprovedDate, new { @class = "form-control",@type = "date"})
+                @Html.ValidationMessageFor(model => model.ApprovedDate)
+            </div>
+        </div>*@
+         <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btn-success" />
+                 @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div> 
+    </div>
+}
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script>
+    $("#datetimepicker2").datepicker({ minDate: 0 });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#reson").hide();
+        $("#ReasonID").change(function () {
+            if ($(this).val() == "2") {
+                $("#reson").show();
+            } else {
+                
+                $("#reson").hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#purpose").hide();
+        $("#VisitTypeID").change(function () {
+            if ($(this).val() == "4") {
+                $("#purpose").show();
+            } else {
+
+                $("#purpose").hide();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#VehicleAccessDiv').hide();
+        $('#VehicleAccess').change(function () {
+            if ($(this).is(":checked")) {
+                $("#VehicleAccessDiv").show();
+            }
+            else {
+                $("#VehicleAccessDiv").hide();
+            }
+        });      
+    });
+</script>

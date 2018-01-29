@@ -1,0 +1,35 @@
+﻿@model PTAWMS.Models.HR_Section
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Department</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SectionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SectionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Department.DepartmentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Department.DepartmentName)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Edit ", "Edit", new { id = Model.SecID } , new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+    
+</p>

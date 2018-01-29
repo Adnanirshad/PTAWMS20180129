@@ -1,0 +1,129 @@
+﻿@model PTAWMS.Areas.HumanResource.BusinessLogic.ModelEmpPersonal
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        }
+    }
+</script>
+<script type="text/javascript">
+    function fileCheck(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(90)
+                    .height(90);
+                document.getElementById("blah").style.marginTop = "20px";
+                document.getElementById("blah").style.marginLeft = "30px";
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+@using (Html.BeginForm("EPPersonal", "HumanResource", FormMethod.Post, new { id = "EditEPPersonalForm" ,enctype = "multipart/form-data"  }))
+            {
+    @Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.EmpID)
+<div class="form-horizontal">
+<div class="Outer">
+    <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-4">First Name<span style="color:red;"> *</span></label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                </div>
+            </div>
+                <div class="form-group">
+                                <label class="control-label col-md-4">Middle Name<span style="color:red;"> </span></label>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MiddleName)
+                                </div>
+                            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Last Name<span style="color:red;"> *</span></label>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.LastName)
+                </div>
+            </div>
+         <div class="form-group">
+            <label class="control-label col-md-4">Father's Name</label>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.FathersName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FathersName)
+            </div>
+        </div>      
+            <div class="form-group">
+                <label class="control-label col-md-4">Choose Image</label>
+                <div class="col-md-6">
+                   <input type="file" name="ImageData"  id="ImageData" onchange="fileCheck(this);"/> 
+                </div>
+            </div>
+           
+        <div class="form-group">
+            <label class="control-label col-md-4">CNIC No</label>
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.CNICNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CNICNo)
+            </div>
+        </div>             
+        <div class="form-group">
+            <label class="control-label col-md-4">Date Of Birth</label>
+            <div class="col-md-6">
+                @*@Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @type = "date" })*@
+                @Html.EditorFor(model => model.DOB,new { htmlAttributes = new { @class = "form-control",@type="date" } })
+                @Html.ValidationMessageFor(model => model.DOB)
+            </div>
+        </div>       
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-10">
+                <input type="button" id="SaveEmpPersonalInfo" value="Save" class="btn btn-default btn-success" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary " })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6"> 
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-4" })
+            <div class="col-md-7">
+                @Html.DropDownList("Gender", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Blood Group</label>
+            <div class="col-md-5">
+                @Html.DropDownList("BloodGroup", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                @Html.ValidationMessageFor(model => model.BloodGroup)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Marital Status</label>
+            <div class="col-md-5">
+                @Html.DropDownList("MaritalStatus", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                @Html.ValidationMessageFor(model => model.MaritalStatus)
+            </div>
+        </div>      
+    </div>
+</div>
+</div>
+}
+<script src="~/assets/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        SavePersonalInfoFunction();
+    });
+
+
+</script>
+

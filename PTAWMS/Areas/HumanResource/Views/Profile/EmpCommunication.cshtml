@@ -1,0 +1,224 @@
+﻿@{
+    //ViewBag.Title = "Communication";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    List<PTAWMS.Models.ViewEmpCommunication> commsList = Model as List<PTAWMS.Models.ViewEmpCommunication>;
+    
+    //PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];
+}
+<input id='hidType' type="hidden" value='@ViewBag.TypeID' />
+<input id='hidID' type="hidden" value='@ViewBag.ID' />
+<input id='hidPersonID' type="hidden" value='@ViewBag.EmpID' />
+<input id='hidStatus' type="hidden" value='@ViewBag.StatusID' />
+
+<div style="border:groove;">
+   
+        <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable">
+
+
+            @*<div class="widget-header">
+                    <div class="pull-right tableTools-container">
+                        <div class="dt-buttons btn-overlap btn-group" style="padding-top:6px;">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pull-left tableTools-container">
+                        <div class="dt-buttons btn-overlap btn-group">
+                            <h4 class="smaller"><i class="ace-icon fa fa-check"></i>@ViewBag.Area</h4>
+                        </div>
+                    </div>
+                </div>*@
+
+
+            <div class="widget-header widget-header-small">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="ace-icon fa fa-check"></i>@ViewBag.Area</h4>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <div class="profile-user-info profile-user-info-striped">
+                    @Html.Raw(ViewBag.Values)
+                        <span class="col-md-4">
+                            @if (!String.IsNullOrEmpty(@ViewBag.filePath))
+                            {
+                                @Html.ActionLink("Download", "DownloadDocument", "Profile", new { ID = ViewBag.ID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+                            }
+                        </span>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+
+
+                <div class="form-group">
+                    <div class="widget-box">
+                        <div class="widget-header">
+                            <h4 class="widget-title lighter smaller">
+                                <i class="ace-icon fa fa-comment blue"></i>
+                                Correspondence
+                            </h4>
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main no-padding">
+                                <div class="dialogs ace-scroll">
+                                    <div class="scroll-track scroll-active scroll-hover" style="display: block; height: 300px;">
+                                        @*<div class="scroll-bar" style="height: 236px; top: 64px;"></div>*@
+                                    </div>
+                                    <div class="scroll-content" style="max-height: 300px; overflow:scroll;">
+
+                                        @if (commsList.Count == 0)
+                                        {
+                                            <div class="itemdiv dialogdiv" style="height:200px">
+                                                <div class="user">
+                                                    <img alt="Alexa's Avatar" src="~/assets/images/avatars/avatar2.png">
+                                                </div>
+                                                <div class="body">
+                                                    <div class="time">
+
+                                                        <span class="green"></span>
+
+                                                    </div>
+
+                                                    <div class="name">
+                                                        <a href="#"></a>
+                                                    </div>
+                                                    <div class="text"></div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @foreach (var item in commsList)
+                                        {
+                                            <div class="itemdiv dialogdiv">
+                                                <div class="user">
+                                                    <img alt="Alexa's Avatar" src="~/assets/images/avatars/avatar2.png">
+                                                </div>
+                                                @if (item.HRModule == true)
+                                                {
+                                                    <div class="body">
+                                                        <div class="time">
+
+                                                            <span class="green">@item.DateCreated.ToShortDateString()</span>
+                                                            <i class="ace-icon fa fa-clock-o"></i> @item.DateCreated.ToString("hh:mm tt")
+                                                        </div>
+
+                                                        <div class="name">
+                                                            <strong>@item.ActionByName</strong>
+                                                            <span class="label label-sm label-danger">HR</span>
+                                                        </div>
+                                                        <div class="text">@item.Comment</div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="body">
+                                                        <div class="time">
+
+                                                            <span class="green">@item.DateCreated.ToShortDateString()</span>
+                                                            <i class="ace-icon fa fa-clock-o"></i> @item.DateCreated.ToString("hh:mm tt")
+                                                        </div>
+
+                                                        <div class="name">
+                                                            <strong>@item.ActionByName</strong>
+                                                            <span class="label label-sm label-info">User</span>
+                                                        </div>
+                                                        <div class="text">@item.Comment</div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+
+                                <form>
+                                    <div class="form-actions">
+                                        <div class="input-group">
+                                            @if (ViewBag.ShowMessageBox == true)
+                                            {
+                                                <input required placeholder="Type your message here ..." type="text" id="message" class="form-control" name="message" />
+                                                        <span class="input-group-btn">
+                                                            <input type="submit" id="SaveEmpPersonalInfo" value="Send" class="btn btn-sm btn-warning" />
+
+                                                            <input type="button" id="btnCancel" value="Cancel" class="btn btn-sm btn-info" data-dismiss="modal" />
+                                                        </span>
+
+                                            }
+                                            else
+                                            {
+                                                <input type="button" id="btnCancel" value="Cancel" class="btn btn-sm btn-info" data-dismiss="modal" />
+                                            }
+
+
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div><!-- /.widget-main -->
+                        </div><!-- /.widget-body -->
+                    </div><!-- /.widget-box -->
+                </div>
+
+                <input id='hidType' type="hidden" value='@ViewBag.NotificationType' />
+
+            </div>
+            @*</div>*@
+        </div>
+    </div>
+
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+@*<script src="~/Scripts/dataTables.fixedHeader.js"></script>
+    <script src="~/Scripts/dataTables.fixedHeader.min.js"></script>*@
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.scroll-content').animate({
+            scrollTop: 1000
+        }, 1200);
+
+        $(".btn-warning").click(function () {
+            var message = $("#message").val();
+            if (message.length > 0) {
+                var type = $("#hidType").val();
+                var id = $("#hidID").val();
+                var empID = $("#hidPersonID").val();
+                var status = $("#hidStatus").val();
+                var urls = LoadUrl('HumanResource/Profile/SubmitComments');
+                $.ajax({
+                    type: "GET",
+                    url: urls,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    data: { ID: id, TypeID: type, EmpID: empID, Comments: message, StatusID: status },
+                    success: function (response) {
+                        location.reload(true);
+                    },
+                    failure: function (response) {
+                        //alert(response.responseText);
+                    },
+                    error: function (response) {
+                        //alert(response.responseText);
+                    }
+                });
+            }
+
+        });
+
+
+    });
+</script>
+
+

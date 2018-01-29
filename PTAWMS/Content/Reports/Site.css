@@ -1,0 +1,111 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.table-header {
+background-color:#f0f0f0;
+font-size:13px;
+}
+.CreateLink {
+font-weight:bold;
+text-decoration: underline;
+}
+.dpWidth {
+    width: 210px;
+}
+.dpLocation {
+width:230px;}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input[type="text"],
+input[type="password"] {
+    max-width: 210px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+div.Outer {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+div.InnerLeft {
+    width: 40%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight {
+    width: 59%;
+    position: relative;      
+    float: right;
+}
+div.InnerLeft1 {
+    width: 50%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight1 {
+    width: 49%;
+    position: relative;      
+    float: right;
+}
+div.InnerLeft2{
+    width: 50%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight2 {
+    width: 49%;
+    position: relative;      
+    float: right;
+}
+
+.ComboBoxWidth {
+    width: 210px;
+}
+
+.TableText {
+font-size:12px;}
+
+.EmpInfoMainMargin {
+margin-top:10px;
+margin-left:5px;
+}
+.EmpInfoSecondaryMargin {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.table > tbody > tr > td {
+     vertical-align: middle;
+}

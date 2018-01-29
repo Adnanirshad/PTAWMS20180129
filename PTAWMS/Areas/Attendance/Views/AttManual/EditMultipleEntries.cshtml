@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "EditMultipleEntries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Attendance</li>
+				</li>
+				<li class="active">Edit Attendance</li>             
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div>
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm("SaveEditEntries", "AttManual", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+         <div class="page-header">
+            <h1>
+			    Edit Attendance For
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                     @Model.EmpNo : @Model.EmpName           												
+			    </small>
+			</h1>
+        </div>
+   // <p class="h4">Edit Attendance For : </p>
+    <p class="h5">@Model.DateFrom  TO @Model.DateTo</p>
+    <hr />
+    <input hidden type="text" name="empID" id="empID" value="@Model.EmployeeID" />
+    <input hidden type="text" name="dateFrom" id="dateFrom" value="@Model.DateFrom" />
+    <input hidden type="text" name="dateTo" id="dateTo" value="@Model.DateTo" />
+    var grid = new WebGrid(Model.list, canSort: false, canPage: false);
+    int rowNum = 0;
+    <div>
+        @grid.GetHtml(columns:
+            grid.Columns
+            (
+                grid.Column("Sr.No", format: item => rowNum = rowNum + 1),
+                grid.Column("", format: (item) => Html.TextBox("EmpDate" + (rowNum - 1).ToString(), (string)item.EmpDate, new { @hidden = true })),
+                grid.Column("Date", format: (item) => Html.Label("Date" + (rowNum - 1).ToString(), (string)item.Date,new { style =" width:80px;" })),
+                grid.Column("Code", format: (item) => Html.TextBox("DutyCode" + (rowNum - 1).ToString(), (string)item.DutyCode,new { style =" width:47px;" })),
+                 grid.Column("Start Time", format: (item) => Html.TextBox("DutyTime" + (rowNum - 1).ToString(), (string)item.DutyTime,new { style =" width:47px;" })),
+                grid.Column("Shift Hours", format: (item) => Html.TextBox("ShiftTime" + (rowNum - 1).ToString(), (string)item.ShiftTime,new { style =" width:47px;" })),
+                 grid.Column("Time In", format: (item) => Html.TextBox("TimeIn" + (rowNum - 1).ToString(), (object)item.TimeIn, new { style = " width:47px;" , @disabled="disabled" })),
+                 grid.Column("Time Out", format: (item) => Html.TextBox("TimeOut" + (rowNum - 1).ToString(), (object)item.TimeOut, new { style = " width:47px;", @disabled="disabled"  })),
+                grid.Column("T IN 1", format: (item) => Html.TextBox("TimeIn1" + (rowNum - 1).ToString(), (object)item.TimeIn1,new { style =" width:47px;" })),
+                grid.Column("T O 1", format: (item) => Html.TextBox("TimeOut1" + (rowNum - 1).ToString(), (object)item.TimeOut1,new { style =" width:47px;" })),
+                grid.Column("T IN 1", format: (item) => Html.TextBox("TimeIn2" + (rowNum - 1).ToString(), (object)item.TimeIn2,new { style =" width:47px;" })),
+                grid.Column("T O 2", format: (item) => Html.TextBox("TimeOut2" + (rowNum - 1).ToString(), (object)item.TimeOut2,new { style =" width:v;" })),
+                grid.Column("T IN 3", format: (item) => Html.TextBox("TimeIn3" + (rowNum - 1).ToString(), (object)item.TimeIn3,new { style =" width:47px;" })),
+                grid.Column("T O 3", format: (item) => Html.TextBox("TimeOut3" + (rowNum - 1).ToString(), (object)item.TimeOut3,new { style =" width:47px;"})),
+                grid.Column("Work", format: (item) => Html.TextBox("Work" + (rowNum - 1).ToString(), (object)item.WorkMinutes, new {style =" width:47px;", @disabled="disabled" })),
+                 grid.Column("Overtime", format: (item) => Html.TextBox("OT" + (rowNum - 1).ToString(), (object)item.OTMin, new {style =" width:47px;" ,@disabled="disabled" })),
+                 grid.Column("Remarks", format: (item) => Html.TextBox("Remarks" + (rowNum - 1).ToString(), (object)item.Remarks, new {style =" width:60px;" }))
+            ), mode: WebGridPagerModes.Numeric)
+    </div>
+         <br />
+    <input type="submit" value="Submit" class="btn btn-default" />
+}
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>
+<style type="text/css">
+    table
+    {
+        font-family: verdana,arial,sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+    }
+    table th
+    {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+    }
+    table td
+    {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+    }
+    input
+    {
+        width:100px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>

@@ -1,0 +1,35 @@
+﻿@model PTAWMS.Models.Att_Holiday
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Att_Holiday</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HolidayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HolidayName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HolidayID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

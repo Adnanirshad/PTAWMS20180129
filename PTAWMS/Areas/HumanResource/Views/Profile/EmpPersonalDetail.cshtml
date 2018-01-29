@@ -1,0 +1,390 @@
+﻿@model PTAWMS.Areas.HumanResource.BusinessLogic.ModelEmpPersonal
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="user-profile row">
+    
+    @*<span class="h4">EMPLOYEE PROFILE OF  @Model.FullName : @Model.EmpID</span>*@
+
+    <div class="col-xs-1 col-sm-2 center hidden-print">
+        <span class="profile-picture">
+            @*<img id="blah" class="editable img-responsive editable-click editable-empty" src="@Url.Action("RetrieveImage", "Employee", new { id = Model.EmpID})" />*@
+            @*<img id="blah" class="editable img-responsive editable-click editable-empty" src="~/WMS/HumanResource/Employee/RetrieveImage/@Model.EmpID" />*@
+            <img class="editable img-responsive editable-click editable-empty" src="~/Home/RetrieveUserImage/@Model.EmpID" alt="Jason's Photo" />
+        </span>
+        <div class="hr hr12 dotted"></div>
+        <div class="profile-contact-links align-left">
+            <a href="#OfficialInfo" class="btn btn-link">
+                <i class="ace-icon fa fa-laptop bigger-120 green"></i>
+                Official Info.
+            </a>
+            <a href="#ContactDetail" class="btn btn-link">
+                <i class="ace-icon fa fa-comments-o bigger-120 pink"></i>
+                Contact Details
+            </a>
+            <a href="#ContactDetail" class="btn btn-link" id="editInfo" data-toggle="modal" data-target=".bs-example-modal-lg">
+                <i class="ace-icon glyphicon glyphicon-edit bigger-110 blue"></i>
+                Edit Contact Info.
+            </a>
+            
+
+        </div>
+        <div class="hr hr12 dotted"></div>
+           </div>
+
+    <div class="col-xs-12 col-sm-10">
+        <div class="profile-user-info-striped">
+            <div class="label label-lg label-info arrowed-right  hidden-print">
+                <b><strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.</b>
+            </div>
+            <br />
+
+            <div class="pull-right tableTools-container hidden-print">
+                    <div class="dt-buttons btn-overlap btn-group">
+                        <a id="printable" class="dt-button buttons-print btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="table-responsive" data-original-title="" title=""><span><i class="fa fa-print bigger-110 grey"></i> <span class="hidden">Print</span></span></a>
+                    </div>
+                </div>
+            <h2 class="widget-title grey lighter">Employee Profile of <strong> @Html.DisplayFor(model => model.FullName) </strong> : @Html.DisplayFor(model => model.EmpID) </h2>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th class="profile-info-name">
+                            
+                            @Html.DisplayNameFor(model => model.FathersName)
+
+                        </th>
+
+                        <td class="profile-info-value">
+                            @Html.DisplayFor(model => model.FathersName)
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.DOB)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.DOB)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Gender)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.Gender)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.MaritalStatus)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.MaritalStatus)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.CNICNo)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.CNICNo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.PresentAddress)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.PresentAddress)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.PermanentAddress)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.PermanentAddress)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.BloodGroup)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.BloodGroup)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.DomicileCity)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.DomicileCity) ( @Html.DisplayFor(model => model.DomicileProvince) )
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.ReportTo)
+                        </th>
+
+                        <td>
+                            @Html.DisplayFor(model => model.ReportTo)
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+
+                        </th>
+
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            <h2><a id="OfficialInfo">Official Information</a></h2>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Category)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Location)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Location)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Section)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Section)
+                                </span>
+</td>
+                    </tr>
+                    
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Designation)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Designation)
+                                </span>
+</td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Grade)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Grade)
+                                </span>
+</td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.AppointmentDate)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.AppointmentDate)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.JoiningDate)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.JoiningDate)
+                                </span>
+</td>
+                    </tr>
+
+                    <tr>
+                        <th>
+
+                        </th>
+
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><a id="ContactDetail">Contact Details</a>
+                <div class="pull-right tableTools-container hidden-print">
+                    @*<button class="btn btn-xs btn-info">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                    </button>*@
+                    <a href="#" id="AddExperience" data-toggle="modal" class="btn btn-xs btn-info hidden-print" data-target=".bs-example-modal-lg"><i class="ace-icon fa fa-pencil bigger-110"></i></a>
+                    </div>
+</h2>
+            <table class="table table-hover">
+                <tbody>
+                    
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.OfficeLandLine)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.OfficeLandLine)
+                                </span>
+</td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.MobileNo)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.MobileNo)
+                                </span>
+</td>
+                    </tr>
+                   
+
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.Email)
+                                </span>
+</td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.RoomNo)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.RoomNo)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="profile-info-name">
+                            @Html.DisplayNameFor(model => model.ExtNo)
+                        </th>
+
+                        <td>
+                            <span >
+                                @Html.DisplayFor(model => model.ExtNo)
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+
+                        </th>
+
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+     <div class="modal fade bs-example-modal-lg in" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="divExperience" style="border:groove;">
+            </div>
+        </div>
+    </div>
+</div>   
+<input type="hidden" id="hidPersonID" value="@Model.EmpID" />
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.EmpID }) |*@
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#printable").click(function () {
+            print()
+        });
+        $(".ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all").hide();
+        @*$("#breadcrumbs").html("<ul class='breadcrumb'> <li><i class='ace-icon fa fa-user home-icon'></i><a href='/WMS/HumanResource/Profile/EmpDetails//@Model.EmpID'>Profile</a></li> </ul>");*@
+        $("#breadcrumbs").html("<ul class='breadcrumb'><li><i class='ace-icon fa fa-user home-icon'></i><a href='" + LoadUrl("Home/Index")+"'>Home</a></li><li class='active'>Profile</li></ul>");
+
+        var empID = $("#hidPersonID").val();
+        var urls = LoadUrl('HumanResource/Profile/EMPContactInfo');
+        $.ajax({
+            type: "GET",
+            url: urls,
+            data: {ID: empID},
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                $('#divExperience').hide();
+                $('#divExperience').html(response);
+                //$('#divQualification').dialog('open');
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+
+        $(".btn-info").click(function () {
+            $('.bs-example-modal-lg').show();
+            $('#divExperience').show();
+            
+        });
+        $("#editInfo").click(function () {
+            $('.bs-example-modal-lg').show();
+            $('#divExperience').show();
+
+        });
+        
+    });
+    </script>
+

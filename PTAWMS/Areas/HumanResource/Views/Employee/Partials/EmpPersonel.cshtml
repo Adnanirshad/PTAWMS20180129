@@ -1,0 +1,114 @@
+﻿@model PTAWMS.Models.HR_Employee
+
+@using (Html.BeginForm("OpenEmpPersonelPartialView", "Employee", FormMethod.Post))
+{ 
+    @Html.AntiForgeryToken()
+<section class ="form-group form-horizontal">
+<section class="col-md-12,row form-horizontal">
+<section class ="col-md-6">
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>First name</label>
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(model => model.FirstName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstName)
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Middle name</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.MiddleName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MiddleName) 
+         </div>
+    </div>
+
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Father's Name</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.FathersName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FathersName) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+            <label>Gender</label>
+        </div>
+         <div class="col-md-6">
+                @Html.DropDownList("Gender",null,new { @class = "btn btn-default dropdown-toggle dropdown dpWidth"})
+              
+          </div>
+     </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+            <label>Religion</label>
+        </div>
+         <div class="col-md-6">
+                @Html.DropDownList("Religion",null,new { @class = "btn btn-default dropdown-toggle dropdown dpWidth"})
+              
+          </div>
+     </div>
+</section>
+<section class ="col-md-6">
+      <div class="form-group">
+        <div class =" col-md-4">
+           <label>Last Name</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.LastName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Full Name</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.FullName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FullName) 
+         </div>
+   </div>
+      <div class="form-group">
+        <div class =" col-md-4">
+           <label>CNIC</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.LastName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName) 
+         </div>
+    </div>
+     <div class="form-group">
+        <div class =" col-md-4">
+           <label>DOB</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.DOB,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DOB) 
+         </div>
+    </div>
+     <div class="form-group">
+        <div class =" col-md-4">
+            <label>Nationality</label>
+        </div>
+         <div class="col-md-6">
+                @Html.DropDownList("Nationality",null,new { @class = "btn btn-default dropdown-toggle dropdown dpWidth"})
+              
+          </div>
+     </div>
+
+    
+</section>
+</section>
+     <input type="submit" value="Create" class="btn btn-default btn-success" />
+    </section>
+}

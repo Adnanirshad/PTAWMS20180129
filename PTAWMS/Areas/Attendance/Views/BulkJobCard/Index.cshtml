@@ -1,0 +1,364 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="~/Home/Index">Home</a>
+                <li class="active">Attendance</li>
+                <li class="active">Employees Jobcard</li>
+                <li class="active">Bulk Jobcard</li>
+                </li>
+                <li class="active">Create</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-header">
+                <h1>
+                    Bulk JobCard
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        Create Bulk JobCard
+                    </small>
+                </h1>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <br />
+                        <form class="form-inline" role="form">
+                            <div class="form-group">
+                                <ul class="nav nav-pills">
+                                    <li>@Html.ActionLink("List of Applied JobCards", "ListOfJobCardApp", null, new { @class = "" })</li>
+                               </ul>
+                            </div>
+                        </form>
+                        <br />
+                        <link href="~/Content/GridDesign.css" rel="stylesheet" type="text/css" />
+                        <article class="col-md-12" id="SelectionArticle">
+                            @using (Html.BeginForm("SelectEmployee", "BulkJobCard", FormMethod.Post))
+                            {
+                                <div class="well bs-component">
+                                    <fieldset>
+                                        <section class="col-md-4">
+                                            <h4>1. Choose Criteria</h4>
+                                            <div>
+                                                <div class="radio"><label><input type="radio" checked value="rbAll" name="SelectionRB">All</label></div>
+                                                <div class="radio"><label><input type="radio" value="rbDept" name="SelectionRB">Division</label></div>
+                                                <div class="radio"><label><input type="radio" value="rbSection" name="SelectionRB">Department</label></div>
+                                                <div class="radio"><label><input type="radio" value="rbLocation" name="SelectionRB">Location</label></div>
+                                                <div class="radio"><label><input type="radio" value="rbType" name="SelectionRB">Employee Type</label></div>
+                                                <div class="radio"><label><input type="radio" value="rbShift" name="SelectionRB">Shift</label></div>
+                                            </div>
+
+                                            <section class="col-md-12">
+                                                <section class="row">
+                                                    <div class="form-group col-md-8">
+                                                        <label>From</label>
+                                                        <input id="JobDateFrom" name="JobDateFrom" value="@ViewData["JobDateFrom"]" type="date" class="form-control" />
+                                                    </div>
+                                                </section>
+                                                <section class="row">
+                                                    <div class="form-group col-md-8">
+                                                        <label>To</label>
+                                                        <input id="JobDateTo" name="JobDateTo" type="date" value="@ViewData["JobDateTo"]" class="form-control" />
+                                                    </div>
+                                                </section>
+                                                <section class="row">
+                                                    <div class="form-group col-md-8">
+                                                        <label>Card Type</label>
+                                                        @Html.DropDownList("JobCardType", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                                                    </div>
+                                                </section>
+                                            </section>
+
+                                            @*<div class="form-group">
+                                                    <div class ="col-md-3">
+                                                    <label>Card Type</label>
+                                                        </div>
+                                                    <div class ="col-md-9">
+                                                    @Html.DropDownList("JobCardType",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                                         <br />
+                                                     </div>
+                                                </div>*@
+                                            <div id="JCValueDiv">
+                                                <div class="form-group">
+                                                    <label>Value</label>
+                                                    <input id="JCValue" name="JCValue" type="text" value="0" class="form-control" />
+                                                    <br />
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="form-group col-md-8">
+                                                <p><br /><input type="submit" value="Next" class="btn btn-sm btn-success" /><br /></p>
+                                            </div>
+                                        </section>
+                                        <section class="col-md-8">
+                                            <h4>2. Select Criteria</h4>
+                                            <div id="DivDivision">
+                                                @{
+                                                    var gridDiv = new WebGrid(Model.DivEmployees, canPage: true, rowsPerPage: 30,
+                                                        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridDiv.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridDiv.GetHtml(tableStyle: "webgrid-table",
+                 htmlAttributes: new { id = "checkableGridDivisions" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridDiv.Columns(
+                    gridDiv.Column(header: "{checkalldivisions}", format:@<text><input class="check-box" id="cbDivisions" name="cbDivisions" type="checkbox" value="@item.DeptID" /></text>),
+                    gridDiv.Column("DepartmentName", "Division", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                            <div id="DivLocation">
+                                                @{
+                                                    var gridLoc = new WebGrid(Model.LocEmployees, canPage: true, rowsPerPage: 30,
+                                                            selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridLoc.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridLoc.GetHtml(tableStyle: "webgrid-table",
+
+                 htmlAttributes: new { id = "checkableGridLocations" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridLoc.Columns(
+                    gridLoc.Column(header: "{checkalllocations}", format:@<text><input class="check-box" id="cbLocation" name="cbLocation" type="checkbox" value="@item.LocID" /></text>),
+                    gridLoc.Column("LocationName", "Location", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                            <div id="DivType">
+                                                @{
+                                                    var gridType = new WebGrid(Model.TypeEmployees, canPage: true, rowsPerPage: 30,
+                                                            selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridType.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridType.GetHtml(tableStyle: "webgrid-table",
+
+                 htmlAttributes: new { id = "checkableGridTypes" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridType.Columns(
+                    gridType.Column(header: "{checkalltypes}", format:@<text><input class="check-box" id="cbType" name="cbType" type="checkbox" value="@item.TypID" /></text>),
+                    gridType.Column("TypeName", "Type", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                            <div id="DivDept">
+                                                @{
+                                                    var gridDept = new WebGrid(Model.DeptEmployees, canPage: true, rowsPerPage: 30,
+                                                        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridDept.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridDept.GetHtml(tableStyle: "webgrid-table",
+
+                 htmlAttributes: new { id = "checkableGridTypes" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridDept.Columns(
+                    gridDept.Column(header: "{checkalltypes}", format:@<text><input class="check-box" id="cbDept" name="cbDept" type="checkbox" value="@item.DeptID" /></text>),
+                    gridDept.Column("DepartmentName", "Department", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                            <div id="DivSec">
+                                                @{
+                                                    var gridSec = new WebGrid(Model.SecEmployees, canPage: true, rowsPerPage: 30,
+                                                        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridSec.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridSec.GetHtml(tableStyle: "webgrid-table",
+
+                 htmlAttributes: new { id = "checkableGridTypes" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridSec.Columns(
+                    gridSec.Column(header: "{checkalltypes}", format:@<text><input class="check-box" id="cbSec" name="cbSec" type="checkbox" value="@item.SecID" /></text>),
+                    gridSec.Column("SectionName", "Section", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                            <div id="DivShift">
+                                                @{
+                                                    var gridShift = new WebGrid(Model.ShiftEmployees, canPage: true, rowsPerPage: 30,
+                                                        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+                                                    gridShift.Pager(WebGridPagerModes.NextPrevious);}
+                                                <div>
+                                                    @gridShift.GetHtml(tableStyle: "webgrid-table",
+
+                 htmlAttributes: new { id = "checkableGridTypes" },
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+                    columns: gridType.Columns(
+                    gridShift.Column(header: "{checkalltypes}", format:@<text><input class="check-box" id="cbShift" name="cbShift" type="checkbox" value="@item.ShftID" /></text>),
+                    gridShift.Column("ShiftName", "Shift", style: "description")
+             ))
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </fieldset>
+                                </div>
+                                                    }
+                        </article>
+                    </div><!-- /.widget-main -->
+                </div><!-- /.widget-body -->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Attendance/Jobcard/RBJCSelection.js")"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //Fr Deductions
+        //1st replace first column header text with checkbox
+
+        $("#checkableGrid th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkall}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAll", name: "cbSelectAll", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAll']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGrid').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbDeduction']").click(function () {
+            var checked = $("#checkableGrid td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGrid").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbDeduction").removeAttr("checked");
+            }
+        });
+
+        //For Divsions Grid
+        //1st replace first column header text with checkbox
+
+        $("#checkableGridDivisions th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkalldivisions}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAllDivsions", name: "cbSelectAllDivisions", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAllDivisions']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGridDivisions').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbDivisions']").click(function () {
+            var checked = $("#checkableGridDivisions td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGridDivisions").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbDivisions").removeAttr("checked");
+            }
+        });
+
+        //For Locations
+        $("#checkableGridLocations th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkalllocations}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAllLocations", name: "cbSelectAllLocations", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAllLocations']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGridLocations').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbLocations']").click(function () {
+            var checked = $("#checkableGridLocations td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGridLocations").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbLocation").removeAttr("checked");
+            }
+        });
+
+
+
+
+        //For Types Grid
+        //1st replace first column header text with checkbox
+
+        $("#checkableGridTypes th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkalltypes}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAllTypes", name: "cbSelectAllTypes", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAllTypes']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGridTypes').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbTypes']").click(function () {
+            var checked = $("#checkableGridTypes td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGridTypes").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbType").removeAttr("checked");
+            }
+        });
+
+
+
+    });
+</script>

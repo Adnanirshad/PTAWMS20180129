@@ -1,0 +1,290 @@
+﻿@model PTAWMS.Areas.Attendance.BusinessLogic.ModelSOTPEmpDetail
+@{
+    ViewBag.Title = "Employee wsie Overtime";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+				</li>
+				<li class="active">OT Pending Details</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+ <div class="col-md-10 col-sm-12 col-xs-12">
+        <br />
+        <div>
+     <div class="widget-body">
+                <div class="widget-main">
+                    
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+           <div class="row " >  
+                <span class="h4 pull-right label label-xlg label-primary arrowed arrowed-right">Division Remaining Budget: @String.Format("{0:n0}", Model.DivRemainingBudget)</span>                
+                <div class="page-header">
+					<h1>@Model.PeriodName : Pending Overtime for @Model.EmpName
+					</h1>
+				</div>                  
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content" style="display: block;">         
+        @if (Model.List.Count > 1)
+            {
+                
+        <div class="row">         
+            <div class="col-md-3">
+                 <span class="label label-xlg label-warning">Total Days:  @Model.TotalDays</span>               
+            </div>
+            <div class="col-md-3">
+                
+                        <span class="label label-xlg label-info">System OT Hours:  @Model.SystemOT</span>
+                
+            </div>
+            <div class="col-md-3">
+                
+                        <span class="label label-xlg label-success">Claimed OT Hours:  @Model.ClaimedOT</span>
+                
+            </div>
+            <div class="col-md-3">
+               
+                        <span class="label label-xlg label-danger">Overtime Amount:  @String.Format("{0:n0}", Model.TotalAmount)</span>
+               
+            </div>
+        </div>
+                <br />
+            }
+            <div class="row">
+                <ul class="to_do">
+                    <li>
+                        <p>@Model.OTPolicy</p>
+                    </li>      
+                </ul>
+            </div>
+            <div class="row">
+                <ul class="to_do">
+                    <li>
+                        <p>@Model.OTPolicyDays</p>
+                    </li>      
+                </ul>
+            </div>
+            <br />
+            @using (Html.BeginForm("RDetailPending", null, FormMethod.Post, new { id = "RDetailPendingForm" }))
+            {
+                @Html.HiddenFor(model => model.EmpID)
+                @Html.HiddenFor(model => model.PeriodID)
+                @Html.HiddenFor(model => model.IsLate)
+                @Html.HiddenFor(model => model.DeptID)
+                @Html.HiddenFor(model => model.EmpName)
+                @Html.HiddenFor(model => model.DivRemainingBudget)
+                @Html.HiddenFor(model => model.PeriodName)
+                @Html.HiddenFor(model => model.TotalAmount)
+                @Html.HiddenFor(model => model.OTPolicy)
+        <input hidden type="text" name="Count" id="Count" value="@Model.Count" />
+            <div id="gridID" class="col-md-12 col-sm-12">
+                @{var grid = new WebGrid(Model.List, canSort: false, canPage: false);
+                  int rowNum = 0;
+                <div>
+                    @grid.GetHtml(
+                    htmlAttributes: new { id = "checkableGrid" },
+                    columns:
+                        grid.Columns
+                        (
+                        grid.Column(header: "{checkall}", format: @<text> <input style="width:15px"type="checkbox"  @(item.StatusID=="F"?"checked":null)  id="cbEmployee" name="cbEmployee"  value="@(rowNum + 1)" /> </text>),
+                            grid.Column("Sr.No", format: item => rowNum = rowNum + 1),
+                            grid.Column("", format: (item) => Html.TextBox("ED" + (rowNum - 1).ToString(), (string)item.EmpDate, new { @hidden = true })),
+                            grid.Column("Date", format: (item) => Html.Label("EmpNo" + (rowNum - 1).ToString(), (string)item.Date, new { style = "width:180px; font-weight: normal;" })),
+                            grid.Column("IN", format: (item) => Html.Label("EmpNo" + (rowNum - 1).ToString(), (string)item.TimeIN, new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("OUT", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.TimeOut, new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("Work", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.WorkHours, new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("System OT", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.SystemOTHours, new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("Claim OT ", format: (item) => Html.TextBox("ClaimOT" + (rowNum - 1).ToString(), (object)item.ClaimedOTHours, new { style = " width:50px;" })),
+                            grid.Column("Amount", format: (item) => Html.Label("Amount" + (rowNum - 1).ToString(), (string)item.OTAmount.ToString(), new { style = " width:50px;font-weight: normal;" })),
+                            grid.Column("Status", format: (item) => Html.Label("Amount" + (rowNum - 1).ToString(), (string)item.StatusRemarks, new { style = " width:150px;font-weight: normal;"}))
+                        ), mode: WebGridPagerModes.Numeric)
+                </div>
+                }
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>
+            <div class="col-md-12 col-sm-12">
+                @if (Model.IsLate == true)
+                {
+                <div class="form">
+                    <div class="form-group">
+                        <label for="email">Justification:</label>
+                       @Html.TextAreaFor(model => model.Justification, new { cols = 35, @rows = 3 })
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>
+                }
+            <div id="ErrorMessageDiv">
+                <div class="x_content bs-example-popovers">
+                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <span id="ErrorMessage"></span>
+                    
+                    </div>
+                </div>
+            </div>
+                      <br />
+            <form class="form-inline">
+                 <span><label>Decision:</label></span>  
+                 &nbsp;&nbsp;&nbsp;   
+                @Html.DropDownList("DecisionID", null, new { @class = "input-medium valid"})
+                  &nbsp;&nbsp;&nbsp;  
+                   <span id="RecDivID"><label>Recommended To:</label></span>  
+                 &nbsp;&nbsp;&nbsp;                  
+                  @Html.DropDownList("RecommendID", null, new { @class = "input-medium valid " }) 
+                     &nbsp;&nbsp;&nbsp;                    
+                   <button type="button" id="SubmitButton" class="btn btn-xs btn-info">Submit</button>
+             </form> 
+            </div> 
+                 <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>               
+            }
+        </div>
+    </div>
+</div>
+                </div><!-- /.widget-main -->
+            </div><!-- /.widget-body -->
+        </div>
+            </div>
+        </div>
+    </div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="~/vendors/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ErrorMessageDiv").hide();
+        $('#SubmitButton').on("click", function getIdFunction() {
+            $("#divLoading").show();
+            var urls = LoadUrl('Attendance/OTRecommend/ROTDetailList');
+            $.ajax({
+                url: urls,
+                type: 'POST',
+                data: $("#RDetailPendingForm").serialize(),
+                success: function (data) {
+                    if (data == "OK") {
+
+                        alert('Overtime Submitted Sucessfully')
+                        var prid = document.getElementById("PeriodID").value;
+                        var deptid = document.getElementById("DeptID").value;
+                        var url = '/ESSP/Attendance/OTRecommend/ROTEmpList?DeptID=' + deptid + '&PayrollPeriodID=' + prid;
+                        window.location = url;
+                    }
+                    else {
+                        $("#ErrorMessageDiv").show();
+                        var htmlElements = "";
+                        for (var i in data) {
+                            htmlElements += '<strong><p>' + data[i] + '</p></strong>';
+                        }
+                        var container = document.getElementById("ErrorMessage");
+                        container.innerHTML = htmlElements;
+                    }
+                },
+                error: function () {
+                    $("#result").text('an error occured')
+
+                }
+            });
+        });
+    });
+    $(document).ready(function () {
+        var selec = $('#DecisionID').val();
+        if (selec == "F") {
+            $('#RecDivID').show();
+        }
+        else { $('#RecDivID').hide(); }
+        $('#DecisionID').change(function () {
+            var Divval = $('#DecisionID').val();
+            if (Divval == "F") {
+                $('#RecDivID').show();
+            }
+            else { $('#RecDivID').hide(); }
+            // $(this).val() will work here
+        });
+
+        //1st replace first column header text with checkbox
+        $("#checkableGrid th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkall}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAll", name: "cbSelectAll", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAll']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGrid').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbEmployee']").click(function () {
+            var checked = $("#checkableGrid td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGrid").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbEmployee").removeAttr("checked");
+            }
+        });
+    });
+    </script>
+
+<style type="text/css">
+    table
+    {
+        font-size: 13px;
+        color: #333333;
+        font-weight:normal;
+        border-width: 1px;
+        border-color: #f9f9f9;
+        border-collapse: collapse;
+    }
+    table th
+    {
+         
+        padding: 5px;
+        border-style: solid;
+        border-top-width: 0;
+          border-left-width: 0;
+           border-right-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-color: #ccc6c6;
+        border-top-color: #f9f9f9;
+        border-left-color: #f9f9f9;
+        border-right-color: #f9f9f9;
+        background-color: #f9f9f9;
+    }
+    table td
+    {
+        border-width: 1px;
+        padding: 5px;
+        border-style: solid;
+        border-top-width: 0;
+          border-left-width: 0;
+           border-right-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-color: #ccc6c6;
+        border-top-color: #f9f9f9;
+        border-left-color: #f9f9f9;
+        border-right-color: #f9f9f9;
+        background-color: #f9f9f9;
+    }
+    table td input
+    {
+        width:80px;
+    }
+</style>
+

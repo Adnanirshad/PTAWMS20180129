@@ -1,0 +1,110 @@
+﻿@model PTAWMS.Models.Att_Reader
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Attendance</li>
+                    <li class="active">Bio-Metric</li>
+				</li>
+				<li class="active">Delete</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-header">
+            <h1>
+			   Bio-Metric
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Are you sure you want to delete this?            												
+			    </small>
+			</h1>
+        </div>
+<div class="widget-box">
+	<div class="widget-body">
+		<div class="widget-main">
+   <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RdrName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RdrName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderDutyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderDutyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IpAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IpPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RdrTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RdrTypeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocID)
+        </dd>
+       <dd>
+            @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+         <div>
+            <div class="col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />  
+                @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div>
+    }  
+        </dd>
+    </dl>
+
+   
+		    </div><!-- /.widget-main -->
+
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>iv>

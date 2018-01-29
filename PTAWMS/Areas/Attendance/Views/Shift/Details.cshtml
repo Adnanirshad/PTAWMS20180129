@@ -1,0 +1,209 @@
+﻿@model PTAWMS.Models.Att_Shift
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shift Details</h2>
+
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOff1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOff1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOff2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOff2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TueMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TueMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WedMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WedMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThuMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThuMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FriMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FriMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SatMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SatMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SunMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SunMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LateIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LateIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EarlyIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarlyIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EarlyOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EarlyOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LateOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LateOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OverTimeMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OverTimeMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinHrs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinHrs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasBreak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasBreak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BreakMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BreakMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HalfDayBreakMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HalfDayBreakMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GZDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GZDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenShift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoundOffWorkMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoundOffWorkMin)
+        </dd>       
+        <dt>
+            @Html.DisplayNameFor(model => model.SubtractEIFromWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubtractEIFromWork)
+        </dd>     
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Edit ", "Edit", new { id = Model.ShftID } , new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+    
+</p>

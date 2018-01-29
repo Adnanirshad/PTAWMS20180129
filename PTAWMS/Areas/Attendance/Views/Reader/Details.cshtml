@@ -1,0 +1,75 @@
+﻿@model PTAWMS.Models.Att_Reader
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Att_Reader</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RdrName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RdrName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReaderDutyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReaderDutyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IpAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IpPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IpPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RdrTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RdrTypeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Edit ", "Edit", new { id = Model.RdrID } , new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })    
+</p>

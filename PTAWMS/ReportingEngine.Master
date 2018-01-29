@@ -1,0 +1,1189 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ReportingEngine.master.cs" Inherits="PTAWMS.ReportingEngine" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <%--         <link href="Content/Reports/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Reports/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Reports/filter-navigation.css" type="text/css" rel="stylesheet" />
+    <link href="Content/Reports/filters-page.css" type="text/css" rel="stylesheet" />--%>
+    <%--<script src="Scripts/jquery.js"></script>--%>
+    <%--   
+    <script type="text/javascript" src="Scripts/ReportsFilters/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="Scripts/ReportsFilters/bootstrap.min.js"></script>--%>
+    <script type="text/javascript" src="../../Scripts/ReportsFilters/FilterScripts.js"></script>
+    <script type="text/javascript" src="../../Scripts/ReportsFilters/DeleteSingleFilters.js"></script>
+    <script src="../../Scripts/AppName.js"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Employee Self Service Portal</title>
+    <link rel="icon" href="assets/images/pta_logo.png">
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="assets/css/select2.min.css" />
+    <!-- text fonts -->
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" />
+
+    <!--[if lte IE 9]>
+			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="Content/PTACustom.css" />
+    <!--[if lte IE 9]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+    <script type="text/javascript" src="../../assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+    <!--[if lte IE 8]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<% { %> 
+    <% PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];%>
+
+            <body class="no-skin">
+
+
+                <div id="navbar" class="navbar navbar-default ace-save-state">
+                   <div class="navbar-container ace-save-state" id="navbar-container">
+                        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                            <span class="sr-only">Toggle sidebar</span>
+
+                            <span class="icon-bar"></span>
+
+                            <span class="icon-bar"></span>
+
+                            <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-header pull-left">
+                            <a href="../../Home/VDSContainer" class="navbar-brand">
+                                <small>
+                                    <i class="">
+                                        <img height="25" alt="" src="../../assets/images/pta_logo.png"></i>
+                                    <span><span class="bolder"></span><span style="padding-top: 10px; font-size: 15px;">Employee's Self Service Portal</span></span>
+                                </small>
+                            </a>
+                        </div>
+                       </div>
+
+                       <%--  <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                            <ul class="nav ace-nav">
+                                <li class="light-blue dropdown-modal">
+                                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                        <span class="user-info">Welcome!<small><asp:Label ID="lbUserName" runat="server" Text="Label"></asp:Label>
+                                        </small>
+                                        </span>
+
+                                        <i class="ace-icon fa fa-caret-down"></i>
+                                    </a>
+
+                                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                        <li>
+                                            <a href="../../Home/Logout">
+                                                <i class="ace-icon fa fa-power-off"></i>
+                                                Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>--%>
+                    
+                    <div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+                        <li class="purple dropdown-modal">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                                <span class="badge badge-important"><div id="divTotalCount"></div></span>
+                            </a>
+
+
+
+                            <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                                <li class="dropdown-header">
+                                    <i class="ace-icon fa fa-exclamation-triangle"></i>
+                                    Notifications
+                                </li>
+
+                                <li class="dropdown-content ace-scroll" style="position: relative;">
+                                    <div class="scroll-track" style="display: none;">
+                                        <div class="scroll-bar"></div>
+                                    </div>
+                                    <div id="divQualificationNote" class="scroll-content" style="max-height: 200px;">
+
+                                    </div>
+                                </li>
+
+                                <li class="dropdown-footer">
+
+                                </li>
+                            </ul>
+                        </li>
+						<li class="light-blue dropdown-modal">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" runat="server" id="img" />
+
+								<span class="user-info" style="white-space:unset;">
+									<small><asp:Label ID="lbUserName" runat="server" Text="Label"></asp:Label></small>
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+                                <li>
+									<a href="../../Home/ChangePassword">
+										<i class="ace-icon fa fa-cogs"></i>
+										Change Password
+									</a>
+								</li>
+								<li>
+									<a href="../../Home/Logout">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+                    <!-- /.navbar-container -->
+                </div>
+                <div class="main-container ace-save-state" id="main-container">
+                    <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
+                        <script type="text/javascript">
+                            try { ace.settings.loadState('sidebar') } catch (e) { }
+                        </script>
+                        <div class="sidebar-shortcuts" id="Div1">
+                            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                                <button onclick="btnShortCutClick('Dashboard')" class="btn btn-success">
+                                    <i class="ace-icon fa fa-signal"></i>
+                                </button>
+
+                                <button onclick="btnShortCutClick('JobCard')" class="btn btn-info">
+                                    <i class="ace-icon fa fa-calendar-check-o"></i>
+                                </button>
+
+                                <button onclick="btnShortCutClick('Visitor')" class="btn btn-warning">
+                                    <i class="ace-icon fa fa-car"></i>
+                                </button>
+
+                                <button onclick="btnShortCutClick('Setting')" class="btn btn-danger">
+                                    <i class="ace-icon fa fa-cogs"></i>
+                                </button>
+                            </div>
+
+                            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                                <span class="btn btn-success"></span>
+
+                                <span class="btn btn-info"></span>
+
+                                <span class="btn btn-warning"></span>
+
+                                <span class="btn btn-danger"></span>
+                            </div>
+                        </div>
+                        <ul class="nav nav-list">
+                            <li class="">
+                                <a href="../../Home/VDSContainer">
+                                    <i class="menu-icon fa fa-tachometer"></i>
+                                    <span class="menu-text">Dashboard </span>
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liPersonalInfo">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-pencil-square-o" ></i>
+                            <span class="menu-text"> Personal Info. </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="" id="liProfile">
+                                
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>">
+                                    <i class="menu-icon fa fa-caret-right"></i> Profile
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liQualification">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=qualification">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Qualification
+								</a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liDependent">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=dependent">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Dependents
+								</a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liTransfer">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=postingtransfer">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Posting Transfer
+								</a>
+                                
+                                <b class="arrow"></b>
+                            </li>
+
+                            
+                            <li class="" id="liLeave">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=leave">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Leaves
+								</a>
+                                
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liPrejobhistory">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=prejobhistory">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Pre-Job History
+								</a>
+                                
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liAppreciation">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=appreciation">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Appreciation
+								</a>
+                                
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liWarning">
+                                <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=warnings">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Warnings
+								</a>
+                               
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liTraining">
+                               <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=training">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Trainings
+								</a>
+                               
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="" id="liAsset">
+                                 <a href="../../HumanResource/Profile/EmpDetails/<%= user.EmpID %>?class=assets">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Assets
+								</a>
+                                <b class="arrow"></b>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                            <%  if (user.MHRCompHierarchy == true)
+                                { %>
+                            <li id="liMCompany">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-building"></i>
+							<span class="menu-text"> HRMS </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+                             <% if (user.MHREmployee==true)
+                            {  %>
+							<li id="liEmployee">
+								<a href="../../HumanResource/Employee/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Employees
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                           <%  if (user.HRRequest == true)
+                            { %>
+                                <li id="liPendingRequest">
+                                    <a class="dropdown-toggle"><span class="menu-text">Pending Request</span><b class="arrow fa fa-angle-down"></b></a>
+                                    <ul class="submenu">
+                                            <li id="liHRPreJobHistory">
+                                                <a href="../../HumanResource/HR/GetPendingPreJobHistory">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Pre-Job History
+								</a>
+                                                <%--<a href="@Url.Action("GetPendingPreJobHistory", "HR", new { area = "HumanResource"})">
+                                                    <i class="menu-icon fa fa-caret-right"></i> Pre-Job History
+                                                </a>--%>
+                                                </li>
+                                                <li id="liHRAppreciation">
+                                                    <a href="../../HumanResource/HR/GetPendingAppreciation">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Appreciation
+								</a>
+                                                   <%-- <a href="@Url.Action("GetPendingAppreciation", "HR", new { area = "HumanResource"})">
+                                                        <i class="menu-icon fa fa-caret-right"></i> Appreciation
+                                                    </a>--%>
+                                                </li>
+                                                <li id="liHRWarning">
+                                                    <a href="../../HumanResource/HR/GetPendingWarning">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Warning
+								</a>
+                                                    <%--<a href="@Url.Action("GetPendingWarning", "HR", new { area = "HumanResource"})">
+                                                        <i class="menu-icon fa fa-caret-right"></i> Warning
+                                                    </a>--%>
+                                                </li>
+                                                <li id="liHRTraining">
+                                                    <a href="../../HumanResource/HR/GetPendingTraining">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Training
+								</a>
+                                                    <%--<a href="@Url.Action("GetPendingTraining", "HR", new { area = "HumanResource"})">
+                                                        <i class="menu-icon fa fa-caret-right"></i> Training
+                                                    </a>--%>
+                                                </li>
+                                    </ul>
+                                </li>
+                                <% }  %>
+                                <li id="liHRQualification">
+                             <a href="../../HumanResource/HR/GetQualifications">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Qualifications
+								</a>
+                                   <%-- <a href="@Url.Action("GetQualifications", "HR", new { area = "HumanResource"})">
+                                        <i class="menu-icon fa fa-caret-right"></i> Qualifications
+                                    </a>--%>
+                                    <b class="arrow"></b>
+                                </li>
+                                
+                                <li id="liHRDegree">
+                                    <a href="../../HumanResource/HR/EmpDegree">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Degree
+								</a>
+                                   <%-- <a href="@Url.Action("EmpDegree", "HR", new { area = "HumanResource"})">
+                                        <i class="menu-icon fa fa-caret-right"></i> Degree
+                                    </a>--%>
+                                    <b class="arrow"></b>
+                                </li>
+                             <% } %>
+                             <% if (user.MUser==true)
+                            {   %>
+                            <li id="liUser">
+								<a href="../../User/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Users
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                            <li id="liUserRole">
+								<a href="../../UserTypes/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									User Roles
+								</a>
+
+								<b class="arrow"></b>
+							</li>                         
+                           <% } %>
+                            <% if (user.HRSection == true)
+                             {   %>
+                            <li id="liSection">
+								<a href="../../HumanResource/Section/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Departments
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                              <% } %>
+                             <% if (user.HRDeptartment == true)
+                             {  %>
+                            <li id="liDepartment">
+								<a href="../../HumanResource/Department/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Divisions
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                              <% } %>
+                             <% if (user.HRDesignation == true)
+                             {   %>
+                            <li id="liDesignation">
+								<a href="../../HumanResource/Designation/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Designations
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                            <% } %>
+                                  <%if (user.HREmpType == true)
+                                  {  %> 
+                            <li id="liEmpType">
+								<a href="../../HumanResource/EmpType/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Employee Types
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                                <%  }   %>                        
+                            <li id="liGrade">
+								<a href="../../HumanResource/Grade/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Grades
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                             <% if (user.HRLocation == true)
+                             {   %>
+                            <li id="liLocation">
+								<a href="../../HumanResource/Location/Index">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Stations
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+                           <%  } %>
+						</ul>
+					</li>
+<%--                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-building"></i>
+                                    <span class="menu-text">HRMS </span>
+
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <% if (user.MHREmployee == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/Employee/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Employees
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.MUser == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../User/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Users
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../UserTypes/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            User Roles
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HRSection == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/Section/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Departments
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HRDeptartment == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/Department/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Divisions
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HRDesignation == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/Designation/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Designations
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HREmpType == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/EmpType/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Employee Types
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HRLocation == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../HumanResource/Location/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Stations
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </li>--%>
+                            <% } %>
+                            <% if (user.AttendanceModule == true)
+                                { %>
+                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-calendar"></i>
+                                    <span class="menu-text">Attendance </span>
+
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <% if (user.MAttShift == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/Shift/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Shifts
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.MAttHoliday == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/Holiday/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Holidays
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.MAttEditAttendance == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/AttManual/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Edit Attendance
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.MAttProcess == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/ProcessRequest/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Process Attendance
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.MAttDevice == true)
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/Reader/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Bio-metric Devices
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.UserType == "A" || user.UserType == "E" || user.UserType == "H")
+                                        { %> 
+                            { 
+                            <li class="">
+                                <a href="../../Attendance/Settings/Edit/1">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Settings
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                                    <% } %>
+                                </ul>
+                            </li>
+                            <% } %>
+                            <% if (user.MAttOTPolicy == true)
+                                { %>
+                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-keyboard-o "></i>
+                                    <span class="menu-text">Overtime Settings </span>
+
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <li class="">
+                                        <a href="../../Attendance/OTPolicy/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime Policy
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="../../Attendance/PRPeriod/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Periods
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/OTDiv/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime Budget
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/OTCredit/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime Credit
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/OTDebit/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime Debit
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ul>
+                            </li>
+                            <% } %>
+
+                            <% if (user.MAttJobCard == true)
+                            { %>
+                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-calendar-check-o"></i>
+                                    <span class="menu-text">Job Cards </span>
+
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <% if (user.UserType == "A" || user.UserType == "H" || user.UserType == "E")
+                                        { %>
+                                    <li class="">
+                                        <a href="../../Attendance/EmployeeJobCard/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Employee Job card
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <li class="">
+                                        <a href="../../Attendance/JobCard/Create">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            New Job card
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/PendingJobCards/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Pending Job Cards
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/JobCard/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Job Card History
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <% } %>
+
+                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-money"></i>
+                                    <span class="menu-text">Overtime Desk </span>
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+                                <ul class="submenu">
+                                    <% if (user.UserType == "N" || user.UserType == "E")
+                                        { %>
+                                    <li class="">
+                                        <a href="../../Attendance/OTSupervisor/SOTDeptList">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Pending Desk
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else if (user.UserType == "R")
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/OTRecommend/ROTDeptList">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Pending Desk
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else if (user.UserType == "P" || user.UserType == "H")
+                                    { %>
+                                    <li class="">
+                                        <a href="../../Attendance/OTApprover/AOTDeptList">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Pending Desk
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <li class="">
+                                        <a href="../../Attendance/OTHR/HROTDeptList">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Manager
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <li class="">
+                                        <a href="../../Attendance/OTApproved/HAOTDeptList">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            OT Approved
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-car"></i>
+                                    <span class="menu-text">Visitor Entry </span>
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+                                <ul class="submenu">
+                                    <li class="">
+                                        <a href="../../Attendance/ScheduleVisitor/Index">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Visitor's Request
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% if (user.UserType == "A" || user.UserType == "H")
+                                        { %>
+                                    <li class="">
+                                        <a href="../../Attendance/ScheduleVisitor/ListOfPendingVisitor">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Pending Scheduled Visitors
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </li>
+                            <li class="active open">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-area-chart"></i>
+                                    <span class="menu-text">Reports </span>
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+                                <ul class="submenu">
+                                    <% if (HttpContext.Current.Session["ReportMenu"].ToString() == "Attendance")
+                                        { %>
+                                    <li class="active">
+                                        <a href="" onclick="LoadReports('Attendance')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Attendance
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else
+                                    {%>
+                                    <li class="">
+                                        <a href="" onclick="LoadReports('Attendance')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Attendance
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (HttpContext.Current.Session["ReportMenu"].ToString() == "Visitor")
+                                        { %>
+                                    <li class="active">
+                                        <a href="" onclick="LoadReports('Visitor')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Visitors
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else
+                                    {%>
+                                    <li class="">
+                                        <a href="" onclick="LoadReports('Visitor')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Visitors
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (HttpContext.Current.Session["ReportMenu"].ToString() == "Overtime")
+                                        { %>
+                                    <li class="active">
+                                        <a href="" onclick="LoadReports('Overtime')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else
+                                    {%>
+                                    <li class="">
+                                        <a href="" onclick="LoadReports('Overtime')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            Overtime
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% if (user.HRModule == true)
+                                    { %>
+                                    <% if (HttpContext.Current.Session["ReportMenu"].ToString() == "HRMS")
+                                        { %>
+                                    <li class="active">
+                                        <a href="" onclick="LoadReports('HRMS')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            HRMS
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% }
+                                    else
+                                    {%>
+                                    <li class="">
+                                        <a href="" onclick="LoadReports('HRMS')">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            HRMS
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                    <% } %>
+                                    <% } %>
+                                    
+                                </ul>
+                            </li>
+                            <li class="active">
+                                <%--<% if (user.UserType == "A" || user.UserType == "H" || user.UserType == "E")
+                            { %> 
+						<a href="../../Reports/Filters/StepOne.aspx">
+							<i class="menu-icon fa fa-area-chart"></i>
+							Reports
+						</a>
+                        <% } else
+                        { %> 
+                        
+                            <a href="../../Reports/Filters/StepThree.aspx">
+							<i class="menu-icon fa fa-area-chart"></i>
+							Reports
+						</a>
+                       <% } %>--%> 
+                            </li>
+                        </ul>
+                        <!-- /.nav-list -->
+
+                    </div>
+                    <div class="main-content">
+                        <div class="main-content-inner">
+                            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <i class="ace-icon fa fa-home home-icon"></i>
+                                        <a href="/WMS/Home/Index">Home</a>
+                                        <li class="active">Reports</li>
+                                    </li>
+                                    <%--<li class="active">Job Cards History</li>--%>
+                                </ul>
+                                <!-- /.breadcrumb -->
+                            </div>
+                            <form id="Form1" runat="server">
+                                <input id="hidEmpID" runat="server" type="hidden" />
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </form>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        try { ace.settings.loadState('main-container') } catch (e) { }
+                    </script>
+
+
+                    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+                    </a>
+                </div>
+                <!-- /.main-container -->
+
+                <!-- basic scripts -->
+
+                <!--[if !IE]> -->
+                <script type="text/javascript" src="../../assets/js/jquery-2.1.4.min.js"></script>
+
+                <!-- <![endif]-->
+
+                <!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+                <script type="text/javascript">
+                    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+                </script>
+
+                <script>
+                    var urls = LoadUrl('Home/GetQualificationNotification');
+                    var val = $("#hidEmpID").val();
+                    $.ajax({
+                        type: "GET",
+                        url: urls,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        data: { ID: val },
+                        success: function (response) {
+                            //divQualificationNote
+
+                            $("#divQualificationNote").append(response);
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+                    urls = LoadUrl('Home/GetTotalNotification');
+                    $.ajax({
+                        type: "GET",
+                        url: urls,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        data: { ID: val },
+                        success: function (response) {
+                            //divQualificationNote
+                            $("#divTotalCount").append(response);
+                            //$("#HRTotal").append(response);
+
+
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+
+                    function navigate(target) {
+                        //Grab your values
+                        alert(target);
+
+                        //Perform your navigation
+                        window.location.href = target;
+                    }
+
+                    function LoadReports(obj) {
+                        var urls = LoadUrl('Reports/Filters/StepTwo.aspx/SaveReportSession');
+                        $.ajax({
+                            type: "POST",
+                            url: urls,
+                            data: "{'id':'" + obj + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                urls = LoadUrl('Reports/Filters/AttendanceReport.aspx');
+                                window.location.href = urls;
+                            },
+                            error: function (response) {
+                                alert(response);
+                            },
+                            failure: function (response)
+                            { alert(response); }
+                        });
+                    }
+                    function btnShortCutClick(obj) {
+                        //window.applicationBaseUrl = @Html.Raw(HttpUtility.JavaScriptStringEncode(Url.Content("~/"), true));
+                        if (obj == "Dashboard") {
+                            var urls = LoadUrl('Home/Index');
+                            window.location.replace(urls);
+                        }
+                        else if (obj == "JobCard") {
+                            var urls = LoadUrl('Attendance/JobCard/Create');
+                            window.location.replace(urls);
+                        }
+                        else if (obj == "Visitor") {
+                            var urls = LoadUrl('Attendance/ScheduleVisitor/Index');
+                            window.location.replace(urls);
+                        }
+                        else if (obj == "Setting") {
+                            var urls = LoadUrl('Home/ChangePassword');
+                            window.location.replace(urls);
+                        }
+                    }
+                </script>
+
+                <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+
+                <!-- page specific plugin scripts -->
+
+                <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/jquery.dataTables.bootstrap.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/dataTables.buttons.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/buttons.flash.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/buttons.html5.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/buttons.print.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/buttons.colVis.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/dataTables.select.min.js"></script>
+                
+                <!--[if lte IE 8]>
+		  <script src="assets/js/excanvas.min.js"></script>
+		<![endif]-->
+
+                <!-- ace scripts -->
+                <script type="text/javascript" src="../../assets/js/ace-elements.min.js"></script>
+                <script type="text/javascript" src="../../assets/js/ace.min.js"></script>
+
+
+                <script src="../../assets/js/jquery-2.1.4.min.js"></script>
+     <script type="text/javascript">
+                    var filterFlag = "false";
+                    $(document).ready(function () {
+
+                        if ($("#ContentPlaceHolder1_hidDateFilter").val() == "1") {
+                            $("#divDate").show();
+                            //$('#chkDate').attr('checked', true);
+                            $('#chkDate').trigger('click');
+                            
+                        }
+                        else if ($("#ContentPlaceHolder1_hidDateFilter").val() == "0") {
+                            $("#divDate").hide();
+                            $('#chkDate').attr('checked', false);
+                           
+                        }
+
+                        $('#chkDate').click(function () {
+
+                            if (this.checked) {
+                                filterFlag = "true";
+                                $("#ContentPlaceHolder1_hidDateFilter").val("1");
+                                $("#divDate").show();
+                            }
+                            else {
+                                filterFlag = "false";
+                                $("#ContentPlaceHolder1_hidDateFilter").val("0");
+                                $("#divDate").hide();
+                            }
+                        });
+
+
+
+                    });
+
+     </script>
+
+            </body>
+            <% } %>
+</html>

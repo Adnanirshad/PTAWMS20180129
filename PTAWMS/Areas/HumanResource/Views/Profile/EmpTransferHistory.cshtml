@@ -1,0 +1,208 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "Home Page";
+    List<PTAWMS.Models.ViewEMPTransfer> approvedList = Model.ToList()[0] as List<PTAWMS.Models.ViewEMPTransfer>;
+    //List<PTAWMS.Models.ViewEmpQualification> pendingList = Model.ToList()[1] as List<PTAWMS.Models.ViewEmpQualification>;
+    PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];
+    string className = string.Empty;
+    bool comments = false;
+    bool edit = false;
+    int Counter = 1;
+}
+<div class="modal fade bs-example-modal-lg in" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="divAppreciation" style="display:block;border:groove;">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="label label-lg label-info arrowed-right">
+    <b><strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.</b>
+</div>
+<br />
+
+<div id="appreciation" class="">
+    <div>
+        <div class="main-content-inner">
+            <div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-header">
+                            <h1>
+
+                                <small>
+                                    <div class="pull-right tableTools-container"></div>
+                                    <div class="pull-right">
+                                        @*<a href="#" id="CreateAppreciation" data-toggle="modal" class="blue btn btn-white btn-bold hidden-print" data-target=".bs-example-modal-lg">New Appreciation</a>*@
+                                    </div>
+                                </small>
+                            </h1>
+                        </div>
+                        <!-- div.table-responsive -->
+                        <!-- div.dataTables_borderWrap -->
+                        <div>
+                            <div>
+                                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                               Name
+                                            </th>
+                                            <th>
+                                                Date
+                                            </th>
+                                            <th>
+                                                Station
+                                            </th>
+                                            <th>
+                                                Department
+                                            </th>
+                                            <th>
+                                                Scale
+                                            </th>
+                                            <th>
+                                                Remarks
+                                            </th>
+                                            @*<th>
+                Session Start
+            </th>
+            <th>
+                Session End
+            </th>
+            <th class="hidden-480">
+                Specialization
+            </th>
+            <th class="hidden-480">
+                Grade
+            </th>*@
+                                            @*<th class="hidden-480 hidden-print">
+                                                Attachment
+                                            </th>*@
+                                            @if (user.HRSection == true)
+                                            {
+                                            <th class="hidden-480 hidden-print">Action</th>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in approvedList)
+            {
+                                            <tr>
+                                                <td>
+                                                    @Counter
+                                                    @{
+                                                        Counter = Counter + 1;
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    @item.FullName
+                                                </td>
+                                                <td>
+                                                   @if (@item.OStationJoinDate != null)
+                                                   {
+                                                        @item.OStationJoinDate.Value.ToShortDateString()
+                                                   }
+                                                </td>
+                                                
+                                                <td>
+                                                    @item.LocationName
+                                                </td>
+                                                <td>
+                                                    @item.SectionName
+                                                </td>
+                                                <td>
+                                                   @item.OGrd -  @item.OScale
+                                                </td>
+                                                <td>
+                                                    @item.Remarks
+                                                </td>
+
+                                        @if (user.HRSection == true)
+                                        {
+                                    <td class="hidden-print">
+
+                                            <input type="hidden" id="hidPostingID" value="@item.PHEmpID" />
+                                            <input type="hidden" id="hidPersonID" value="@item.EmpID" />
+                                            @*<input type="hidden" id="hidStatusID" value="@item.StatusID" />*@
+                                            <input type="hidden" id="hidTypeID" value="@ViewBag.TypeID" />
+                                            @*<a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-success" data-target=".bs-example-modal-lg">
+                                                <i class="ace-icon fa fa-comment-o icon-only"></i>
+                                            </a>*@
+                                            @if (user.HRModule == true)
+                                            {
+                                                <a href="#" data-toggle="modal" class="label btn-info" data-target=".bs-example-modal-lg">
+                                                    <i class="ace-icon fa fa-pencil bigger-110"></i>
+                                                </a>
+                                            }
+
+                                        </td>
+                                        }
+                                            </tr>
+                                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*my table end*@
+    <br />
+
+    <div class="modal-backdrop fade in" style="display:none;">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#breadcrumbs").html("<ul class='breadcrumb'><li><i class='ace-icon fa fa-user home-icon'></i><a href='" + LoadUrl("Home/Index")+"'>Home</a></li><li class='active'>Posting Transfer</li></ul>");
+
+        $("#ui-datepicker-div").hide();
+
+        $(".btn-info").click(function () {
+            var ID = $(this).parents('tr').find('#hidPostingID').val();
+            var urls = LoadUrl('HumanResource/Profile/ModifyPosting');
+            $.ajax({
+                type: "GET",
+                url: urls,
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                data: { ID: ID },
+                success: function (response) {
+                    $('#divAppreciation').html(response);
+                    $('#divAppreciation').show();
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+    });
+
+</script>
+
+<script src="~/Scripts/gridFeatures.js"></script>
+
+
+
+
+
+
+
+

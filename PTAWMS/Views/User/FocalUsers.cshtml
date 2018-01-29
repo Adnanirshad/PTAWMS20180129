@@ -1,0 +1,76 @@
+﻿@model PTAWMS.Models.FocalUser
+
+@{
+    ViewBag.Title = "FocalUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Company</li>
+                    <li class="active">Users</li>
+				</li>
+				<li class="active">Focal Users</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="page-header">
+            <h1>
+			    Focal Users
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Create New Focal Users           												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            <div class="control-label col-md-2">User Name</div>
+            <div class="col-md-4">
+                 @Html.DropDownList("FocalUID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12"})
+            </div>
+        </div>     
+        <div class="form-group">
+           <div class="control-label col-md-2">Start Date</div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control", @type = "date"})
+                @Html.ValidationMessageFor(model => model.StartDate)
+                <h6 style="color:red"> @ViewBag.error</h6>
+            </div>
+        </div>
+
+        <div class="form-group">
+           <div class="control-label col-md-2">End Date</div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control", @type = "date"})
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+        </div>
+
+       <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" onclick="JavascriptFunction();" class="btn btn-default btn-success" />
+            @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div> 
+    </div>
+}
+		     </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>

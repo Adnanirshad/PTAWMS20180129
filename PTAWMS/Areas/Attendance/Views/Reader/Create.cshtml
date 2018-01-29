@@ -1,0 +1,104 @@
+﻿@model PTAWMS.Models.Att_Reader
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Attendance</li>
+                    <li class="active">Bio-Metric</li>
+				</li>
+				<li class="active">Create</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="page-header">
+            <h1>
+			    Bio-Metric
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Create New Bio-Metric Machines             												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">    
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="Outer">
+        <div class="form-group">
+            <div class="control-label col-md-2">Reader Name</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.RdrName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RdrName)
+            </div>
+        </div>
+        <div class="form-group">
+           <div class="control-label col-md-2">Ip Address</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.IpAdd,new { @class = "form-control" , @Type="Number" })
+                @Html.ValidationMessageFor(model => model.IpAdd)
+            </div>
+        </div>
+
+        <div class="form-group">
+             <div class="control-label col-md-2">Ip Port</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.IpPort,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IpPort)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Duty Code</label>
+            <div class="col-md-4">
+                @Html.DropDownList("DutyCode", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })              
+            </div>
+        </div>
+             <div class="form-group">
+            <label class="control-label col-md-2">Reader Type</label>
+            <div class="col-md-4">
+                @Html.DropDownList("ReaderType", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })              
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="control-label col-md-2">Location</label>
+            <div class="col-md-4">
+                @Html.DropDownList("Location", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })              
+            </div>
+        </div>
+
+         <div class="form-group">
+                <div class="control-label col-md-2">Status</div>
+                <div class="col-md-4">
+                    @Html.CheckBox("Status") 
+                   @* <input type="checkbox" class="checkbox" name="OpenShift" value="Hasbreak" id="Hasbreak" />*@ 
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default btn-success" />
+                 @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div> 
+        </div>
+        
+}
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>

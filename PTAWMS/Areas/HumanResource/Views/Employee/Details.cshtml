@@ -1,0 +1,595 @@
+﻿@model PTAWMS.Models.HR_Employee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HR_Employee</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OldIKNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OldIKNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FathersName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FathersName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CNICNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CNICNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PassportNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PassportNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HouseNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HouseNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LandLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LandLine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MobileNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmergencyContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmergencyContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficialContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficialContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfficialEmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfficialEmailID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CraftManDesignationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CraftManDesignationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusinessAreaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusinessAreaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOJ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOJ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReportingToID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReportingToID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReasonToLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReasonToLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PinCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PinCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValidDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValidDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FaceTemp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FaceTemp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPTemp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPTemp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessAttendance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessAttendance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyJ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyJ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeavePolicyM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeavePolicyM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OvertimePolicyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OvertimePolicyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CalculatedSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CalculatedSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PESSIContri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PESSIContri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EOBIContri)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EOBIContri)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NTNNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NTNNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SAPIntegrated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SAPIntegrated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PECNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PECNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Designation.DesignationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Designation.DesignationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpBloodGroup.BloodGroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpBloodGroup.BloodGroupName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpGender.GenderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpGender.GenderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpNationality.NationalityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpNationality.NationalityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpReligion.ReligionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpReligion.ReligionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpStatus.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpStatus.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_EmpType.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_EmpType.TypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Grade.GradeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Grade.GradeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Group.GroupName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Group.GroupName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_JobTitle.JobTitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_JobTitle.JobTitleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Location.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Location.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_MartialStatus.MartialStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_MartialStatus.MartialStatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HR_Section.SectionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HR_Section.SectionName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

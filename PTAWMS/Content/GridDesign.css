@@ -1,0 +1,45 @@
+﻿
+
+
+    .webgrid-table
+    {
+        font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 12px;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #325d88;
+    }
+    .webgrid-table td, th
+    {
+        font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        padding: 1px 7px 2px;
+        text-align: left;
+        font-size:12px;
+    }
+
+    .webgrid-header
+    {
+        color:white;
+        background-color: #325d88;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+        font-size:12px;
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+        background-color: rgba(228, 241, 255, 0.44);
+        padding: 3px 7px 2px;
+    }
+#SelectionArticle a
+{
+   color:#fcfcfc;
+} 

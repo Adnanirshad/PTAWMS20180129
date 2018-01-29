@@ -1,0 +1,197 @@
+﻿@model PTAWMS.Models.Att_OTPolicy
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Overtime Settings</li>
+                    <li class="active">Overtime Policy</li>
+				</li>
+				<li class="active">Edit</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="page-header">
+            <h1>
+			    Overtime Policies
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Edit Overtime Policy             												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+	        <div class="widget-body">
+		        <div class="widget-main">
+				@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.OTPolicyID)
+
+        <div class="form-group">
+            <div class="control-label col-md-2">OT Policy Name</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.OTPolicyName, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.OTPolicyName)
+            </div>
+        </div>       
+        <div class="form-inline" style="margin-left:18%" >           
+                <div class="form-group">                          
+                     @Html.CheckBox("NormalOT", new { @checked = "checked" })<label >Normal Overtime</label>                               
+                  </div>
+            <div id="divNormal">
+                <div class="form-group">
+                    <label class="control-label col-md-5">Min Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayOTStartLimitHour, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDayOTStartLimitHour)
+                   </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5">Max Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayOTEndLimitHour,new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.PerDayOTEndLimitHour)
+                      </div>
+                </div>   
+            </div>            
+        </div>    
+        <div class="form-inline" style="margin-left:18%">         
+                <div class="form-group">                                             
+                     @Html.CheckBox("RestlOT", new { @checked = "checked" })<label >Rest Overtime</label>                                               
+                </div>
+            <div id="divrest">
+                <div class="form-group">
+                     <label class="control-label col-md-5">Min Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayROTStartLimitHour,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDayROTStartLimitHour)
+                      </div>
+                </div>
+                <div class="form-group">
+                     <label class="control-label col-md-5">Max Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayROTEndLimitHour,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDayROTEndLimitHour)
+                      </div>
+                </div> 
+            </div>                  
+        </div>       
+        <div class="form-inline" style="margin-left:18%" >
+           
+               <div class="form-group">                          
+                     @Html.CheckBox("GZlOT", new { @checked = "checked" })<label >Gazzeted Overtime</label>                               
+                 </div>
+            <div id="divgz">
+                <div class="form-group">
+                    < <label class="control-label col-md-5">Min Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayGOTStartLimitHour,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDayGOTStartLimitHour)
+                      </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5">Max Hour</label>
+                  <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.PerDayGOTEndLimitHour,new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDayGOTEndLimitHour)
+                      </div>
+                </div>
+             </div>                            
+        </div>   
+            <br />
+      <div class="form-group">
+            <div class="control-label col-md-2">Min Minutes For OneHour</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.MinMinutesForOneHour, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.MinMinutesForOneHour)
+            </div>
+        </div>   
+        <div class="form-group">
+            <div class="control-label col-md-2">Days In Month</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.DaysInMonth, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.DaysInMonth)
+            </div>
+        </div> 
+             <div class="form-group">
+            <div class="control-label col-md-2">Days In Week</div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.DaysInWeek, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.DaysInWeek)
+            </div>
+        </div>      
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Create" onclick="JavascriptFunction();" class="btn btn-default btn-success" />
+                                                        @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+                                                        </div>
+                                                    </div>
+                                </div>
+         
+                            }
+
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script>
+    $(document).ready(function () {       
+        // For Normal OverTime       
+        if (document.getElementById('NormalOT').checked) {
+            $("#divNormal").show();
+        } else {
+            $("#divNormal").hide();
+        }
+        $('#NormalOT').change(function () {
+            if ($(this).is(":checked")) {
+                $("#divNormal").show();
+            }
+            else {
+                $("#divNormal").hide();
+            }
+        })
+        // For Rest OverTime
+        if (document.getElementById('RestlOT').checked) {
+            $("#divrest").show();
+        } else {
+            $("#divrest").hide();
+        }
+        $('#RestlOT').change(function () {
+            if ($(this).is(":checked")) {
+                $("#divrest").show();
+            }
+            else {
+                $("#divrest").hide();
+            }
+        })
+        // For GZ OverTime
+        if (document.getElementById('GZlOT').checked) {
+            $("#divgz").show();
+        } else {
+            $("#divgz").hide();
+        }
+        $('#GZlOT').change(function () {
+            if ($(this).is(":checked")) {
+                $("#divgz").show();
+            }
+            else {
+                $("#divgz").hide();
+            }
+        })
+
+    });
+</script>

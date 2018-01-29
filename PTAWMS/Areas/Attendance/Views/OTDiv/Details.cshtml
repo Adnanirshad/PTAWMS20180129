@@ -1,0 +1,65 @@
+﻿@model PTAWMS.Models.BG_OTDivision
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+				</li>
+				<li class="active">Details Over Time Budget</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+        <br />
+        <div class="widget-box">
+	        <div class="widget-header widget-header-blue widget-header-flat">
+		        <h4 class="widget-title lighter">Details Over Time Budget</h4>
+	        </div>
+
+	        <div class="widget-body">
+		        <div class="widget-main">
+					<div>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBudget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaidBudget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RemainingBudget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemainingBudget)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PBDivID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>

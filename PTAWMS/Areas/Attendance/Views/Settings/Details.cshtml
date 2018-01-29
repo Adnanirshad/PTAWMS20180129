@@ -1,0 +1,43 @@
+﻿@model PTAWMS.Models.Att_Setting
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Att_Setting</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SupervisorCutOffDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupervisorCutOffDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecommendCutOffDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecommendCutOffDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedCutOffDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedCutOffDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

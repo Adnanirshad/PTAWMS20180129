@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<PTAWMS.Models.PR_FinYear>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@{ PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"]; }
+<div>
+    <form class ="form-inline" role="form">
+        <div class="form-group">
+            <ul class="nav nav-pills">
+                <li class="active">@Html.ActionLink("Financial Year", "Index",null,new { @class = "" })</li>
+                <li>@Html.ActionLink("Payroll Period", "Index", "PRPeriod", new { area="Attendance"}, new { @class = "" })</li>
+                <li>@Html.ActionLink("Create Financial Year", "Create",null,new { @class = "" })</li>
+                <li></li>
+            </ul>
+        </div>           
+    </form> 
+</div>
+<br />
+<div class="">  
+<table class="table table-bordered table-hover table-condensed">
+    <tr class="table-header">
+        <th>
+            Name
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+           Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+         <td>
+            @Html.DisplayFor(modelItem => item.FinYearName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @if(item.Status==true)
+            {<span>Active</span>}
+            else{<span>Active</span>}
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PFinYearID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PFinYearID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PFinYearID })
+        </td>
+    </tr>
+}
+
+</table>
+</div>
+ <div class="form-inline">
+          <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
+          <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+     </div>

@@ -1,0 +1,87 @@
+﻿@model PTAWMS.Areas.Attendance.Controllers.VMJCApplication
+@{
+    ViewBag.Title = "Add Quota | Select Employees ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h4>Select Employees</h4><hr />
+@using (Html.BeginForm("AddEmployeeForJC", "EmployeeJobCard", FormMethod.Post))
+{
+    @*<input type="text" id="Search" name="Search"/>
+    <input type="submit" value="Search" name="SearchButton" />*@
+    string empids = "";
+    foreach (var item in Model.Employees)
+    {
+        empids = empids + item.EmployeeID.ToString() + ",";
+    }
+    <p>Job Card: @Model.CardName</p>
+    <input hidden  type="text" name="SelEmps" id="SelEmps" value="@empids" />
+    <input hidden  type="text" name="JCAppID" id="JCAppID" value="@Model.JCAppID" />
+    <input hidden  type="text" name="JCValue" id="JCValue" value="@Model.JCValue" />
+    <div id="SelectionArticle">
+        @{
+    var gridEmp = new WebGrid(Model.Employees, canPage: true, rowsPerPage: 2000,
+        selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    gridEmp.Pager(WebGridPagerModes.NextPrevious);} 
+        <div>
+            @gridEmp.GetHtml(
+                tableStyle: "webgrid-table",
+
+            htmlAttributes: new { id = "checkableGrid" },
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+                columns: gridEmp.Columns(
+                gridEmp.Column(header: "{checkall}", format: @<text><input class="check-box"  id="cbEmployee"name="cbEmployee" type="checkbox" value="@item.EmployeeID"/></text>),
+                gridEmp.Column("EmployeeID", " Name"),
+                gridEmp.Column("EmpNo", " Emp No"),
+                gridEmp.Column("FullName", "Description", style: "description"),
+                gridEmp.Column("DesignationName", " Designation"),
+                gridEmp.Column("SectionName", " Section"),
+                gridEmp.Column("DepartmentName", " Department"),
+                gridEmp.Column("TypeName", " Type"),
+                gridEmp.Column("LocationName", " Location")
+            )) 
+        </div>
+    </div>
+    <div class="form-inline" style="margin-top:15px;">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+}
+<link href="~/Content/GridDesign.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //1st replace first column header text with checkbox
+
+        $("#checkableGrid th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkall}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAll", name: "cbSelectAll", value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+
+        // 2nd click event for header checkbox for select /deselect all
+        $("input[name='cbSelectAll']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGrid').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+        $("input[name='cbEmployee']").click(function () {
+            var checked = $("#checkableGrid td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGrid").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbEmployee").removeAttr("checked");
+            }
+        });
+    });
+    </script>

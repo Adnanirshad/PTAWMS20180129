@@ -1,0 +1,140 @@
+﻿@model PTAWMS.Models.HR_EmpTrainings
+<link href="~/assets/css/jquery-ui1.css" rel="stylesheet" />
+
+<div class="modal-content">
+    <div class="widget-header widget-header-small">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"><i class="ace-icon fa fa-check"></i>Local Training</h4>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("AddTraining", "Profile", FormMethod.Post, new { id = "AddPreJobHistory", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.TrainingID)
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+
+            <div class="form-horizontal">
+                <div class="tab-content">
+                    <div class="row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="alert alert-danger" id="errMsg" style="display:none;">Invalid Date</div>
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="control-label col-md-4">Training Course</div>
+                                <div class="col-md-6">
+                                    @Html.TextAreaFor(model => model.Training_Course, new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Training_Course, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-4">Training Year</div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.Year_, new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Year_, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-4">Training Institution</div>
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(model => model.Training_School_Institution, new { @class = "form-control", @type = "text", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Training_School_Institution, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Document Attachment</label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+                                    @if (!String.IsNullOrEmpty(Model.DocumentPath))
+                                    {
+
+                                        @Html.ActionLink("Download", "DownloadDocument", "Profile", new { ID = Model.TrainingID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+
+                                    }
+                                    <small class="text-warning">Maximum File Size: 2 MB</small>
+                                </div>
+
+                            </div>
+                            @if (Model.TrainingID > 0)
+                            {
+                                <div class="form-group">
+                                    <div class="control-label col-md-4">Query Response</div>
+                                    <div class="col-md-6">
+                                        @Html.TextArea("txtComment", new { @class = "form-control", @type = "text" })
+
+                                    </div>
+                                    @if (ViewBag.Comm != null)
+                                    {
+                                    <div class="widget-menu">
+                                        <a href="#" data-action="settings" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="ace-icon fa fa-bars"> Last Query</i>
+                                        </a>
+
+                                        <ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-closer">
+                                            <li>
+                                                <a data-toggle="tab" href="#dropdown1">@ViewBag.Comm</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    }
+                                </div>
+
+                            }
+                            <div class="form-group">
+                                <div class="control-label col-md-4"></div>
+                                <div class="col-md-6">
+                                    <small class="text-primary">Change Request Subject to HR Approval.</small>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-10">
+                                    <input type="submit" id="AddTraining" value="Save" class="btn btn-default btn-success" />
+                                    <input type="button" id="btnCancel" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+</div>
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@<link href="~/assets/css/jquery-ui-new.css" rel="stylesheet" />
+<script src="~/assets/js/jquery-ui.min.js"></script>
+<script src="~/assets/js/jquery-ui-1-12-1.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        if (!$.datepicker.initialized) {
+            $(document).mousedown($.datepicker._checkExternalClick)
+                // !!!!!!!!!!
+                // The next code line has to be added again so that the date picker
+                // shows up when the popup is opened more than once without reloading
+                // the "base" page.
+                // !!!!!!!!!!
+                .find(document.body).append($.datepicker.dpDiv);
+            $.datepicker.initialized = true;
+            ($.datepicker.dpDiv).hide();
+        }
+        $("#Year_").datepicker({ dateFormat: 'yy' });
+
+        if ($("#TrainingID").val() == '')
+            $('#AddTraining').submit(function () {
+
+            if (fileCheck() == false) {
+
+                return false;
+            }
+           
+            return true;
+        });
+        
+
+    });
+</script>

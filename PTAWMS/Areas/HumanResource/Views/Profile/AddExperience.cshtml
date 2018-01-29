@@ -1,0 +1,205 @@
+﻿@model PTAWMS.Areas.HumanResource.BusinessLogic.ModelExperienceHistory
+<link href="~/assets/css/jquery-ui1.css" rel="stylesheet" />
+
+    <div class="modal-content">
+        <div class="widget-header widget-header-small">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel"><i class="ace-icon fa fa-check"></i>Pre-Job History</h4>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("AddExpHistory", "Profile", FormMethod.Post, new { area="HumanResource", id = "AddPreJobHistory", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.ID)
+            @Html.AntiForgeryToken()
+            <div class="modal-body">
+                    
+                        <div class="form-horizontal">
+                            <div class="tab-content">
+                                <div class="row">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="alert alert-danger" id="errMsg" style="display:none;">Invalid Date</div>
+                                    <fieldset>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Organisation, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Organisation, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                                @Html.ValidationMessageFor(model => model.Organisation, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.OrgAddress, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.TextAreaFor(model => model.OrgAddress, new { @class = "form-control"})
+                                                @Html.ValidationMessageFor(model => model.OrgAddress, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", onkeypress = "return event.charCode >= 48 && event.charCode <= 57", maxlength = "15" } })
+                                                @Html.ValidationMessageFor(model => model.OrgAddress, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.TextBoxFor(model => model.FromDate, "{0:dd/MM/yyyy}", new { @class = "form-control" , @type = "text", @required = "required" })
+                                                @*<input id="FromDate" name="FromDate" class="form-control" type="date" required />*@
+                                                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+
+                                                @Html.TextBoxFor(model => model.ToDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @type = "text", @required = "required" })
+                                                @*<input id="ToDate" name="ToDate" class="form-control" type="date" required />*@
+                                                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control"} })
+                                                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.JobDescription, htmlAttributes: new { @class = "control-label col-md-4" })
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.JobDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.JobDescription, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4">Experience Letter</label>
+                                            <div class="col-md-6">
+                        <input type="file" class="form-control" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+                                                @if (!String.IsNullOrEmpty(Model.ExperiencePath))
+                                                {
+                                                    
+                                                    @Html.ActionLink("Download", "DownloadDocument", "Profile", new { ID = Model.ID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+                                                   
+                                                }
+                                                <small class="text-warning">Maximum File Size: 2 MB</small>
+                    </div>
+                                        </div>
+                                        @if(Model.ID > 0) { 
+                                        <div class="form-group">
+                                            <div class="control-label col-md-4">Query Response</div>
+                                            <div class="col-md-6">
+                                                @Html.TextArea("txtComment", new { @class = "form-control", @type = "text"})
+                                                
+                                            </div>
+                                            @if (ViewBag.Comm != null)
+                                            {
+                                            <div class="widget-menu">
+                                                <a href="#" data-action="settings" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="ace-icon fa fa-bars"> Last Query</i>
+                                                </a>
+
+                                                <ul class="dropdown-menu dropdown-menu-right dropdown-light-blue dropdown-closer">
+                                                    <li>
+                                                        <a data-toggle="tab" href="#dropdown1">@ViewBag.Comm</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            }
+                                        </div>
+
+                                        }
+                                        <div class="form-group">
+                                            <div class="control-label col-md-4"></div>
+                                            <div class="col-md-6">
+                                                <small class="text-primary">Change Request Subject to HR Approval.</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-4 col-md-10">
+                                                <input type="submit" id="AddPreJobHistory" value="Save" class="btn btn-default btn-success" />
+                                                <input type="button" id="btnCancel" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                        </div>
+                    </div>
+            </div>
+        }
+
+
+
+    </div>
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">*@<link href="~/assets/css/jquery-ui-new.css" rel="stylesheet" />
+<script src="~/assets/js/jquery-ui.min.js"></script>
+<script src="~/assets/js/jquery-ui-1-12-1.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        if (!$.datepicker.initialized) {
+            $(document).mousedown($.datepicker._checkExternalClick)
+                // !!!!!!!!!!
+                // The next code line has to be added again so that the date picker
+                // shows up when the popup is opened more than once without reloading
+                // the "base" page.
+                // !!!!!!!!!!
+                .find(document.body).append($.datepicker.dpDiv);
+            $.datepicker.initialized = true;
+            ($.datepicker.dpDiv).hide();  
+        }
+        $('#AddPreJobHistory').submit(function () {
+            //alert($("#FromDate").val());
+            //alert($("#ToDate").val());
+            $("#ToDate").val($("#ToDate").val());
+            $("#FromDate").val($("#FromDate").val());
+
+            if (fileCheck() == false) {
+
+                return false;
+            }
+            
+            return true;
+        });
+        if ($('#ID').val().length == 0) {
+            $("#FromDate").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker("setDate", new Date());
+            $("#ToDate").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker("setDate", new Date());
+        }
+        $("#FromDate").datepicker({
+            dateFormat: 'dd/mm/yy', changeMonth: true,
+            changeYear: true});
+        $("#FromDate").bind("change", function () {
+            var minValue = $("#FromDate").val();
+            minValue = $.datepicker.parseDate("dd/mm/yy", minValue);
+            minValue.setDate(minValue.getDate() + 1);
+            $("#ToDate").datepicker("option", "minDate", minValue);
+        })
+
+        $("#ToDate").datepicker({
+            dateFormat: 'dd/mm/yy', changeMonth: true,
+            changeYear: true }).bind("change", function () {
+            var minValue = $("#FromDate").val();
+            minValue = $.datepicker.parseDate("dd/mm/yy", minValue);
+            minValue.setDate(minValue.getDate() + 1);
+            $("#ToDate").datepicker("option", "minDate", minValue);
+            })
+
+    });
+    </script>

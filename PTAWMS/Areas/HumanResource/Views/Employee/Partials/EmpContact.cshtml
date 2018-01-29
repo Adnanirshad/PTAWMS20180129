@@ -1,0 +1,111 @@
+﻿@model PTAWMS.Models.HR_Employee
+
+@using (Html.BeginForm("OpenEmpContactPartialView", "Employee", FormMethod.Post))
+{
+    
+    @Html.AntiForgeryToken()
+<section class="col-md-12,row form-horizontal">
+<section class ="col-md-6">
+<div class="form-group">
+        <div class =" col-md-4">
+           <label>Current Address</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.Address,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>LandLine</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.LandLine,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LandLine) 
+         </div>
+    </div>
+     <div class="form-group">
+        <div class =" col-md-4">
+           <label>Mobile No</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.MobileNo,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MobileNo) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Emergency Contact No</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.EmergencyContactNo,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MiddleName) 
+         </div>
+    </div>
+  <div class="form-group">
+        <div class =" col-md-4">
+           <label>Country</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.Country,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Country) 
+         </div>
+    </div>   
+
+</section>
+<section class ="col-md-6">
+<div class="form-group">
+        <div class =" col-md-4">
+           <label>Email ID</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.EmailID,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmailID) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Official Contact No</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.OfficialContactNo,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OfficialContactNo) 
+         </div>
+    </div>
+    <div class="form-group">
+        <div class =" col-md-4">
+           <label>Official Email ID</label>
+        </div>
+        <div class="col-md-6">
+             
+             @Html.TextBoxFor(model => model.OfficialEmailID,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OfficialEmailID) 
+         </div>
+    </div>
+    @*<div class="form-group">
+        <div class =" col-md-4">
+           <label>City</label>
+        </div>
+        <div class="col-md-6">
+              
+            @Html.DropDownList("City",null,new { @class = "btn btn-default dropdown-toggle dropdown dpWidth"})
+         </div>
+    </div>*@
+     
+</section>
+</section>
+   <input type="submit" id="btnEmpContactnew" value="EmployeeContact"  class="btn btn-default btn-success" />
+}
+
+<div id="searchResults">
+
+</div>
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>

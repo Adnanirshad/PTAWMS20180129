@@ -1,0 +1,70 @@
+﻿@model PTAWMS.Models.HR_Designation
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"]; } 
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+				</li>
+                <li>
+					<a href="~/HumanResource/Designation/Index">Designations</a>
+				</li>
+				<li class="active">Edit</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+        <br />
+        <div class="widget-box">
+	        <div class="widget-header widget-header-blue widget-header-flat">
+		        <h4 class="widget-title lighter">Edit Designation</h4>
+	        </div>
+
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+    
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.DesgID)
+                            @Html.HiddenFor(model => model.ODesigID)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DesignationName, new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.DesignationName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DesignationName)
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                @Html.LabelFor(model => model.OCommonName, new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.OCommonName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.OCommonName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Save" class="btn btn-default btn-success" />
+                                  @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary " })
+                                </div>
+                            </div>
+                        </div>
+                    }
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>
+
+

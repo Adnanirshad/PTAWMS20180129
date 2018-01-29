@@ -1,0 +1,267 @@
+﻿@model PTAWMS.Areas.Attendance.BusinessLogic.ModelSOTEmpList
+@{
+    ViewBag.Title = "ApprovedOTList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+				</li>
+				<li class="active">OT Manager</li>
+			</ul><!-- /.breadcrumb -->
+		</div> 
+        @{ PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"]; }
+<div class="col-md-10 col-sm-12 col-xs-12">
+        <br />
+        <div>
+
+	        <div class="widget-body">
+		        <div class="widget-main">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+           <div class="page-header">
+					<h1>Overtime Manager
+					</h1>
+				</div> 
+            
+            <div class="clearfix"></div>
+        </div>
+        @if(Model.Message.Count>0)
+        {
+        <div class="x_content bs-example-popovers">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                </button>
+                @foreach(var ms in Model.Message)
+                {<strong><p>@ms.ToString()</p></strong>}
+                    
+            </div>
+        </div>
+        }
+        <div class="x_content" style="display: block;">
+            @using (Html.BeginForm("HROTEmpList", null, FormMethod.Get))
+            {
+            <div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <label for="email" class="pull-left">Month : </label>
+                        @Html.DropDownList("PayrollPeriodID", null, new { @class = "input-medium valid col-lg-2 col-md-12 col-sm-12 col-xs-12" })
+                @Html.HiddenFor(model => model.DeptID)
+                      <button type="submit" class="btn btn-xs btn-success pull-left">Find</button>
+                          @*<span class="h5 pull-right">Total  Pending Amount: @Model.TotalOTAmount</span>*@
+                      </div>
+                </div>
+            </div>
+                <br />
+            }
+            <br />
+            @using (Html.BeginForm("REmpPending", null, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.PayrollPeriodID)
+                @Html.HiddenFor(model => model.DeptID)
+            <input hidden type="text" name="Count" id="Count" value="@Model.Count" />
+            <div class="col-md-9 col-sm-12">
+                @{var grid = new WebGrid(Model.List, canSort: false, canPage: false);
+                int rowNum = 0;
+                <div>
+                    @grid.GetHtml(
+                    htmlAttributes: new { id = "checkableGrid" },
+                    columns:
+                        grid.Columns
+                        (
+                        grid.Column("Sr.No", format: item => rowNum = rowNum + 1),
+                            grid.Column("", format: (item) => Html.TextBox("ED" + (rowNum-1).ToString(), (int)item.EmpID, new { @hidden = true })),
+                            grid.Column("Name", format: (item) => Html.Label("EmpNo" + (rowNum - 1).ToString(), (string)item.EmpName, new { style = "width:150px; font-weight: normal;" })),
+                            //grid.Column("Designation", format: (item) => Html.Label("EmpNo" + (rowNum - 1).ToString(), (string)item.Designation, new { style = " width:150px;font-weight: normal;" })),
+                            grid.Column("System OT Hours", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.SystemOTHours, new { style = " width:60px;font-weight: normal;" })),
+                             grid.Column("Claim OT Hours", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.ClaimedOTHours, new { style = " width:60px;font-weight: normal;" })),
+                              grid.Column("Amount", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.OTAmount.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("Days", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.DailyOTRequestCount.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("Pending Desk", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.PendingAtSupervisor.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                              grid.Column("Recommender Desk", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.PendingAtRecommender.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                              grid.Column("Approver Desk", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.PendingAtApprover.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                               grid.Column("Approved", format: (item) => Html.Label("EmpName" + (rowNum - 1).ToString(), (string)item.Approved.ToString(), new { style = " width:60px;font-weight: normal;" })),
+                            grid.Column("Details", format: @<text>@Html.ActionLink("Details", "HROTDetailList", "OTHR", new { EmpID = item.EmpID, PayrollPeriodID = Model.PayrollPeriodID}, new { target = "" })</text>)
+                        ), mode: WebGridPagerModes.Numeric)
+                </div>
+                }
+            </div>
+                <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>
+           if(user.UserType=="A" || user.UserType=="H")
+            {<div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    @Html.CheckBox("Certified") <label>It is certified that this employee does not claim daily allowance on these dates</label> 
+            </div>
+               @* <form class="form-inline">
+                 <span><label>Decision:</label></span>  
+                 &nbsp;&nbsp;&nbsp;   
+                @Html.DropDownList("DecisionID", null, new { @class = "input-medium valid"})
+                  &nbsp;&nbsp;&nbsp;  
+                   <span id="RecDivID"><label>Recommended To:</label></span>  
+                 &nbsp;&nbsp;&nbsp;                  
+                  @Html.DropDownList("RecommendID", null, new { @class = "input-medium valid " })                    
+                    <button type="button" id="SubmitButton" class="btn btn-xs btn-info">Submit</button>
+             </form>*@
+                <form class="form-inline">
+                 <span><label>Decision:</label></span>  
+                 &nbsp;&nbsp;&nbsp;   
+                @Html.DropDownList("DecisionID", null, new { @class = "input-medium valid"})
+                  &nbsp;&nbsp;&nbsp;  
+                   <span id="RecDivID"><label>Recommended To:</label></span>  
+                 &nbsp;&nbsp;&nbsp;                  
+                  @*@Html.DropDownList("RecommendID", null, new { @class = "input-medium valid " })*@ 
+                   <input type="text" id="Recommendid" value="@Model.RecommendID" class="hidden" /> 
+                     @Html.HiddenFor(aa=>aa.RecommendID)
+                   <input type="text" id="RecommenderN" value="@Model.RecommenderName" disabled="disabled"/> 
+                 <a class="btnCreate ace-icon fa fa-search  bigger-110 btn btn-xs btn-info"id="btnsearch"></a>
+                    <button type="button" id="SubmitButton" class="btn btn-xs btn-info">Submit</button>
+             </form>
+                 <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>     
+            </div>
+            }
+            }
+        </div>
+    </div>
+</div>
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+        </div>
+    </div>
+<div id="myModal" class="modal fade" role="dialog" data-toggle="modal" tabindex="-1" data-dismiss="modal" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">  
+           <button type="button" class="close" data-dismiss="modal">&times;</button>  
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button"  id="modal" class=" md-trigger btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="@Url.Content("~/Scripts/Attendance/OTApprovl/ModalClick.js")"></script>
+<script type="text/javascript">
+    $("#btnsearch").click(function () {
+        //alert('ok');
+        var modal = $('#myModal'), modalBody = $('#myModal .modal-body');
+
+        modal
+            .on('show.bs.modal', function () {
+                var urls = LoadUrl('Attendance/OTHR/SearchEmp');
+                modalBody.load(urls)
+            })
+            .modal();
+        e.preventDefault();
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var selec = $('#DecisionID').val();
+        if (selec == "F") {
+            $('#RecDivID').show();
+        }
+        else { $('#RecDivID').hide(); }
+        $('#DecisionID').change(function () {
+            var Divval = $('#DecisionID').val();
+            if (Divval == "F") {
+                $('#RecDivID').show();
+            }
+            else { $('#RecDivID').hide(); }
+            // $(this).val() will work here
+        });
+         //1st replace first column header text with checkbox
+
+        $("#checkableGrid th").each(function () {
+            if ($.trim($(this).text().toString().toLowerCase()) === "{checkall}") {
+                $(this).text('');
+                $("<input/>", { type: "checkbox", id: "cbSelectAll", name: "cbSelectAll" , value: "" }).appendTo($(this));
+                $(this).append("<span></span>");
+            }
+        });
+
+       // 2nd click event for header checkbox for select /deselect all
+            $("input[name='cbSelectAll']").click(function () {
+            var ischecked = this.checked;
+            $('#checkableGrid').find("input:checkbox").each(function () {
+                this.checked = ischecked;
+            });
+        });
+            $("input[name='cbEmployee']").click(function () {
+            var checked = $("#checkableGrid td :checkbox:checked").length;
+
+            if (checked == totalRows) {
+                $("#checkableGrid").find("input:checkbox").each(function () {
+                    this.checked = true;
+                });
+            }
+            else {
+                $("#cbEmployee").removeAttr("checked");
+            }
+        });
+    });
+    </script>
+
+<style type="text/css">
+    table
+    {
+        font-size: 13px;
+        color: #333333;
+        font-weight:normal;
+        border-width: 1px;
+        border-color: #f9f9f9;
+        border-collapse: collapse;
+    }
+    table th
+    {
+         
+        padding: 5px;
+        border-style: solid;
+        border-top-width: 0;
+          border-left-width: 0;
+           border-right-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-color: #ccc6c6;
+        border-top-color: #f9f9f9;
+        border-left-color: #f9f9f9;
+        border-right-color: #f9f9f9;
+        background-color: #f9f9f9;
+    }
+    table td
+    {
+        border-width: 1px;
+        padding: 5px;
+        border-style: solid;
+        border-top-width: 0;
+          border-left-width: 0;
+           border-right-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-color: #ccc6c6;
+        border-top-color: #f9f9f9;
+        border-left-color: #f9f9f9;
+        border-right-color: #f9f9f9;
+        background-color: #f9f9f9;
+    }
+    table td input
+    {
+        width:80px;
+    }
+</style>
+
+
+

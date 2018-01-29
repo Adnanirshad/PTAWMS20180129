@@ -1,0 +1,51 @@
+﻿@model PTAWMS.Models.PR_PayrollPeriod
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PR_PayrollPeriod</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PStageID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PStageID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

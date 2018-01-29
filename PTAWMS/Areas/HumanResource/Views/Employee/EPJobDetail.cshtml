@@ -1,0 +1,113 @@
+﻿@model PTAWMS.Areas.HumanResource.BusinessLogic.ModelEmpJobDetail
+@using (Html.BeginForm("EPPersonal", "HumanResource", FormMethod.Post, new { id = "EditEJobDetailForm" }))
+            {
+    @Html.AntiForgeryToken()
+@Html.HiddenFor(model => model.EmpID)
+<div class="form-horizontal">
+    <div class="Outer">
+        <p></p>                      
+            <div class="form-group" id="DeptDivID">
+                <label class="control-label col-md-3">Division</label>
+                <div class="col-md-6">
+                    @Html.DropDownList("DeptID",null,new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12"})                                      
+                </div>
+            </div>
+
+            <div class="form-group" id="SectionDivID">
+                <label class="control-label col-md-3">Department</label>
+                <div class="col-md-5">
+                    @* @Html.DropDownList("SectionID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                    @Html.ValidationMessageFor(model => model.SectionID)*@
+                    <select class="input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" id="SectionID" name="SectionID"></select>
+                    @Html.HiddenFor(model => model.SectionID, new { id = "selectedSectionIdHidden" })
+                </div>
+            </div>          
+            <div class="form-group">
+                <label class="control-label col-md-3">Employee type</label>
+                <div class="col-md-6">
+                    @Html.DropDownList("EmpTypeID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                    @Html.ValidationMessageFor(model => model.EmpTypeID)
+                </div>
+            </div>
+            @*<div id="EmpTypeDiv">
+                <div class="form-group">
+                    <label class="control-label col-md-5">Permanent Date</label>
+                    <div class="col-md-6">   
+                         @Html.EditorFor(model => model.PermanentDate,new { htmlAttributes = new { @class = "form-control",@type="date" } })
+                        @Html.ValidationMessageFor(model => model.PermanentDate)
+                    </div>
+                </div>
+            </div>   *@              
+            <div class="form-group">
+                <label class="control-label col-md-3">Location</label>
+                <div class="col-md-6"> 
+                @Html.DropDownList("LocationID",null,new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12"})
+                @Html.ValidationMessageFor(model => model.LocationID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Grade</label>
+                <div class="col-md-6">
+                    @Html.DropDownList("GradeID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                    @Html.ValidationMessageFor(model => model.GradeID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Designation</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("DesignationID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                    @Html.ValidationMessageFor(model => model.DesignationID)
+                    @*<select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DesigID" name="DesigID"></select>
+                *@
+                </div>
+            </div>                               
+            <div class="form-group">
+                <label class="control-label col-md-3">Join Date</label>
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.DOJ,new { htmlAttributes = new { @class = "form-control",@type="date" } })
+                    @Html.ValidationMessageFor(model => model.DOJ)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">Status</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("Status", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                    @Html.ValidationMessageFor(model => model.Status)
+                </div>
+            </div>
+            <div id="ResignedControls">
+                @*<div class="form-group">
+                    <label class="control-label col-md-5">Resign Date</label>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.LeavingDate,new { htmlAttributes = new { @class = "form-control",@type="date" } })
+                        @Html.ValidationMessageFor(model => model.LeavingDate)
+                    </div>
+                </div>*@
+                 <div class="form-group">
+               <label class="control-label col-md-3">Reported To</label>
+                <div class="col-md-6">
+                        @Html.DropDownList("UserID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                </div>
+            </div>                
+                 <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="button" id="SaveJobDetailsInfo" value="Save" class="btn btn-default btn-success" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary " })
+            </div>
+        </div>                           
+            </div>
+    </div>
+</div> 
+<script src="~/assets/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/DpDivDeptEdit.js")"></script>
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/ResignInEdit.js")"></script>   
+<script src="@Url.Content("~/Scripts/HumanResource/Employee/DpDivDeptCreate.js")"></script>
+}
+<script type="text/javascript">
+    $(function () {
+        SaveJobDetailFunction();
+        LoadDivDeptFirstTme();
+    });
+
+
+</script>

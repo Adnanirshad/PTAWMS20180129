@@ -1,0 +1,196 @@
+﻿@model PTAWMS.Models.User
+
+@{
+    ViewBag.Title = "Create User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+				</li>
+				<li class="active">User Create</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+        <br />
+        <div class="widget-box">
+	        <div class="widget-header widget-header-blue widget-header-flat">
+		        <h4 class="widget-title lighter">Create User Roles and Rights</h4>
+	        </div>
+
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm()) 
+{
+@Html.AntiForgeryToken()
+<div class="form-horizontal">
+@Html.ValidationSummary(true)   
+    <div>
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="control-label col-md-2">Emp No</div>
+                <div class="col-lg-9 col-md-9 col-sm-9">
+                    <div class="input-group">
+                        <input id="EmpNo" autofocus name="EmpNo" type="text" class="form-control" placeholder="EMP-00001"/>
+                        <span class="input-group-btn">
+                            <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>​ 
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">User Name</div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.UserName,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">Password</div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.Password,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">User Type</div>
+                <div class="col-md-3">
+                     @Html.DropDownList("UserType", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                </div>
+            </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                 @Html.CheckBox("Status") <label>Is Active</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-10">
+                 @Html.CheckBox("CanAdd") <label>Can Add</label>
+                 @Html.CheckBox("CanEdit") <label>Can Edit</label>
+                 @Html.CheckBox("CanDelete") <label>Can Delete</label>
+                 @Html.CheckBox("CanView") <label>Can View</label>
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                 @Html.CheckBox("HRModule") <label class="h4">Human Resource</label>               
+            </div>
+        </div>
+        <div  id="HRModuleDiv">
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @Html.CheckBox("MHRCompHierarchy")
+                    <label>Company</label>
+                    @Html.CheckBox("MUser")
+                   @* <label>User</label>
+                    @Html.CheckBox("HRCategory")*@
+                    <label>Category</label>
+                    @Html.CheckBox("HREmpType")
+                    <label>Employee Type</label>
+                    @Html.CheckBox("HRDesignation")
+                    <label>Designation</label>
+                    @Html.CheckBox("MGrade")
+                    <label>Grades</label>                  
+                    @Html.CheckBox("HRLocation")
+                    <label>Location</label>                    
+                    @Html.CheckBox("HRDeptartment")
+                    <label>Department</label>  
+                    @Html.CheckBox("HRSection")
+                    <label>Section</label>                 
+                </div>
+                <hr width="80%">
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @Html.CheckBox("MHREmployee")
+                    <label class="h5">Employee Profile</label>
+                </div>
+            </div>
+            <div class="form-group" id="HREmpProfileDiv">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    @Html.CheckBox("MHREmpA")
+                    <label>Add</label>
+                    @Html.CheckBox("MHREmpE")
+                    <label>Edit</label>
+                    @Html.CheckBox("MHREmpV")
+                    <label>View</label>
+                    @Html.CheckBox("MHREmpD")
+                    <label>Delete</label>
+                    @Html.CheckBox("MHREmpPersonal")
+                    <label>Personal</label>
+                    @Html.CheckBox("MHREmpJob")
+                    <label>Job</label>
+                    @Html.CheckBox("MHREmpAtt")
+                    <label>Attendance</label>                  
+                </div>
+            </div>
+        </div>
+         <hr width="67%">  
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                 @Html.CheckBox("AttendanceModule") <label class="h4">Attendance Management</label>                
+            </div>
+        </div>
+        <div class="form-group" id="AttendanceModuleDiv">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                @Html.CheckBox("MAttEditAttendance") <label>Daily Attendance Editor</label>
+                @Html.CheckBox("MAttMonthEditor") <label>Monthly Attendance Editor</label>
+                @Html.CheckBox("MOption") <label>Attendance Options</label>
+                @Html.CheckBox("MAttDevice") <label>Bio-metric Devices</label>
+                @Html.CheckBox("MAttJobCard") <label>Job Card</label>
+                @Html.CheckBox("MAttShift") <label>Shifts</label>
+                @Html.CheckBox("MAttPolicy") <label>Attendance Policies</label>
+                @Html.CheckBox("MAttDownloadTime") <label>Download Time</label>
+                @Html.CheckBox("MAttRoster") <label>Roster</label>
+                @Html.CheckBox("MAttOTPolicy") <label>OT Policy</label>
+                @Html.CheckBox("MAttOTCreate") <label>Create Daily OT Request</label>
+                @Html.CheckBox("MAttOTEdit") <label>OT Edit</label>               
+                @Html.CheckBox("MAttMOT") <label>Monthly Overtime</label>
+                @Html.CheckBox("MAttHoliday") <label>Holidays</label>
+                @Html.CheckBox("MAttProcess") <label>Process Attendance</label>
+            </div>
+        </div>
+         <hr width="67%">
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                 @Html.CheckBox("MAttLeaves") <label class="h4">Leave Management</label>                 
+            </div>
+        </div>    
+        <div class="form-group" id="LeaveDiv">
+        </div>
+        <hr width="67%">
+    </div>
+     <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default btn-success" />
+                @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+        </div>
+    </div>
+</div>
+    
+}
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="@Url.Content("~/Scripts/User/UserController.js")"></script>
+<script src="@Url.Content("~/Scripts/User/MainController.js")"></script>
+<script src="@Url.Content("~/Scripts/User/UserPermissionCB.js")"></script>

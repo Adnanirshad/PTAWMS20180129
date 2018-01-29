@@ -1,0 +1,254 @@
+﻿@model PTAWMS.Models.Att_JobCardApp
+				
+@{
+	ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];} 
+				
+<div class="main-content">
+	<div class="main-content-inner">
+		<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+					<li class="active">Job Cards</li>
+					<li class="active">Employees Job Cards</li>
+				</li>
+				<li class="active">Create</li>
+			</ul>
+			<!-- /.breadcrumb -->
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="page-header">
+				<h1>
+				Employees Job Cards
+							    
+					<small>
+						<i class="ace-icon fa fa-angle-double-right"></i>
+				    Create New Employees Job Cards             												
+							    
+					</small>
+				</h1>
+			</div>
+			<div class="widget-box">
+				<div class="widget-body">
+					<div class="widget-main">
+						@using (Html.BeginForm()) 
+				        {
+				            @Html.AntiForgeryToken()
+				                    
+						<div class="form-horizontal">
+							<hr />
+				             @Html.ValidationSummary(true)          
+				                        
+							<br />
+							<section class="col-md-6">
+				                    @if(user.UserType=="A" || user.UserType=="E"){
+				                                             
+								<div id="admin">
+									<div class="form-group">
+										<div class="form-inline">
+											<label class="control-label col-md-3 col-sm-3 col-xs-12">Emp No</label>
+											<div class="col-lg-9 col-md-9 col-sm-9">
+												<div class="input-group">
+				                                    @Html.TextBoxFor(model => model.EmpID, new { @class = "form-control" })
+				                                    @Html.ValidationMessageFor(model => model.EmpID)
+				                                                            
+													<h6>@ViewBag.error</h6>
+													<span class="input-group-btn">
+														<a class="btnCreate btn btn-sm btn-info"id="btnsearch" href="/ESSP/Attendance/EmployeeJobCard/SEmps" title="View" data-target="#myModal" data-toggle="modal">Search</a>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>}
+				             
+				             
+								<div style="margin-left:27%" >
+									<input type="radio"  value="Alls" id="Alls" name="SelectionRB" checked="checked"/> Time Wise
+				             
+									<input type="radio" value="Divs" id="Divs" name="SelectionRB" /> Date Wise         
+				            
+								</div>
+								<br />
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">From Date</label>
+									<div class="col-md-6">
+				                        @Html.TextBoxFor(x => x.DateStarted, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+				                        @Html.ValidationMessageFor(model => model.DateStarted)
+			                        </div>
+								</div>
+								<div id="timewise">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Start Time</label>
+										<div class="col-md-6">
+				                            @Html.TextBoxFor(x => x.StartTime, "{0:HH:mm}", new { @class = "form-control", @type = "time"})
+				                            @Html.ValidationMessageFor(model => model.StartTime)
+			                            </div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">End Time</label>
+										<div class="col-md-6">
+				                            @Html.TextBoxFor(model => model.EndTime, new { @class = "form-control",@type = "time",@Value="16:30"})
+				                            @Html.ValidationMessageFor(model => model.EndTime)
+			                            </div>
+									</div>
+								</div>
+								<div id="datewise">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">To Date</label>
+										<div class="col-md-6">
+				                            @Html.TextBoxFor(model => model.DateEnded, new { @class = "form-control",@type = "date"})
+				                            @Html.ValidationMessageFor(model => model.DateEnded)
+			                            </div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">Job Card</label>
+									<div class="col-md-6">
+				                        @Html.DropDownList("JCTypeID", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })              
+			                        </div>
+								</div>
+								<div id="Justifications">
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Justification</label>
+										<div class="col-md-8">
+				                            @Html.TextAreaFor(model => model.Justification, new { @class = "form-control"})
+				                            @Html.ValidationMessageFor(model => model.Justification)
+			                            </div>
+									</div>
+								</div>
+							</section>
+							<section class="col-md-6">
+								<div class="list-group">
+									<a  class="list-group-item">
+										<h4 class="list-group-item-heading">Employee Information</h4>
+										<h5>Name: @ViewBag.EmployeeName</h5>
+										<h5>Designation:  @ViewBag.Designation</h5>
+										<h5>Department: @ViewBag.Department</h5>
+									</a>
+								</div>
+							</section>
+							<div class="form-group">
+								<div class="col-md-offset-2 col-md-10">
+									<input type="submit" value="submit" class="btn btn-default btn-success" />
+				                    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+				            
+								</div>
+							</div>
+						</div>  
+				}         
+					</div>
+					<!-- /.widget-main -->
+				</div>
+				<!-- /.widget-body -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="myModal" class="modal fade" role="dialog" data-toggle="modal" tabindex="-1"  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header"></div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="@Url.Content("~/Scripts/Attendance/Jobcard/Modal.js")"></script>
+<script type="text/javascript">
+	$(function () {
+		$("#Justifications").hide();
+		$("#JCTypeID").change(function () {
+			if ($(this).val() == "2") {
+				$("#Justifications").show();
+			} else {
+				if ($(this).val() == "3") {
+				    $("#Justifications").show();
+				} else {
+				    $("#Justifications").hide();
+				}
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+	$("#btnsearch").click(function () {
+        var urls = LoadUrl('Attendance/EmployeeJobCard/SEmps');
+		$.ajax({
+			type: "GET",
+            url: urls,
+            success: function (item) {
+                $('#modal-body').html(item);
+				$('#myModal').modal('show');
+			},
+			error: function () {
+				alert("Dynamic content load failed.");
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function () {
+		$("#timewise").show();
+		$("#datewise").hide();
+		var test = $("input[name='SelectionRB']:checked").val();
+		if (test == "Alls") {
+			$("#datewise").hide();
+			$("#timewise").show();
+		}
+		$("input[name$='SelectionRB']").click(function () {
+			var test = $(this).val();
+			if (test == "Alls") {
+				$("#timewise").show();
+				$("#datewise").hide();
+			}
+			else {
+				$("#timewise").show();
+				$("#datewise").hide();
+
+			}
+		});
+		var test = $("input[name='SelectionRB']:checked").val();
+		if (test == "Divs") {
+			$("#datewise").show();
+			$("#timewise").hide();
+		}
+		$("input[name$='SelectionRB']").click(function () {
+			var test = $(this).val();
+			if (test == "Divs") {
+				$("#datewise").show();
+				$("#timewise").hide();
+
+			}
+			else {
+				$("#datewise").hide();
+				$("#timewise").show();
+			}
+		});
+	});
+</script>
+<script>
+	$("#JCTypeID option[value='2']").hide();
+	$("#JCTypeID option[value='3']").hide();
+	$('#Alls').change(function () {
+		if ($(this).prop("checked")) {
+			$("#JCTypeID option[value='2']").hide();
+			$("#JCTypeID option[value='3']").hide();
+			$("#Justifications").hide();
+		}
+	});
+	$('#Divs').change(function () {
+		if ($(this).prop("checked")) {
+			$("#JCTypeID option[value='2']").show();
+			$("#JCTypeID option[value='3']").show();
+		}
+	});
+</script>

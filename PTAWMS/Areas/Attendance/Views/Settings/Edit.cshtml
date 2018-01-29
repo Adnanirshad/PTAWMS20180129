@@ -1,0 +1,76 @@
+﻿@model PTAWMS.Models.Att_Setting
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Attendance</li>                  
+				</li>
+				<li class="active">Settings</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="page-header">
+            <h1>
+			    Settings
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Settings             												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+	        <div class="widget-body">
+		        <div class="widget-main">
+					@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Supervisor CutOff Date</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.SupervisorCutOffDate,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SupervisorCutOffDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Recommend CutOff Date</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.RecommendCutOffDate,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RecommendCutOffDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">Approved CutOff Date</div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.ApprovedCutOffDate,new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ApprovedCutOffDate)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Save" class="btn btn-default btn-success" />             
+            </div>
+        </div>
+    </div>
+}
+		        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+</div>

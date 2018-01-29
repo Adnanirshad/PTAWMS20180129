@@ -1,0 +1,241 @@
+﻿@model PTAWMS.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRoleL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRoleL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRoleD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRoleD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanView)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttDevice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttDevice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttDeviceUtility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttDeviceUtility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttEditAttendance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttEditAttendance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttJobCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttJobCard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttShift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttShift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttPolicy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttPolicy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttDownloadTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttDownloadTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttHoliday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttHoliday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttLeaves)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttLeaves)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttLeaveSetting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttLeaveSetting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttLeaveEncash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttLeaveEncash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAttRoster)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAttRoster)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MHRCompHierarchy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MHRCompHierarchy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MUser)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

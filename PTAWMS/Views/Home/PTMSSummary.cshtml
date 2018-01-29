@@ -1,0 +1,46 @@
+﻿@model PTAWMS.Helper.DMTMSParentModel
+@{
+    //Layout = "~/Views/Shared/_LayoutSimple.cshtml";
+}
+<div class="row">
+	<div class="col-md-12">
+		<div class="widget-box transparent">
+
+			<div class="widget-body">
+				<div class="widget-main no-padding">
+                    <div class="col-md-9 col-sm-12">
+                        
+                        <div id="lineChart"></div>          
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <br />
+                        <h5><a href="~/Home/TMSDetailLateIn">Late In Employees: @Model.LateIn</a></h5>
+                        <div class="progress pos-rel">
+							<div class="progress-bar progress-bar-danger" style="width:100%;"></div>
+						</div>
+                        <h5><a href="~/Home/TMSDetailLateOut">Late Out Employees: @Model.LateOut</a></h5>
+                        <div class="progress pos-rel color-orange">
+							<div class="progress-bar progress-bar-success" style="width:100%;"></div>
+						</div>
+                        <h5><a href="~/Home/TMSDetailEarlyIn">Early In Employees: @Model.EarlyIn</a></h5>
+                        <div class="progress pos-rel">
+							<div class="progress-bar" style="width:100%;"></div>
+						</div>
+                        <h5><a href="~/Home/TMSDetailEarlyOut">Early Out Employees: @Model.EarlyOut</a></h5>
+                        <div class="progress pos-rel">
+							<div class="progress-bar progress-bar-warning" style="width:100%;"></div>
+						</div>
+                    </div>
+				</div><!-- /.widget-main -->
+			</div><!-- /.widget-body -->
+		</div><!-- /.widget-box -->
+	</div><!-- /.col -->
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+        var model = @Html.Raw(Json.Encode(Model))
+               RenderLineChart(model.ChildList);
+    });
+</script>

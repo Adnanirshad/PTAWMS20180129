@@ -1,0 +1,334 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "Home Page";
+    List<PTAWMS.Models.ViewEmpQualification> approvedList = Model.ToList()[0] as List<PTAWMS.Models.ViewEmpQualification>;
+    //List<PTAWMS.Models.ViewEmpQualification> pendingList = Model.ToList()[1] as List<PTAWMS.Models.ViewEmpQualification>;
+    PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];
+    string className = string.Empty;
+    bool comments = false;
+    bool edit = false;
+    int Counter = 1;
+}
+<div class="label label-lg label-info arrowed-right">
+    <b><strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.</b>
+</div>
+<br />
+<div class="modal fade bs-example-modal-lg in" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="divQualification" style="display:block;border:groove;">
+            </div>
+            <div id="divQualificationRemarks" style="display:block;">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="qualification" class="tab-pane">
+
+        <div class="">
+    <div class="">
+        <div class="">
+
+    <div id="qualification" class="tab-pane">
+        <div class="main-content">
+    <div class="main-content-inner
+        <div class="page-content">
+
+         <div class="row">
+			<div class="col-xs-12">
+                
+                <div class="page-header">
+                <h1>
+					
+					<small>
+                         <div class="pull-right tableTools-container"></div>   
+                        <div class="pull-right">
+                             
+                        </div>             												
+					</small>
+							</h1>
+                    </div>
+				<!-- div.table-responsive -->
+
+				<!-- div.dataTables_borderWrap -->
+				<div>
+                    <div>
+					<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+						<thead>
+                             <tr>
+                                <th>
+                                #
+                            </th>
+                            <th>
+                                Degree Name
+                            </th>
+                            <th>
+                                Institute
+                            </th>
+                            
+                            <th>
+                                Pass Year
+                            </th>
+                           
+                            <th class="hidden-480">
+                                Grade
+                            </th>
+                            <th class="hidden-480 hidden-print">
+                                Distinction
+                            </th>
+                            
+                            </tr>
+						</thead>
+                        <tbody>
+                  @foreach (var item in approvedList)
+                  {
+                            <tr>
+                                 <td>
+                        @Counter
+                        @{
+                            Counter = Counter + 1;
+                        }
+
+                    </td>
+                    <td>
+                        @item.Degree
+                        
+                    </td>
+                    <td>
+                        @item.Institute
+                    </td>
+                    
+                    <td>
+                        @item.EndSession
+
+                    </td>
+                    
+                    <td>
+                        @item.Grade
+                    </td>
+                    <td class="hidden-print">
+                        @item.distinction
+                        
+                    </td>
+                    
+                            </tr>
+                        }
+                        </tbody>
+					</table>
+				</div>
+
+                </div>
+			</div>
+		</div>
+        </div>
+    </div>
+</div>
+        <br />
+        @*@if (pendingList.Count > 0)
+        {
+            <div class="page-header hidden-print">
+                <h1>
+                    Unapproved Qualification
+
+                </h1>
+            </div>
+            <table class="table  table-bordered hidden-print">
+                <thead>
+                    <tr role="row">
+                        <th>
+                            Degree Name
+                        </th>
+                        <th>
+                            Institute
+                        </th>
+                        <th>
+                            Session Start
+                        </th>
+                        <th>
+                            Session End
+                        </th>
+                        <th>
+                            Specialization
+                        </th>
+                        <th>
+                            Grade
+                        </th>
+                        <th>
+                            Attachment
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in pendingList)
+                {
+                    if (item.Status == "Query by HR")
+                    {
+                        className = "alert-info";
+                        comments = true;
+                        edit = true;
+                    }
+                    else if (item.Status == "Rejected by HR")
+                    {
+                        className = "alert-danger";
+                        comments = true;
+                        edit = false;
+                    }
+                    else
+                    {
+                        className = "alert-warning";
+                        comments = true;
+                        edit = false;
+                    }
+                    <tr class=@className>
+                        <td>
+                            @item.Degree
+                        </td>
+                        <td style="width:15%;">
+                            @item.Institute
+                        </td>
+                        <td>
+                            @item.StartSession
+                        </td>
+                        <td>
+                            @item.EndSession
+                        </td>
+                        <td>
+                            @item.Specialization
+                        </td>
+                        <td>
+                            @item.Grade
+                        </td>
+                        <td>
+                            @if (!String.IsNullOrEmpty(item.DocumentPath))
+                            {
+
+                                @Html.ActionLink("Download", "DownloadDocument", "Employee", new { ID = item.QualificationID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+                            }
+                        </td>
+                        <td>
+                            @item.Status
+                        </td>
+                        <td>
+                            <input type="hidden" id="hidQualificationID" value="@item.QualificationID" />
+                            <input type="hidden" id="hidPersonID" value="@item.EmployeeID" />
+                            <input type="hidden" id="hidStatusID" value="@item.StatusID" />
+                            <input type="hidden" id="hidTypeID" value="@ViewBag.TypeID" />
+
+                            <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-success" data-target=".bs-example-modal-lg">
+                                <i class="ace-icon fa fa-comment-o icon-only"></i>
+                            </a>
+                            @if (edit || user.HRModule == true)
+                            {
+                                <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-info" data-target=".bs-example-modal-lg">
+                                    <i class="ace-icon fa fa-pencil bigger-110"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+
+
+
+                }
+
+            </table>
+        }*@
+        <div class="modal-backdrop fade in" style="display:none;">
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+    $(function () {
+        $("#breadcrumbs").html("<ul class='breadcrumb'><li><i class='ace-icon fa fa-user home-icon'></i><a href='" + LoadUrl("Home/Index")+"'>Home</a></li><li class='active'>Qualification</li></ul>");
+        $("#printable").click(function () {
+            print()
+        });
+        var urls = LoadUrl('HumanResource/Profile/NewQualification');
+        $.ajax({
+            type: "GET",
+            url: urls,
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#divQualificationRemarks').hide();
+                $('#divQualification').hide();
+                $('#divQualification').html(response);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        $("#CreateQualification").click(function () {
+            $('#divQualificationRemarks').hide();
+            $('.bs-example-modal-lg').show();
+            $('#divQualification').show();
+
+        });
+
+
+        $(".btn-info").click(function () {
+            var val = $(this).parents('tr').find('#hidQualificationID').val();
+            var ID = val
+            var urls = LoadUrl('HumanResource/Profile/ModifyQualification');
+            $.ajax({
+                type: "GET",
+                url: urls,
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                data: { ID: ID },
+                success: function (response) {
+                    $('#divQualificationRemarks').hide();
+                    $('#divQualification').show();
+                    $('#divQualification').html(response);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+        $(".btn-success").click(function () {
+
+            var ID = $(this).parents('tr').find('#hidQualificationID').val();
+            var empID = $(this).parents('tr').find('#hidPersonID').val();
+            var statusID = $(this).parents('tr').find('#hidStatusID').val();
+            var type = $("#hidTypeID").val();
+            var urls = LoadUrl('HumanResource/Profile/HREmpAction');
+            $.ajax({
+                type: "GET",
+                url: urls,
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                data: { ID: ID, TypeID: type, EmpID: empID, StatusID: statusID },
+                success: function (response) {
+                    $('#divQualification').hide();
+                    $('#divQualificationRemarks').show();
+                    $('#divQualificationRemarks').html(response);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+    });
+
+    </script>
+    
+<script src="~/Scripts/gridFeatures.js"></script>
+

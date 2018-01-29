@@ -1,0 +1,362 @@
+﻿@model PTAWMS.Controllers.DashboardValue
+@{
+    ViewBag.Title = "DetailAbsentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"]; }
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="~/Home/VDSContainer">Home</a>
+                </li>
+                <li class="active">Dashboard</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    Dashboard
+                    <small>
+                        <i class="ace-icon fa fa-angle-double-right"></i>
+                        overview &amp; notifications
+                    </small>
+                    <div class="col-md-3 col-sm-10 pull-right">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar bigger-110"></i>
+                            </span>
+                            <input class="form-control" type="text" name="date-range-picker" id="id-date-range-picker-1">
+                        </div>
+                    </div>
+                </h1>
+            </div>
+            @if (Session["UserRole"].ToString() == "Single" && user.UserType !="N")
+            {
+               
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="row">
+                            <div class="space-6"></div>
+                            <div class="infobox-container">
+                               
+                                    <div class="infobox infobox-blue">
+                                        <div class="infobox-icon">
+                                            <i class="ace-icon fa fa-calendar-check-o"></i>
+                                        </div>
+                                        <div class="infobox-data">
+                                            <span class="infobox-data-number">@Model.JobCardPending</span>
+                                            <div class="infobox-content"><a href="/ESSP/Attendance/PendingJobCards/Index)">Job Card Desk</a></div>
+                                        </div>
+                                    </div>
+
+                                        <div class="infobox infobox-pink">
+                                            <div class="infobox-icon">
+                                                <i class="ace-icon fa fa-money"></i>
+                                            </div>
+                                            <div class="infobox-data">
+                                                <span class="infobox-data-number">@Model.OvertimePending</span>
+                                                @if (user.UserType == "N" || user.UserType == "E")
+                                                {
+                                                    <div class="infobox-content"><a href="/ESSP/Attendance/OTSupervisor/SOTDeptList">Overtime Desk</a></div>         }
+                                                else if (user.UserType == "R")
+                                                {
+                                                    <div class="infobox-content"><a href="/ESSP/Attendance/OTRecommend/ROTDeptList">Overtime Desk</a></div>
+
+                                                }
+                                                else if (user.UserType == "P" || user.UserType == "H")
+                                                {
+                                                    <div class="infobox-content"><a href="/ESSP/Attendance/OTApprover/AOTDeptList">Overtime Desk</a></div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="infobox-content"><a href="/ESSP/Attendance/OTHR/HROTDeptList">Overtime Desk</a></div>
+                                                }
+                                            </div>
+                                        </div>
+                                       
+                                        @if (user.UserType == "E" || user.UserType == "A")
+                                        {
+                                            <div class="infobox infobox-green">
+                                                <div class="infobox-icon">
+                                                    <i class="ace-icon fa fa-car"></i>
+                                                </div>
+
+                                                <div class="infobox-data">
+                                                    <span class="infobox-data-number">@Model.VisitorPending</span>
+                                                    <div class="infobox-content"><a href="/ESSP/Attendance/ScheduleVisitor/ListOfPendingVisitor">Visitors Desk</a></div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                        @*<div class="infobox infobox-orange">
+                                                <div class="infobox-icon">
+                                                    <i class="ace-icon fa fa-calendar"></i>
+                                                </div>
+
+                                                <div class="infobox-data">
+                                                    <span class="infobox-data-number">@Model.VisitorPending</span>
+                                                    <div class="infobox-content"><a href="">Leave Desk</a></div>
+                                                </div>
+
+                                            </div>*@
+                                        <div class="infobox infobox-blue2">
+                                            <div class="infobox-icon">
+                                                <i class="ace-icon fa fa-user"></i>
+                                            </div>
+
+                                            <div class="infobox-data">
+
+                                                <span class="infobox-data-number" id="HRTotal"></span>
+                                                <div class="infobox-content"><a href="">HR Desk</a></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="space-6"></div>
+                                    </div>
+
+                                    <div class="vspace-12-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+             
+            }
+            <br />
+            <div class="row" id="DivWithButton">
+                <div class="col-md-12">
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-flat">
+                            <h4 class="widget-title lighter">
+                                <i class="ace-icon fa fa-star orange"></i>
+                                <span id="Heading"></span>
+                                <small>
+                                    <i class="ace-icon fa fa-angle-double-right"></i>
+                                    <span id="HeadingSub"></span>
+                                </small>
+
+                            </h4>
+                            <div class="pull-right" id="PCButton">
+                                <button type="button" id="btnClickLO" class="btn btn-white btn-info btn-sm">Late Out</button>
+                                <button type="button" id="btnClickLI" class="btn btn-white btn-info btn-sm">Late In</button>
+                                <button type="button" id="btnClickEO" class="btn btn-white btn-info btn-sm">Early Out</button>
+                                <button type="button" id="btnClickEI" class="btn btn-white btn-info btn-sm">Early In</button>
+                                <button type="button" id="btnClickAB" class="btn btn-white btn-info btn-sm">Absent</button>
+                                <button type="button" id="btnClickLV" class="btn btn-white btn-info btn-sm">Leave</button>
+                                <button type="button" id="btnClickTrend" class="btn btn-white btn-info btn-sm">Trend</button>
+                            </div>
+                        </div>
+                        <div id="PVCTMSParent"></div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="PVCTMSChild"></div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="PVCDeptSummary"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="PVCEmpSummary"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+    top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+    opacity: .5; filter: alpha(opacity=70);display:none">
+    <p style="position: absolute; top: 15%; left: 35%; color: White; font-size:large; font-style:italic">
+        <img src="/ESSP/images/launcher-loader.gif">
+    </p>
+</div>
+
+<script type="text/javascript" src="~/assets/js/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#divLoading").show();
+        var userRole = '@Session["UserRole"].ToString()';
+        if( userRole =="Admin" || userRole =="MultiDept")
+        {
+            LoadDivisionPieChart("LateOut");
+            $("#Heading").html("Late Out Details");
+            $("#HeadingSub").html("Click on below Division to View Details");
+            LoadDeptVMSummary();
+        }
+        else if (userRole == "MultiSec") {
+            LoadDepartmentPieChart("Absent");
+            $("#Heading").html("Absent Details");
+            $("#HeadingSub").html("Click on below Division to View Details");
+        }
+        else if (userRole == "MultiSec") {
+            LoadDepartmentPieChart("Leave");
+            $("#Heading").html("Leaves Details");
+            $("#HeadingSub").html("Click on below Division to View Details");
+        }
+        else if(userRole =="MultiSec")
+        {
+            LoadDepartmentPieChart("LateOut");
+            $("#Heading").html("Late Out Details");
+            $("#HeadingSub").html("Click on below Division to View Details");
+        }
+        else if(userRole =="SingleSec")
+        {
+            $("#PCButton").hide();
+            $("#Heading").html("Attendance Trend");
+            $("#HeadingSub").html("Total number of Employees Occurance");
+            LoadTMSSummary();
+            LoadDeptVMSummary();
+        }
+        else if (userRole == "Single") {
+
+            $("#PCButton").hide();
+            $("#DivWithButton").hide();
+            LoadEmployeeAttendance();
+            LoadEmployeeVisitor();
+        }
+
+        document.getElementById("btnClickLO").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("LateOut");
+            $("#Heading").html("Late Out Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickAB").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("Absent");
+            $("#Heading").html("Absent Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickLV").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("Leave");
+            $("#Heading").html("Leaves Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickLI").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("LateIn");
+            $("#Heading").html("Late In Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickEO").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("EarlyOut");
+            $("#Heading").html("Early Out Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickEI").onclick = function fun() {
+            $("#divLoading").show();
+            LoadDivisionPieChart("LateOut");
+            $("#Heading").html("Early In Details");
+            $("#HeadingSub").html("Click on below row to View Details");
+            $('#PVCTMSChild').empty();
+        }
+        document.getElementById("btnClickTrend").onclick = function fun() {
+            $("#divLoading").show();
+            LoadTMSSummary();
+            $("#Heading").html("Attendance Trend");
+            $("#HeadingSub").html("Total number of Employees Occurance");
+            $('#PVCTMSChild').empty();
+        }
+        var model = @Html.Raw(Json.Encode(Model))
+                //to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
+        $('input[name=date-range-picker]').daterangepicker({
+            'applyClass': 'btn-sm btn-success',
+            'cancelClass': 'btn-sm btn-default',
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Cancel',
+                format: 'YYYY-MM-DD',
+                fromLabel: 'From',
+                toLabel: 'To',
+            },
+            startDate: model.DateStart,
+            endDate: model.DateEnd,
+            opens: 'left',
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        })
+        .prev().on(ace.click_event, function () {
+            $(this).next().focus();
+           // alert("h");
+        });
+
+        $('input[name=date-range-picker]').on('apply.daterangepicker', function (ev, picker) {
+            var dateS = picker.startDate.format('YYYY-MM-DD');
+            var dateE = picker.endDate.format('YYYY-MM-DD');
+            $("#divLoading").show();
+            var urls = LoadUrl('Home/SaveDateInSession');
+            $.ajax({
+                url: urls,
+                type: "GET",
+                cache: false,
+                data: { dateS: dateS, dateE: dateE }
+            }).done(function (result) {
+                var userRole = '@Session["UserRole"].ToString()';
+                if (userRole == "Admin" || userRole == "MultiDept") {
+                    LoadDivisionPieChart("LateOut");
+                    $("#Heading").html("Late Out Details");
+                    $("#HeadingSub").html("Click on below Division to View Details");
+                    LoadDeptVMSummary();
+                }
+                else if (userRole == "MultiSec") {
+                    LoadDepartmentPieChart("LateOut");
+                    $("#Heading").html("Late Out Details");
+                    $("#HeadingSub").html("Click on below Division to View Details");
+                }
+                else if (userRole == "SingleSec") {
+                    $("#PCButton").hide();
+                    $("#Heading").html("Attendance Trend");
+                    $("#HeadingSub").html("Total number of Employees Occurance");
+                    LoadTMSSummary();
+                    LoadDeptVMSummary();
+                }
+                else if (userRole == "Single") {
+
+                    $("#PCButton").hide();
+                    $("#DivWithButton").hide();
+                    LoadEmployeeAttendance();
+                    LoadEmployeeVisitor();
+                }
+                //$('#PVCDeptSummary').html(result);
+            });
+            //LoadAJAXCallsForDashboard(picker.startDate.format('MMMM D, YYYY'), picker.endDate.format('MMMM D, YYYY'));
+            //alert("apply event fired, start/end dates are " + picker.startDate.format('DD-MM-YYYY') + " to " + picker.endDate.format('DD-MM-YYYY'));
+        });
+
+    });
+</script>
+
+
+<script src="@Url.Content("~/Scripts/Dashboard/DashboardController.js")"></script>
+
+
+<script src="@Url.Content("~/Scripts/loader.js")"></script>
+<script src="@Url.Content("~/Scripts/jsapi.js")"></script>
+<script src="@Url.Content("~/Scripts/utils.js")"></script>
+<script src="@Url.Content("~/Scripts/Chart.js")" )></script>
+
+<script src="@Url.Content("~/Scripts/Chart.bundle.js")"></script>
+<script src="@Url.Content("~/Scripts/Chart.min.js")"></script>			

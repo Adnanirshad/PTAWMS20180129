@@ -1,0 +1,1593 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C20D958-9650-48D3-A42F-BC3AAE303164}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PTAWMS</RootNamespace>
+    <AssemblyName>PTAWMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>%24/Adnan Source/PTAWMS20171208%2812-12-2017%29/PTAWMS20171208/PTAWMS</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>http://adict-rizwan:8080/tfs/defaultcollection</SccAuxPath>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Json.4.0.20126.16343\lib\net40\System.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\ace-ie.min.css" />
+    <Content Include="assets\css\ace-part2.min.css" />
+    <Content Include="assets\css\ace-rtl.min.css" />
+    <Content Include="assets\css\ace-skins.min.css" />
+    <Content Include="assets\css\ace.min.css" />
+    <Content Include="assets\css\bootstrap-colorpicker.min.css" />
+    <Content Include="assets\css\bootstrap-datepicker3.min.css" />
+    <Content Include="assets\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\css\bootstrap-duallistbox.min.css" />
+    <Content Include="assets\css\bootstrap-editable.min.css" />
+    <Content Include="assets\css\bootstrap-multiselect.min.css" />
+    <Content Include="assets\css\bootstrap-timepicker.min.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\chosen.min.css" />
+    <Content Include="assets\css\colorbox.min.css" />
+    <Content Include="assets\css\daterangepicker.min.css" />
+    <Content Include="assets\css\dropzone.min.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\fonts.googleapis.com.css" />
+    <Content Include="assets\css\fullcalendar.min.css" />
+    <Content Include="assets\css\jquery-customselect.css" />
+    <Content Include="assets\css\jquery-ui-new.css" />
+    <Content Include="assets\css\jquery-ui.custom.min.css" />
+    <Content Include="assets\css\jquery-ui.min.css" />
+    <Content Include="assets\css\jquery.gritter.min.css" />
+    <Content Include="assets\css\prettify.min.css" />
+    <Content Include="assets\css\select2.min.css" />
+    <Content Include="assets\css\ui.jqgrid.min.css" />
+    <Content Include="assets\font-awesome\4.5.0\css\font-awesome.min.css" />
+    <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\images\avatars\avatar.png" />
+    <Content Include="assets\images\avatars\avatar1.png" />
+    <Content Include="assets\images\avatars\avatar2.png" />
+    <Content Include="assets\images\avatars\avatar3.png" />
+    <Content Include="assets\images\avatars\avatar4.png" />
+    <Content Include="assets\images\avatars\avatar5.png" />
+    <Content Include="assets\images\avatars\profile-pic.jpg" />
+    <Content Include="assets\images\avatars\user.jpg" />
+    <Content Include="assets\images\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="assets\images\bootstrap-colorpicker\alpha.png" />
+    <Content Include="assets\images\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="assets\images\bootstrap-colorpicker\hue.png" />
+    <Content Include="assets\images\bootstrap-colorpicker\saturation.png" />
+    <Content Include="assets\images\email\email1.png" />
+    <Content Include="assets\images\email\email2.png" />
+    <Content Include="assets\images\email\email3.png" />
+    <Content Include="assets\images\email\email4.png" />
+    <Content Include="assets\images\gallery\image-1.jpg" />
+    <Content Include="assets\images\gallery\image-2.jpg" />
+    <Content Include="assets\images\gallery\image-3.jpg" />
+    <Content Include="assets\images\gallery\image-4.jpg" />
+    <Content Include="assets\images\gallery\image-5.jpg" />
+    <Content Include="assets\images\gallery\image-6.jpg" />
+    <Content Include="assets\images\gallery\thumb-1.jpg" />
+    <Content Include="assets\images\gallery\thumb-2.jpg" />
+    <Content Include="assets\images\gallery\thumb-3.jpg" />
+    <Content Include="assets\images\gallery\thumb-4.jpg" />
+    <Content Include="assets\images\gallery\thumb-5.jpg" />
+    <Content Include="assets\images\gallery\thumb-6.jpg" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\placeholder\165x90.png" />
+    <Content Include="assets\images\placeholder\255x150.png" />
+    <Content Include="assets\images\placeholder\530x270.png" />
+    <Content Include="assets\images\placeholder\550x280.png" />
+    <Content Include="assets\images\pta_logo.png" />
+    <Content Include="assets\js\ace-editable.min.js" />
+    <Content Include="assets\js\ace-elements.min.js" />
+    <Content Include="assets\js\ace-extra.min.js" />
+    <Content Include="assets\js\ace.min.js" />
+    <Content Include="assets\js\autosize.min.js" />
+    <Content Include="assets\js\bootbox.js" />
+    <Content Include="assets\js\bootstrap-colorpicker.min.js" />
+    <Content Include="assets\js\bootstrap-datepicker.min.js" />
+    <Content Include="assets\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\js\bootstrap-editable.min.js" />
+    <Content Include="assets\js\bootstrap-markdown.min.js" />
+    <Content Include="assets\js\bootstrap-multiselect.min.js" />
+    <Content Include="assets\js\bootstrap-tag.min.js" />
+    <Content Include="assets\js\bootstrap-timepicker.min.js" />
+    <Content Include="assets\js\bootstrap-wysiwyg.min.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\buttons.colVis.min.js" />
+    <Content Include="assets\js\buttons.flash.min.js" />
+    <Content Include="assets\js\buttons.html5.min.js" />
+    <Content Include="assets\js\buttons.print.min.js" />
+    <Content Include="assets\js\chosen.jquery.min.js" />
+    <Content Include="assets\js\dataTables.buttons.min.js" />
+    <Content Include="assets\js\dataTables.select.min.js" />
+    <Content Include="assets\js\daterangepicker.min.js" />
+    <Content Include="assets\js\dropzone.min.js" />
+    <Content Include="assets\js\excanvas.min.js" />
+    <Content Include="assets\js\fullcalendar.min.js" />
+    <Content Include="assets\js\grid.locale-en.js" />
+    <Content Include="assets\js\holder.min.js" />
+    <Content Include="assets\js\html5shiv.min.js" />
+    <Content Include="assets\js\jquery-1.11.3.min.js" />
+    <Content Include="assets\js\jquery-2.1.4.min.js" />
+    <Content Include="assets\js\jquery-additional-methods.min.js" />
+    <Content Include="assets\js\jquery-typeahead.js" />
+    <Content Include="assets\js\jquery-ui.custom.min.js" />
+    <Content Include="assets\js\jquery-ui.min.js" />
+    <Content Include="assets\js\jquery.bootstrap-duallistbox.min.js" />
+    <Content Include="assets\js\jquery.colorbox.min.js" />
+    <Content Include="assets\js\jquery.dataTables.bootstrap.min.js" />
+    <Content Include="assets\js\jquery.dataTables.min.js" />
+    <Content Include="assets\js\jquery.easypiechart.min.js" />
+    <Content Include="assets\js\jquery.flot.min.js" />
+    <Content Include="assets\js\jquery.flot.pie.min.js" />
+    <Content Include="assets\js\jquery.flot.resize.min.js" />
+    <Content Include="assets\js\jquery.gritter.min.js" />
+    <Content Include="assets\js\jquery.hotkeys.index.min.js" />
+    <Content Include="assets\js\jquery.inputlimiter.min.js" />
+    <Content Include="assets\js\jquery.jqGrid.min.js" />
+    <Content Include="assets\js\jquery.knob.min.js" />
+    <Content Include="assets\js\jquery.maskedinput.min.js" />
+    <Content Include="assets\js\jquery.mobile.custom.min.js" />
+    <Content Include="assets\js\jquery.nestable.min.js" />
+    <Content Include="assets\js\jquery.raty.min.js" />
+    <Content Include="assets\js\jquery.sparkline.index.min.js" />
+    <Content Include="assets\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="assets\js\jquery.validate.min.js" />
+    <Content Include="assets\js\markdown.min.js" />
+    <Content Include="assets\js\moment.min.js" />
+    <Content Include="assets\js\prettify.min.js" />
+    <Content Include="assets\js\respond.min.js" />
+    <Content Include="assets\js\select2.min.js" />
+    <Content Include="assets\js\spin.js" />
+    <Content Include="assets\js\spinbox.min.js" />
+    <Content Include="assets\js\tree.min.js" />
+    <Content Include="assets\js\wizard.min.js" />
+    <Content Include="assets\swf\flashExport.swf" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\GridDesign.css" />
+    <Content Include="Content\Reports\bootstrap.css" />
+    <Content Include="Content\Reports\bootstrap.min.css" />
+    <Content Include="Content\Reports\filter-navigation.css" />
+    <Content Include="Content\Reports\filters-page.css" />
+    <Content Include="Content\jquery.jqChart.css" />
+    <Content Include="Content\jquery.jqRangeSlider.css" />
+    <Content Include="Content\PTACustom.css" />
+    <Content Include="Content\Reports\Site.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="images\launcher-loader.gif" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\LoginImage.jpg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\defaultimage.png" />
+    <Content Include="Areas\Attendance\Views\Shift\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shift\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shift\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shift\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Shift\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\AttManual\EditDateWiseEntries.cshtml" />
+    <Content Include="Areas\Attendance\Views\AttManual\EditMultipleEntries.cshtml" />
+    <Content Include="Areas\Attendance\Views\AttManual\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\AttManual\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Department\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Department\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Department\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Department\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Department\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Designation\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Designation\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Designation\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Designation\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Designation\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpType\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpType\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpType\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpType\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpType\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Location\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Location\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Location\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Location\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Location\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Section\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Section\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Section\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Section\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Section\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Partials\EmpAttendance.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Partials\EmpContact.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Partials\EmpJob.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\Partials\EmpPersonel.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\EmpProfileIndex.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\EPAttendance.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\EPContact.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\EPJobDetail.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Employee\EPPersonal.cshtml" />
+    <Content Include="Areas\Attendance\Views\Reader\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Reader\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\Reader\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\Reader\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Reader\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTPolicy\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTPolicy\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTPolicy\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTPolicy\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTPolicy\Index.cshtml" />
+    <Content Include="Models\Assets.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Assets.edmx</DependentUpon>
+      <LastGenOutput>Assets.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Assets.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Assets.edmx</DependentUpon>
+      <LastGenOutput>Assets.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Reports\Filters\AttendanceReport.aspx" />
+    <Content Include="Reports\Filters\HRMSFilters.aspx" />
+    <Content Include="Reports\Filters\HRMSReports.aspx" />
+    <Content Include="Reports\Filters\HRQStep.aspx" />
+    <Content Include="Reports\Filters\StepFive.aspx" />
+    <Content Include="Reports\Filters\StepFour.aspx" />
+    <Content Include="Reports\Filters\StepOne.aspx" />
+    <Content Include="Reports\Filters\StepOne2.aspx" />
+    <Content Include="Reports\Filters\StepThree.aspx" />
+    <Content Include="Reports\Filters\StepTwo.aspx" />
+    <Content Include="Reports\RptLoader\AttReportsHome.aspx" />
+    <Content Include="Areas\Attendance\Views\ProcessRequest\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\ProcessRequest\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\ProcessRequest\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\ProcessRequest\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\ProcessRequest\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\PRPeriod\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\PRPeriod\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\PRPeriod\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\PRPeriod\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\PRPeriod\Index.cshtml" />
+    <Content Include="Models\AttDBDataSet.xsc">
+      <DependentUpon>AttDBDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Areas\Attendance\Views\Holiday\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Holiday\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\Holiday\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\Holiday\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Holiday\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\FinancialYear\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\FinancialYear\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\FinancialYear\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\FinancialYear\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\FinancialYear\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTCredit\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTCredit\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTCredit\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTCredit\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTCredit\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDebit\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDebit\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDebit\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDebit\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDebit\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDiv\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDiv\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDiv\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDiv\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTDiv\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpChangeManager\Personal.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpChangeManager\JobDetail.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpChangeManager\Contact.cshtml" />
+    <Content Include="Areas\HumanResource\Views\EmpChangeManager\Attendance.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\ROTDeptList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\ROTEmpList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\ROTDetailList.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\ScheduleVisitor\ListOfPendingVisitor.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\HRDeptPending.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\HRDetailPending.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTRecommend\HREmpPending.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTSupervisor\SOTDeptList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTSupervisor\SOTEmpList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTSupervisor\SOTDetailList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApprover\AOTDeptList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApprover\AOTDetailList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApprover\AOTEmpList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTHR\HROTDeptList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTHR\HROTDetailList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTHR\HROTEmpList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApproved\HAOTDeptList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApproved\HAOTDetailList.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTApproved\HAOTEmpList.cshtml" />
+    <Content Include="Areas\Attendance\Views\JobCard\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\JobCard\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\JobCard\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\JobCard\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\SEmps.cshtml" />
+    <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\font-awesome\4.5.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Attendance\Views\PendingJobCards\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\JobCard\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\Settings\Create.cshtml" />
+    <Content Include="Areas\Attendance\Views\Settings\Delete.cshtml" />
+    <Content Include="Areas\Attendance\Views\Settings\Details.cshtml" />
+    <Content Include="Areas\Attendance\Views\Settings\Edit.cshtml" />
+    <Content Include="Areas\Attendance\Views\Settings\Index.cshtml" />
+    <Content Include="WebForm1.aspx" />
+    <EntityDeploy Include="Models\Assets.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Assets.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Assets.edmx.diagram">
+      <DependentUpon>Assets.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\HumanResource\Views\Grade\Create.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Grade\Delete.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Grade\Details.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Grade\Edit.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Grade\Index.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\HREmpCommunication.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingDependents.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingPreJobHistory.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingQualification.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddDependents.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddExperience.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddTransferPosting.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\CreateQualification.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpAppreciations.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpAssets.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpCommunication.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpDependents.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EMPDetails.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpPersonalDetail.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpPromotions.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpQualification.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpTrainings.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpTransferHistory.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpWarnings.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\ExperienceHistory.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\EmpLeaves.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\Qualifications.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\EmpInstitutes.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\EmpDegree.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddAppreciation.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddWarning.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddTraining.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingHRAppreciation.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingHRWarning.cshtml" />
+    <Content Include="Areas\HumanResource\Views\HR\PendingHRTraining.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\CreateLoc.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTSupervisor\SearchEmps.cshtml" />
+    <Content Include="Areas\Attendance\Views\OTHR\SearchEmp.cshtml" />
+    <Content Include="Areas\Attendance\Views\web.config" />
+    <Content Include="Areas\HumanResource\Views\web.config" />
+    <Content Include="Areas\HumanResource\Views\Profile\AddEmpInfo.cshtml" />
+    <Content Include="Areas\HumanResource\Views\Profile\NewLeave.cshtml" />
+    <Content Include="Areas\HumanResource\Views\AuditLog\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\EmployeeJobCard\SelectEmployee.cshtml" />
+    <Content Include="Areas\Attendance\Views\BulkJobCard\Index.cshtml" />
+    <Content Include="Areas\Attendance\Views\BulkJobCard\ListOfJobCardApp.cshtml" />
+    <Content Include="Areas\Attendance\Views\BulkJobCard\ListOfJobCardDetail.cshtml" />
+    <Content Include="Areas\Attendance\Views\BulkJobCard\SelectEmployee.cshtml" />
+    <None Include="Models\AttDBDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AttDBDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Models\AttDBDataSet.xss">
+      <DependentUpon>AttDBDataSet.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\PTA.pubxml" />
+    <Content Include="ReportingEngine.Master" />
+    <None Include="Properties\PublishProfiles\PTAPublish.pubxml" />
+    <Content Include="images\american-express.png" />
+    <Content Include="images\cropper.jpg" />
+    <Content Include="images\img.jpg" />
+    <Content Include="images\inbox.png" />
+    <Content Include="images\mastercard.png" />
+    <Content Include="images\media.jpg" />
+    <Content Include="images\paypal.png" />
+    <Content Include="images\picture.jpg" />
+    <Content Include="images\prod-1.jpg" />
+    <Content Include="images\prod-2.jpg" />
+    <Content Include="images\prod-3.jpg" />
+    <Content Include="images\prod-4.jpg" />
+    <Content Include="images\prod-5.jpg" />
+    <Content Include="images\user.png" />
+    <Content Include="images\visa.png" />
+    <Content Include="Reports\WebForm1.aspx" />
+    <Content Include="Scripts\Attendance\AttProcess\CriteriaValueAttProcessor.js" />
+    <Content Include="Scripts\Attendance\EditAttendance\EditAttendance.js" />
+    <Content Include="Scripts\Attendance\EditAttendance\EmpInfoEditAtt.js" />
+    <Content Include="Scripts\Attendance\EditAttendance\EmpRadioButton.js" />
+    <Content Include="Scripts\Attendance\EditAttendance\RBSelection.js" />
+    <Content Include="Scripts\Attendance\Jobcard\ChCreate.js" />
+    <Content Include="Scripts\Attendance\Jobcard\EmpInfo.js" />
+    <Content Include="Scripts\Attendance\AttProcess\ProccessModal.js" />
+    <Content Include="Scripts\Attendance\Jobcard\RBJCSelection.js" />
+    <Content Include="Scripts\Attendance\OTApprovl\EmpInfo.js" />
+    <Content Include="Scripts\Attendance\OTApprovl\ModalClick.js" />
+    <Content Include="Scripts\Attendance\SameLink\Samalink.js" />
+    <Content Include="Scripts\Chart.bundle.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\Dashboard\DashboardController.js" />
+    <Content Include="Scripts\Dashboard\jquery.min.js" />
+    <Content Include="Scripts\Dashboard\JSPieChart.js" />
+    <Content Include="Scripts\Dashboard\LayoutHelper.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\gridFeatures.js" />
+    <Content Include="Scripts\HumanResource\Employee\DpDivDeptCreate.js" />
+    <Content Include="Scripts\HumanResource\Employee\DpDivDeptEdit.js" />
+    <Content Include="Scripts\HumanResource\Employee\DpDivDeptFirst.js" />
+    <Content Include="Scripts\HumanResource\Employee\EmpDetailController.js" />
+    <Content Include="Scripts\HumanResource\Employee\EmpEditController.js" />
+    <Content Include="Scripts\HumanResource\Section\DpDivDeptCreate.js" />
+    <Content Include="Scripts\HumanResource\Section\DpDivDeptEdit.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-customselect-1.9.1.min.js" />
+    <Content Include="Scripts\jsapi.js" />
+    <Content Include="Scripts\loader.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\PieChart\excanvas.js" />
+    <Content Include="Scripts\PieChart\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\PieChart\jquery.jqChart.min.js" />
+    <Content Include="Scripts\PieChart\jquery.jqRangeSlider.min.js" />
+    <Content Include="Scripts\PieChart\jquery.mousewheel.js" />
+    <Content Include="Scripts\PieChart\js\excanvas.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-ar.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-bg.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-bg1251.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-cat.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-cn.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-cs.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-de.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-dk.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-el.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-en.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-fa.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-fi.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-fr.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-he.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-hu.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-is.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-it.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-jp.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-lt.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-nl.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-no.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-pl.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-pt-br.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-pt.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-ro.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-ru.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-sk.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-sp.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-sv.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-tr.js" />
+    <Content Include="Scripts\PieChart\js\i18n\chart.locale-ua.js" />
+    <Content Include="Scripts\PieChart\js\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\PieChart\js\jquery.jqChart.min.js" />
+    <Content Include="Scripts\PieChart\js\jquery.jqRangeSlider.min.js" />
+    <Content Include="Scripts\PieChart\js\jquery.mousewheel.js" />
+    <Content Include="Scripts\ReportsFilters\bootstrap.js" />
+    <Content Include="Scripts\ReportsFilters\bootstrap.min.js" />
+    <Content Include="Scripts\ReportsFilters\ClearSessionOnPageClose.js" />
+    <Content Include="Scripts\ReportsFilters\DeleteSingleFilters.js" />
+    <Content Include="Scripts\ReportsFilters\FilterScripts.js" />
+    <Content Include="Scripts\ReportsFilters\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\AppName.js" />
+    <Content Include="Scripts\User\MainController.js" />
+    <Content Include="Scripts\User\UserPermissionCB.js" />
+    <Content Include="Scripts\utils.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuditManager.cs" />
+    <Compile Include="App_Start\DateDifference.cs" />
+    <Compile Include="App_Start\EmailManager.cs" />
+    <Compile Include="App_Start\LeaveUtil.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SQLDBAccess.cs" />
+    <Compile Include="App_Start\Utilities.cs" />
+    <Compile Include="Areas\Attendance\AttendanceAreaRegistration.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\AttendanceHelper.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\CalculateWorkMins.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\EditAttManager.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\ManualAttendanceProcess.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\ModelChooseEmp.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\MyHelper.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\OTHelper.cs" />
+    <Compile Include="Areas\Attendance\BusinessLogic\OTViewModel.cs" />
+    <Compile Include="Areas\Attendance\Controllers\AttManualController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\BulkJobCardController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\EmployeeJobCardController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\FinancialYearController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\HolidayController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\JobCardController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\Models\ModelUserList.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTApprovedController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTApproverController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTCreditController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTDebitController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTDivController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTHRController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTPolicyController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTRecommendController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\OTSupervisorController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\PendingJobCardsController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\ProcessRequestController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\PRPeriodController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\ReaderController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\ScheduleVisitorController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Attendance\Controllers\ShiftController.cs" />
+    <Compile Include="Areas\HumanResource\BusinessLogic\CustomModels.cs" />
+    <Compile Include="Areas\HumanResource\BusinessLogic\ImageConversion.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\AuditLogController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\DepartmentController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\DesignationController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\EmpChangeManagerController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\EmpTypeController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\GradeController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\HRController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\LocationController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\HumanResource\Controllers\SectionController.cs" />
+    <Compile Include="Areas\HumanResource\HumanResourceAreaRegistration.cs" />
+    <Compile Include="Areas\HumanResource\Models\Employee.cs" />
+    <Compile Include="Areas\HumanResource\Models\ModalPending_Qualification.cs" />
+    <Compile Include="Areas\HumanResource\Models\ModelAdvances.cs" />
+    <Compile Include="Areas\HumanResource\Models\ModelFund.cs" />
+    <Compile Include="Areas\HumanResource\Models\ModelLeaveRequest.cs" />
+    <Compile Include="Areas\HumanResource\Models\ModelTransferPosting.cs" />
+    <Compile Include="Areas\HumanResource\Models\InstituteList.cs" />
+    <Compile Include="Authentication\AuthorizationContext.cs" />
+    <Compile Include="Authentication\CustomActionAttribute.cs" />
+    <Compile Include="Authentication\CustomControllerAttributes.cs" />
+    <Compile Include="Authentication\HandleErrorAttribute.cs" />
+    <Compile Include="Controllers\Helper.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserTypesController.cs" />
+    <Compile Include="DAL\Employee.cs" />
+    <Compile Include="DAL\Notification.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\DashboardManager.cs" />
+    <Compile Include="Helper\DatatableToList.cs" />
+    <Compile Include="Helper\ModelDM.cs" />
+    <Compile Include="Helper\QueryBuilder.cs" />
+    <Compile Include="Models\AccessUser.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllocatedTo_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllocatedTo_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllocationType_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AMS2ESSP.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Asset4Retirement_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetAllocationReport_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetAllocationReport_v1.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetAllocation_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetAllocation_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetCategory_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetCategory_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetClass_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetClass_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetFamily_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetFamily_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetMake_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetMake_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetModel_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetModel_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetOpCondition_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetOtherInfo_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetOtherInfo_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetPurchaseDetailsRep_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetPurchase_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetPurchase_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRepairType_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRepairType_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRepair_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRepair_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetCriteriaConditions_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetCriteriaConditions_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetirementCriteria_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetirementCriteria_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetirement_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetRetirement_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assets.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assets.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assets.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assets.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assets.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetStatus_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetsWithA.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetType_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssetType_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Asset_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Asset_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_DailyAttendance.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_DaysName.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_DeviceData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_DeviceDataError.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_DownloadTime.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_EmpFace.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_EmpFP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Holiday.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_JobCard.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_JobCardApp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_JobCardDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Leave.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ManualEdit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_MonthData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_MonthDataEdit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_MonthlyOTEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OPName.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OTDailyEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OTDForward.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OTPolicy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OTStatus.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_OutPass.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ProcessDate.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ProcessRequest.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Reader.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ReaderDutyCode.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ReaderType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Remark.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_RFIDCard.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_RosterApplication.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_RosterDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_RosterType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ServiceLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Setting.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_Shift.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ShiftChanged.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_ShiftChngedEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Att_TemplatesFP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Audit_Form.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Audit_Log.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BG_OTCredit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BG_OTDebit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BG_OTDivision.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataValidation\MAtt_LvApp.cs" />
+    <Compile Include="Models\DataValidation\MHR_Employee.cs" />
+    <Compile Include="Models\EmpBPS_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpDepartments_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpDesignations_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpDivisions_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpStations_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpView.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FocalUser.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_City.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Designation.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpACR_Status.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpAppreciations.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpBloodGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpChange.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpGender.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpImage.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Employee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmployeeHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpPromotions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpStatus.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpTrainings.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpTranfers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_EmpWarnings.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Emp_Communication.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Emp_Dependents.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Emp_Experience.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Emp_Notification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Emp_Qualification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Grade.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_GradeHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_LeaveModule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_LeaveRec.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_LeaveReminders.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_LeaveReq.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_LeaveType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_ListEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_ListType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Location.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_MartialStatus.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_OracleDB.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_Section.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HR_SMTP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Login_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Login_v.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OUs_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PR_FinYear.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PR_PayrollPeriod.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SOUs_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TBLLOG.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TBLLOG_TYPE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRoleData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendor_t.cs">
+      <DependentUpon>Assets.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAttData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAttDataDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAttMonthlySummary.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAttOTForward.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAttShiftChngeEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewAuditLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewBGCredit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewBGOTDebit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewBGOTDivision.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewDailyOTEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpAccess.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpAppreciation.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpCommunication.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpDependent.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpPreJobHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpQualification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpTraining.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpTrainingReport.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEMPTransfer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewEmpWarning.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewHREmpChange.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewHRSection.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewJobCard.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewJobCardEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewOTMonthlySummary.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewPollData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewReportQualification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewSVisitorEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewUserEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewUserEmpSimple.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewVisitEmp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewVisitorsVisit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_BanCNIC.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_CreateVisitorSMS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_Floor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_Reason.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_SMSSend.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_SpecialVisitor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_SVisitor.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitDevice.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitorInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitorPhoto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitSMS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VMS_VisitType.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZData.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportingEngine.Master.cs">
+      <DependentUpon>ReportingEngine.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportingEngine.Master.designer.cs">
+      <DependentUpon>ReportingEngine.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\BusinessLogic\AttRptFilter.cs" />
+    <Compile Include="Reports\BusinessLogic\HRRptFilter.cs" />
+    <Compile Include="Reports\Filters\AttendanceReport.aspx.cs">
+      <DependentUpon>AttendanceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\AttendanceReport.aspx.designer.cs">
+      <DependentUpon>AttendanceReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\HRMSFilters.aspx.cs">
+      <DependentUpon>HRMSFilters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\HRMSFilters.aspx.designer.cs">
+      <DependentUpon>HRMSFilters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\HRMSReports.aspx.cs">
+      <DependentUpon>HRMSReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\HRMSReports.aspx.designer.cs">
+      <DependentUpon>HRMSReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\HRQStep.aspx.cs">
+      <DependentUpon>HRQStep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\HRQStep.aspx.designer.cs">
+      <DependentUpon>HRQStep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepFive.aspx.cs">
+      <DependentUpon>StepFive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepFive.aspx.designer.cs">
+      <DependentUpon>StepFive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepFour.aspx.cs">
+      <DependentUpon>StepFour.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepFour.aspx.designer.cs">
+      <DependentUpon>StepFour.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOne.aspx.cs">
+      <DependentUpon>StepOne.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOne.aspx.designer.cs">
+      <DependentUpon>StepOne.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOne2.aspx.cs">
+      <DependentUpon>StepOne2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOne2.aspx.designer.cs">
+      <DependentUpon>StepOne2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepThree.aspx.cs">
+      <DependentUpon>StepThree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepThree.aspx.designer.cs">
+      <DependentUpon>StepThree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepTwo.aspx.cs">
+      <DependentUpon>StepTwo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepTwo.aspx.designer.cs">
+      <DependentUpon>StepTwo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RptLoader\AttReportsHome.aspx.cs">
+      <DependentUpon>AttReportsHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\RptLoader\AttReportsHome.aspx.designer.cs">
+      <DependentUpon>AttReportsHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\VDSContainer.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\UserTypes\Create.cshtml" />
+    <Content Include="Views\UserTypes\Delete.cshtml" />
+    <Content Include="Views\UserTypes\Details.cshtml" />
+    <Content Include="Views\UserTypes\Edit.cshtml" />
+    <Content Include="Views\UserTypes\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\User\FocalUsers.cshtml" />
+    <Content Include="Views\User\ListofFocalUsers.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\RegisterUser.cshtml" />
+    <Content Include="Views\Home\VisitorGraph.cshtml" />
+    <Content Include="Views\Home\PVSDeptSummary.cshtml" />
+    <Content Include="Views\Shared\_LayoutSimple.cshtml" />
+    <Content Include="Views\Home\PVSEmpSummary.cshtml" />
+    <Content Include="Views\Home\PTMSSummary.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\TMSDetail.cshtml" />
+    <Content Include="Views\Home\PVSEmpSummaryDetails.cshtml" />
+    <Content Include="Views\Home\TMSAttDetail.cshtml" />
+    <Content Include="Views\Home\PVSVisitorDetail.cshtml" />
+    <Content Include="Views\Home\PVEmployeeVisitor.cshtml" />
+    <Content Include="Views\Home\PVEmployeeAttendance.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Views\Home\PVDeptPieChart.cshtml" />
+    <Content Include="Views\Home\PVDivPieChart.cshtml" />
+    <Content Include="Reports\RDLC\HRActiveEmpAdd.rdlc" />
+    <Content Include="Reports\RDLC\HRPTAEmp.rdlc" />
+    <Content Include="Reports\RDLC\HREmpAddress.rdlc" />
+    <Content Include="Reports\RDLC\HREmpDesigAgg.rdlc" />
+    <Content Include="Reports\RDLC\HREmpDetails.rdlc" />
+    <Content Include="Reports\RDLC\HREmpHistory.rdlc" />
+    <Content Include="Reports\RDLC\HREmpQualification.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\RDLC\HRResignedEmpAdd.rdlc" />
+    <Content Include="Reports\RDLC\HRResignedEmpDetails.rdlc" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Attendance\Views\Shared\" />
+    <Folder Include="Areas\HumanResource\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RDLC\DailyVisitDetail.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpApprovedOT.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpApprovedOTDeptWise.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpOT.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpPenndingOT.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpVisitSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HREmpCharts.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HREmpDetails1.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HREmpQualification1.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HREmpQualification2.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HREmpQualification3.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HRMSReport.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\HRWorkerDetails.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MOTSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\Copy of MRSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\CopyMRSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DailySummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRAbsent.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRDetailed.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRDetailedPB.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRDeviceData.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DREarlyIn.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DREarlyOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLateIn.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLateOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLeave.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRMissingAtt.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRMultipleInOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DROverTime.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRPresent.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpAttSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpAttSummaryCheck.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpAttSumSR.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmployeesDetail.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MREditAtt.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSheet.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSumWork.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\NewVisitEmps.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WMSLibrary\WMSLibrary.csproj">
+      <Project>{bee16d41-5976-4142-97d7-ae43d44519c9}</Project>
+      <Name>WMSLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6765</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3677/ESSP</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

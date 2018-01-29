@@ -1,0 +1,113 @@
+﻿@model PTAWMS.Models.User
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"]; }
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="~/Home/Index">Home</a>
+                <li class="active">Company</li>
+                </li>
+                <li class="active">User</li>
+                <li class="active">Edit</li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h1>
+                            User
+                            <small>
+                                <i class="ace-icon fa fa-angle-double-right"></i>
+                                Edit Users
+                                <div class="pull-right tableTools-container"></div>
+                            </small>
+                        </h1>
+                    </div>
+                    <div class="widget-box">
+                        <div class="widget-body">
+                            <div class="widget-main">
+
+                                @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        @Html.ValidationSummary(true)
+                                        @Html.HiddenFor(model => model.UserID)
+                                        @Html.HiddenFor(model => model.EmpID)
+                                        <div>
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">User Name</div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.UserName)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">Password</div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.Password)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">UI Theme</div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.UI_Theme, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.UI_Theme)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="control-label col-md-2">User Type</div>
+                                                <div class="col-md-3">
+                                                    @Html.DropDownList("UserType", null, new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-10">
+                                                    @Html.CheckBox("Status") <label>Is Active</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-10">
+                                                    @Html.CheckBox("HRReport") <label>HR Report</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-10">
+                                                    @Html.CheckBox("HRRequest") <label>HR Request</label>
+                                                </div>
+                                            </div>
+
+                                          
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Create" class="btn btn-default btn-success" />
+                                                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary " })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div><!-- /.widget-main -->
+                        </div><!-- /.widget-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-2.1.4.min.js"></script>
+<script src="@Url.Content("~/Scripts/User/UserPermissionCB.js")"></script>

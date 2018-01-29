@@ -1,0 +1,105 @@
+﻿@model PTAWMS.Models.PR_PayrollPeriod
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-content">
+    <div class="main-content-inner">
+        <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="ace-icon fa fa-home home-icon"></i>
+					<a href="~/Home/Index">Home</a>
+                    <li class="active">Overtime Settings</li>
+				</li>
+				<li class="active">OT Periods</li>
+                <li class="active">Create</li>
+			</ul><!-- /.breadcrumb -->
+		</div>
+
+        <div class="col-md-8 col-sm-12 col-xs-12">
+       <div class="page-header">
+            <h1>
+			    OT Periods
+			    <small>
+                    <i class="ace-icon fa fa-angle-double-right"></i>
+                    Edit Holiday             												
+			    </small>
+			</h1>
+        </div>
+        <div class="widget-box">
+            @using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PID)                                                       
+                    <div class="form-group">
+                    <div class="control-label col-md-2">Name</div>
+                    <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.PName,new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PName)
+                        </div>
+                    </div>
+                     <div class="form-group">
+                    <div class="control-label col-md-2">Supervisor Cut Off Date</div>
+                    <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.SupervisorCutOffDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                            @Html.ValidationMessageFor(model => model.SupervisorCutOffDate)
+                        </div>
+                    </div>
+                      <div class="form-group">
+                    <div class="control-label col-md-2">Recommend Cut Off Date</div>
+                    <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.RecommendCutOffDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                            @Html.ValidationMessageFor(model => model.RecommendCutOffDate)
+                        </div>
+                    </div>
+                     <div class="form-group">
+                    <div class="control-label col-md-2">Approved Cut Off Date</div>
+                    <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.ApprovedCutOffDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                            @Html.ValidationMessageFor(model => model.ApprovedCutOffDate)
+                        </div>
+                    </div>
+                     <div class="form-group">
+                    <div class="control-label col-md-2">Start Date</div>
+                    <div class="col-md-4">
+                            @Html.TextBoxFor(x => x.PStartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                            @Html.ValidationMessageFor(model => model.PStartDate)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="control-label col-md-2">End Date</div>
+                    <div class="col-md-4">
+                           @Html.TextBoxFor(x => x.PEndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                            @Html.ValidationMessageFor(model => model.PEndDate)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="control-label col-md-2">Stage</div>
+                    <div class="col-md-4">
+                            @Html.DropDownList("PStageID",null,new { @class = "input-medium valid col-lg-12 col-md-12 col-sm-12 col-xs-12"})
+                            @Html.ValidationMessageFor(model => model.PStageID)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-7">
+                            <input type="submit" value="Create" class="btn btn-default btn-primary" />
+                                @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-default " })
+                        </div>
+                   </div>
+        
+        </div>
+        }
+        
+ 	        </div><!-- /.widget-main -->
+	        </div><!-- /.widget-body -->
+        </div>
+            </div>
+    </div>
+          

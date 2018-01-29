@@ -1,0 +1,337 @@
+﻿@*@model IEnumerable<PTAWMS.Areas.HumanResource.BusinessLogic.ModelEmpDependents>*@
+
+@model IEnumerable<object>
+@{
+    List<PTAWMS.Models.ViewEmpDependent> approvedList = Model.ToList()[0] as List<PTAWMS.Models.ViewEmpDependent>;
+    //List<PTAWMS.Models.ViewEmpDependent> pendingList = Model.ToList()[1] as List<PTAWMS.Models.ViewEmpDependent>;
+    PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];
+    int Counter = 1;
+    string className = string.Empty;
+    bool comments = false;
+    bool edit = false;
+}
+@*<div class="alert alert-info hidden-print">
+    <strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.
+</div>*@
+<div class="label label-lg label-info arrowed-right">
+    <b><strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.</b>
+</div>
+<br/>
+<div class="page-header">
+    <h1>
+
+        <small>
+            <div class="pull-right tableTools-container"></div>
+            <div class="pull-right">
+
+            </div>
+        </small>
+    </h1>
+</div>
+
+
+<table id="dynamic-table" class="table table-striped table-bordered dataTable no-footer dtr-inline">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Relationship
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            @*<th>
+                Provident Fund
+            </th>
+            <th>
+                Benevolent Fund
+            </th>
+            <th>
+                Graduity
+            </th>
+            <th>
+                Death Compensation
+            </th>
+
+            <th>
+                CPF
+            </th>
+            <th>Attachment</th>
+            <th>Status</th>
+            <th>Option</th>*@
+
+        </tr>
+    </thead>
+
+    @foreach (var item in approvedList)
+    {
+        
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Relationship
+            </td>
+            <td>
+                @*@if (item.DOB != null)
+                {
+                    Convert.ToDateTime(@item.DOB).ToShortDateString();
+                }*@
+                @item.DOB
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ProvidentFundAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BenevolentFundAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Graduity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeathCompensation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CTF)
+
+            </td>
+            <td>
+                @if (!String.IsNullOrEmpty(item.DocumentPath))
+                {
+                    @Html.ActionLink("Download", "DownloadDocument", "Profile", new { ID = item.DependentID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <input type="hidden" id="hidDependentID" value="@item.DependentID" />
+                <input type="hidden" id="hidPersonID" value="@item.EmployeeID" />
+                <input type="hidden" id="hidStatusID" value="@item.StatusID" />
+                <input type="hidden" id="hidTypeID" value="@ViewBag.TypeID" />
+
+                <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-success" data-target=".bs-example-modal-lg">
+                    <i class="ace-icon fa fa-comment-o icon-only"></i>
+                </a>
+                @if (edit || user.HRModule == true)
+                {
+                    <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-info" data-target=".bs-example-modal-lg">
+                        <i class="ace-icon fa fa-pencil bigger-110"></i>
+                    </a>
+                }
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+
+@*@if (pendingList.Count > 0)
+{
+<div class="page-header hidden-print">
+    <h1>
+        Unapproved Dependents
+
+    </h1>
+</div>
+<table class="table  table-bordered hidden-print">
+    <thead>
+        <tr role="row">
+            <th>
+                Name
+            </th>
+            <th>
+                Relationship
+            </th>
+            <th>
+                Medical Facility
+            </th>
+            <th>
+                Provident Fund
+            </th>
+            <th>
+                Benevolent Fund
+            </th>
+            <th>
+                Graduity
+            </th>
+            <th>
+                Death Compensation
+            </th>
+
+            <th>
+                CPF
+            </th>
+            <th>Attachment</th>
+            <th>Status</th>
+            <th>Option</th>
+
+        </tr>
+    </thead>
+
+    @foreach (var item in pendingList)
+    {
+        if (item.Status == "Query by HR")
+        {
+            className = "alert-info";
+            comments = true;
+            edit = true;
+        }
+        else if (item.Status == "Rejected by HR")
+        {
+            className = "alert-danger";
+            comments = true;
+            edit = false;
+        }
+        else
+        {
+            className = "alert-warning";
+            comments = true;
+            edit = false;
+        }
+        <tr class=@className>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Relationship
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MedicalFacilityAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvidentFundAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BenevolentFundAllowed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Graduity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeathCompensation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CTF)
+
+            </td>
+            <td>
+                @if (!String.IsNullOrEmpty(item.DocumentPath))
+                {
+                    @Html.ActionLink("Download", "DownloadDocument", "Profile", new { ID = item.DependentID, TypeID = ViewBag.TypeID }, new { @class = "ace - icon glyphicon glyphicon - download" })
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <input type="hidden" id="hidDependentID" value="@item.DependentID" />
+                <input type="hidden" id="hidPersonID" value="@item.EmployeeID" />
+                <input type="hidden" id="hidStatusID" value="@item.StatusID" />
+                <input type="hidden" id="hidTypeID" value="@ViewBag.TypeID" />
+
+                <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-success" data-target=".bs-example-modal-lg">
+                    <i class="ace-icon fa fa-comment-o icon-only"></i>
+                </a>
+                @if (edit || user.HRModule == true)
+                {
+                    <a href="javascript:;" data-toggle="modal" class="btn btn-xs btn-info" data-target=".bs-example-modal-lg">
+                        <i class="ace-icon fa fa-pencil bigger-110"></i>
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+}*@
+<script type="text/javascript">
+    $(function () {
+        $("#breadcrumbs").html("<ul class='breadcrumb'><li><i class='ace-icon fa fa-user home-icon'></i><a href='" + LoadUrl("Home/Index")+"'>Home</a></li><li class='active'>Dependent</li></ul>");
+        $("#printable").click(function () {
+            print()
+        });
+        $("#ui-datepicker-div").hide();
+        var urls = LoadUrl('HumanResource/Profile/AddDependent');
+        $.ajax({
+            type: "GET",
+            url: urls,
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                $('#divDependentRemarks').hide();
+                $('#divDependent').hide();
+                $('#divDependent').html(response);
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        $("#AddDependent").click(function () {
+            $('#divDependentRemarks').hide();
+            $('.bs-example-modal-lg').show();
+            $('#divDependent').show();
+
+        });
+
+        $(".btn-info").click(function () {
+            var val = $(this).parents('tr').find('#hidDependentID').val();
+            var ID = val
+            var urls = LoadUrl('HumanResource/Profile/ModifyDependent');
+            $.ajax({
+                type: "GET",
+                url: urls,
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                data: { ID: ID },
+                success: function (response) {
+                    $('#divDependentRemarks').hide();
+                    $('#divDependent').show();
+                    $('#divDependent').html(response);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+        $(".btn-success").click(function () {
+
+            var ID = $(this).parents('tr').find('#hidDependentID').val();
+            var empID = $(this).parents('tr').find('#hidPersonID').val();
+            var statusID = $(this).parents('tr').find('#hidStatusID').val();
+            var type = $("#hidTypeID").val();
+            var urls = LoadUrl('HumanResource/Profile/HREmpAction');
+            $.ajax({
+                type: "GET",
+                url: urls,
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                data: { ID: ID, TypeID: type, EmpID: empID, StatusID: statusID },
+                success: function (response) {
+                    $('#divDependent').hide();
+                    $('#divDependentRemarks').show();
+                    $('#divDependentRemarks').html(response);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+    });
+</script>
+<script src="~/Scripts/gridFeatures.js"></script>

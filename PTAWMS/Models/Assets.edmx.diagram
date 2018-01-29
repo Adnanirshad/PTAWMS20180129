@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e73d081fedc9474a9e69b920675296b5" Name="Diagram1">
+        <EntityTypeShape EntityType="ARADBModel.AllocatedTo_t" Width="1.5" PointX="8.25" PointY="42.125" />
+        <EntityTypeShape EntityType="ARADBModel.AllocationType_t" Width="1.5" PointX="3" PointY="58.125" />
+        <EntityTypeShape EntityType="ARADBModel.Asset_t" Width="1.5" PointX="23.25" PointY="38.375" />
+        <EntityTypeShape EntityType="ARADBModel.AssetAllocation_t" Width="1.5" PointX="10.5" PointY="49.375" />
+        <EntityTypeShape EntityType="ARADBModel.AssetCategory_t" Width="1.5" PointX="8.25" PointY="35.625" />
+        <EntityTypeShape EntityType="ARADBModel.AssetClass_t" Width="1.5" PointX="5.25" PointY="41" />
+        <EntityTypeShape EntityType="ARADBModel.AssetFamily_t" Width="1.5" PointX="13.5" PointY="35.625" />
+        <EntityTypeShape EntityType="ARADBModel.AssetMake_t" Width="1.5" PointX="13.5" PointY="41.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetModel_t" Width="1.5" PointX="18.75" PointY="36.625" />
+        <EntityTypeShape EntityType="ARADBModel.AssetOpCondition_t" Width="1.5" PointX="8.25" PointY="50.375" />
+        <EntityTypeShape EntityType="ARADBModel.AssetOtherInfo_t" Width="1.5" PointX="25.5" PointY="45" />
+        <EntityTypeShape EntityType="ARADBModel.AssetPurchase_t" Width="1.5" PointX="21" PointY="35" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRepair_t" Width="1.5" PointX="25.5" PointY="35.375" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRepairType_t" Width="1.5" PointX="10.5" PointY="40.25" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetCriteriaConditions_t" Width="1.5" PointX="10.5" PointY="33.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetirement_t" Width="1.5" PointX="5.25" PointY="30.25" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetirementCriteria_t" Width="1.5" PointX="3" PointY="30" />
+        <EntityTypeShape EntityType="ARADBModel.AssetStatus_t" Width="1.5" PointX="21" PointY="41.875" />
+        <EntityTypeShape EntityType="ARADBModel.AssetType_t" Width="1.5" PointX="15.75" PointY="35.25" />
+        <EntityTypeShape EntityType="ARADBModel.EmpBPS_t" Width="1.5" PointX="6" PointY="51.125" />
+        <EntityTypeShape EntityType="ARADBModel.EmpDepartments_t" Width="1.5" PointX="6" PointY="48.75" />
+        <EntityTypeShape EntityType="ARADBModel.EmpDesignations_t" Width="1.5" PointX="6" PointY="46.375" />
+        <EntityTypeShape EntityType="ARADBModel.EmpDivisions_t" Width="1.5" PointX="6" PointY="55.75" />
+        <EntityTypeShape EntityType="ARADBModel.EmpStations_t" Width="1.5" PointX="6" PointY="53.5" />
+        <EntityTypeShape EntityType="ARADBModel.Login_t" Width="1.5" PointX="5.25" PointY="36.375" />
+        <EntityTypeShape EntityType="ARADBModel.OUs_t" Width="1.5" PointX="0.75" PointY="29.5" />
+        <EntityTypeShape EntityType="ARADBModel.SOUs_t" Width="1.5" PointX="3" PointY="42.375" />
+        <EntityTypeShape EntityType="ARADBModel.Vendor_t" Width="1.5" PointX="18.75" PointY="33.875" />
+        <EntityTypeShape EntityType="ARADBModel.AllocatedTo_v" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AMS2ESSP" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.Asset_v" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.Asset4Retirement_v" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetAllocation_v" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetAllocationReport_v" Width="1.5" PointX="6.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetAllocationReport_v1" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetCategory_v" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetClass_v" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetFamily_v" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetMake_v" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetModel_v" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetOtherInfo_v" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetPurchase_v" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetPurchaseDetailsRep_v" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRepair_v" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRepairType_v" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetCriteriaConditions_v" Width="1.5" PointX="12.75" PointY="13.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetirement_v" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetRetirementCriteria_v" Width="1.5" PointX="14.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetsWithA" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ARADBModel.AssetType_v" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ARADBModel.Employee_v" Width="1.5" PointX="8.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ARADBModel.Login_v" Width="1.5" PointX="14.75" PointY="13.75" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__BPSID__24B26D99" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__Depar__54968AE5" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__Desig__53A266AC" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__DivID__558AAF1E" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__SOUID__67A95F59" />
+        <AssociationConnector Association="ARADBModel.FK__Allocated__StaID__65C116E7" />
+        <AssociationConnector Association="ARADBModel.FK__AllocatedT__OUID__66B53B20" />
+        <AssociationConnector Association="ARADBModel.FK_AllocationSubType_t_AllocationType_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetAllocation_t_AllocatedTo_t" />
+        <AssociationConnector Association="ARADBModel.FK_AllocationType_t_AllocationType_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetAllocation_t_AllocationType_t" />
+        <AssociationConnector Association="ARADBModel.FK__Asset_t__AssetSt__4589517F" />
+        <AssociationConnector Association="ARADBModel.FK__Asset_t__Created__7C1A6C5A" />
+        <AssociationConnector Association="ARADBModel.FK__Asset_t__SOUID__46486B8E" />
+        <AssociationConnector Association="ARADBModel.FK__AssetAllo__Asset__19AACF41" />
+        <AssociationConnector Association="ARADBModel.FK_Asset_t_AssetPurchase_t" />
+        <AssociationConnector Association="ARADBModel.FK_Asset_t_AssetType_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetOtherInfo_t_Asset_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetRepair_t_Asset_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetAlloc__OCID__2CBDA3B5" />
+        <AssociationConnector Association="ARADBModel.FK__AssetCate__CLSID__23F3538A" />
+        <AssociationConnector Association="ARADBModel.FK__AssetCate__SOUID__25DB9BFC" />
+        <AssociationConnector Association="ARADBModel.FK__AssetCateg__OUID__24E777C3" />
+        <AssociationConnector Association="ARADBModel.FK_AssetCriteriaConditions_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetFamily_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetMake_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetModel_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetRepairType_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK_Assets_t_AssetCategory_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetFami__CLSID__39E294A9" />
+        <AssociationConnector Association="ARADBModel.FK__AssetMake__CLSID__2E70E1FD" />
+        <AssociationConnector Association="ARADBModel.FK__AssetMode__CLSID__3429BB53" />
+        <AssociationConnector Association="ARADBModel.FK__AssetType__CLSID__3F9B6DFF" />
+        <AssociationConnector Association="ARADBModel.FK_AssetClass_t_OUs_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetClass_t_SOUs_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetFami__SOUID__3BCADD1B" />
+        <AssociationConnector Association="ARADBModel.FK__AssetFamil__OUID__3AD6B8E2" />
+        <AssociationConnector Association="ARADBModel.FK_AssetFamily_t_AssetMake_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetFamily_t_AssetModel_t" />
+        <AssociationConnector Association="ARADBModel.FK_Assets_t_AssetFamily_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetMake___OUID__2F650636" />
+        <AssociationConnector Association="ARADBModel.FK__AssetMake__SOUID__30592A6F" />
+        <AssociationConnector Association="ARADBModel.FK_AssetModel_t_AssetMake_t" />
+        <AssociationConnector Association="ARADBModel.FK_Assets_t_AssetMake_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetMode__SOUID__361203C5" />
+        <AssociationConnector Association="ARADBModel.FK__AssetModel__OUID__351DDF8C" />
+        <AssociationConnector Association="ARADBModel.FK_Assets_t_AssetModel_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetPurc__Creat__793DFFAF" />
+        <AssociationConnector Association="ARADBModel.FK__AssetPurc__SOUID__4460231C" />
+        <AssociationConnector Association="ARADBModel.FK__AssetPurc__Updat__7A3223E8" />
+        <AssociationConnector Association="ARADBModel.FK__AssetPurch__OUID__7B264821" />
+        <AssociationConnector Association="ARADBModel.FK_AssetPurchase_t_AssetType_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetPurchase_t_Vendor_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetRepa__SOUID__5F141958" />
+        <AssociationConnector Association="ARADBModel.FK__AssetRepai__OUID__5E1FF51F" />
+        <AssociationConnector Association="ARADBModel.FK__AssetRepai__RTID__60FC61CA" />
+        <AssociationConnector Association="ARADBModel.FK_AssetRepair_t_Vendor_t" />
+        <AssociationConnector Association="ARADBModel.FK_AssetCriteriaConditions_t_AssetRetirementCriteria_t" />
+        <AssociationConnector Association="ARADBModel.FK__AssetReti__Crite__4B422AD5" />
+        <AssociationConnector Association="ARADBModel.FK__AssetRetir__OUID__4C364F0E" />
+        <AssociationConnector Association="ARADBModel.FK__AssetRetir__OUID__4D2A7347" />
+        <AssociationConnector Association="ARADBModel.FK__AssetType___OUID__408F9238" />
+        <AssociationConnector Association="ARADBModel.FK__AssetType__SOUID__4183B671" />
+        <AssociationConnector Association="ARADBModel.FK__Login_t__SOUID__0FEC5ADD" />
+        <AssociationConnector Association="ARADBModel.FK_Login_t_OperatingUnits_t" />
+        <AssociationConnector Association="ARADBModel.FK__SOUs_t__OUID__0D0FEE32" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

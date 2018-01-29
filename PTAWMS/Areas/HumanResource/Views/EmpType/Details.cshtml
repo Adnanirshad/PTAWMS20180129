@@ -1,0 +1,26 @@
+﻿@model PTAWMS.Models.HR_EmpType
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeName)
+        </dd>        
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(" Edit ", "Edit", new { id = Model.TypID } , new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+    
+</p>

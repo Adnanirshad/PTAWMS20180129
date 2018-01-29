@@ -1,0 +1,207 @@
+﻿@model PTAWMS.Areas.HumanResource.BusinessLogic.ModelEmpQualification
+
+
+<link href="~/assets/css/jquery-ui1.css" rel="stylesheet" />
+
+
+<div class="modal-content">
+    <div class="widget-header widget-header-small">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel"><i class="ace-icon fa fa-check"></i>Qualification</h4>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("AddQualification", "Profile", FormMethod.Post, new { id = "AddQualification", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(model => model.ID)
+        @Html.AntiForgeryToken()
+        <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="tab-content">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="alert alert-danger" id="errMsg" style="display:none;">Invalid Date</div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DegreeName, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.DegreeName, (SelectList)Model.DegreesList, "Select Degree", new { @class = "form-control", @required = "required" })
+
+                                    @Html.ValidationMessageFor(model => model.DegreeID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Institute, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.Institute, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.DropDownListFor(model => model.Institute, (SelectList)Model.InstituteList, "Select Institute", new { @class = "form-control", @required = "required" })
+
+                                    @Html.TextBoxFor(model => model.Institute, new { @class = "form-control", style = "display: none;" })
+                                    @*<input type="checkbox" id="chkNew" value="Add New" /> Add New*@
+                                    @Html.ValidationMessageFor(model => model.InstituteID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="divStartDate">
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @*@Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })*@
+
+                                    @*@Html.TextBoxFor(model => model.StartDate, "{0:dd-MM-yyyy}", new { @class = "form-control", @type = "text", @required = "required" })*@
+                                    <input id="StartDate" name="StartDate" class = "form-control" type="text" required  />
+                                </div>
+                              
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+
+                                    @Html.TextBoxFor(model => model.EndDate, "{0:dd-MM-yyyy}", new { @class = "form-control", @type = "text", @required = "required" })
+                                    <input id="EndDate" name="StartDate" class="form-control" type="text" required />
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Specialization, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Specialization, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Specialization, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.Grade, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Certificate/Degree Attachment</label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="ImageData" id="ImageData" onchange="fileCheck();" required />
+                                    <small class="text-warning">Maximum File Size: 2 MB</small>
+                                </div>
+                            </div>
+                            <div id="divFileUpload">
+                                <div class="form-group">
+                                    <div class="control-label col-md-4"></div>
+                                    <div class="col-md-6">
+                                        <small class="text-primary">Change Request Subject to HR Approval.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-10">
+                                        <input type="submit" id="SaveEmpPersonalInfo" value="Save" class="btn btn-default btn-success" />
+                                        <input type="button" id="btnCancel" value="Cancel" class="btn btn-primary" data-dismiss="modal" />
+                                    </div>
+                                </div>
+
+                            </p>
+
+
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script src="~/assets/js/jquery-ui.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        if (!$.datepicker.initialized) {
+            $(document).mousedown($.datepicker._checkExternalClick)
+                // !!!!!!!!!!
+                // The next code line has to be added again so that the date picker
+                // shows up when the popup is opened more than once without reloading
+                // the "base" page.
+                // !!!!!!!!!!
+                .find(document.body).append($.datepicker.dpDiv);
+            $.datepicker.initialized = true;
+            ($.datepicker.dpDiv).hide();  
+        }
+
+        //$("#StartDate").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());
+        //$("#EndDate").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());
+        
+        $("#StartDate").datepicker({ dateFormat: 'dd-mm-yy', changeMonth: true,changeYear: true });
+        $("#StartDate").bind("change", function () {
+            var minValue = $("#StartDate").val();
+            minValue = $.datepicker.parseDate("dd-mm-yy", minValue);
+            minValue.setDate(minValue.getDate() + 1);
+            $("#EndDate").datepicker("option", "minDate", minValue);
+            $("#StartDate").datepicker("show")
+        })
+
+
+        //$("#EndDate").datepicker({ dateFormat: 'dd-mm-yy', changeMonth: true, changeYear: true }).bind("change", function () {
+        //    var minValue = $("#StartDate").val();
+        //    minValue = $.datepicker.parseDate("dd-mm-yy", minValue);
+        //    minValue.setDate(minValue.getDate() + 1);
+        //    $("#EndDate").datepicker("option", "minDate", minValue);
+        //    $("#EndDate").datepicker("show")
+        //})
+
+
+        $('#SaveEmpPersonalInfo').submit(function () {
+
+            if (fileCheck() == false) {
+
+                return false;
+            }
+            alert($("StartDate").val());
+            alert($("EndDate").val());
+            return true;
+        });
+
+        $("#chkNew").click(function () {
+            if ($(this).is(":checked")) {
+                $("#Institute").show();
+                $('#Institute').prop('required', true);
+                $("#InstituteID").hide();
+                $('#Institute').prop('required', false);
+            } else {
+                $("#Institute").hide();
+                $('#Institute').prop('required', false);
+                $("#InstituteID").show();
+                $('#Institute').prop('required', true);
+            }
+        });
+    });
+
+    //$("#StartDate").on('change', function () {
+    //    var dateSt = Date.parse($(this).val());
+    //    var dateEnd = Date.parse($("#EndDate").val());
+    //    alert(dateSt + ' ' + dateEnd);
+    //    if (dateSt > dateEnd) {
+    //        alert('From Date should be greater then To Date');
+    //    }
+    //});
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+

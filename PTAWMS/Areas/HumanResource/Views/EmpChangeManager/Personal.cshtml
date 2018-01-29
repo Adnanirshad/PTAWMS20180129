@@ -1,0 +1,68 @@
+﻿@model PTAWMS.Areas.HumanResource.Controllers.ModelPersonal
+@{
+    ViewBag.Title = "Personal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+                <form class ="form-inline" role="form">
+                    <div class="form-group">
+                        <ul class="nav nav-pills">
+                            <li class="active">@Html.ActionLink("Personal Requests","Personal", "EmpChangeManager",new {area="HumanResource"},null)</li>
+                            <li class="active">@Html.ActionLink("JobDetail Requests","JobDetail", "EmpChangeManager",new {area="HumanResource"},null)</li>
+                            <li class="active">@Html.ActionLink("Contact Requests","Contact", "EmpChangeManager",new {area="HumanResource"},null)</li>
+                            <li class="active">@Html.ActionLink("Attendance Requests","Attendance", "EmpChangeManager",new {area="HumanResource"},null)</li>
+                             
+                        </ul>
+                    </div> 
+                </form>  
+            
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content" style="display: block;">
+            <br />
+            @using (Html.BeginForm("SubmitRequest", null, FormMethod.Post))
+            {
+    @Html.AntiForgeryToken()
+                <input hidden type="text" name="Count" id="Count" value="@Model.Count" />
+                
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    @{var grid = new WebGrid(Model.EmpChangesList, canSort: false, canPage: false);
+                    int rowNum = 0;
+                    <div>
+                        @grid.GetHtml(
+                        htmlAttributes: new { id = "checkableGrid" },
+                        columns:
+                            grid.Columns
+                            (
+                            grid.Column(header: "{checkall}",format: @<text> <input style="width:15px"type="checkbox" id="cbEmployee" name="cbEmployee"  value="@(item.EmployeeID)" /> </text>),
+                                grid.Column("Sr.No", format: item => rowNum = rowNum + 1), 
+                                grid.Column("First Name", format: (item) => Html.Label("MiddleName" + (rowNum - 1).ToString(), (string)item.FirstName, new { style = "width:180px; font-weight: normal;" })),
+                               
+                                grid.Column("MiddleName", format: (item) => Html.Label("MiddleName" + (rowNum - 1).ToString(), (string)item.MiddleName, new { style = "width:180px; font-weight: normal;" })),
+                                grid.Column("LastName", format: (item) => Html.Label("LastName" + (rowNum - 1).ToString(), (string)item.LastName, new { style = " width:60px;font-weight: normal;" })),
+                                grid.Column("FathersName", format: (item) => Html.Label("FathersName" + (rowNum - 1).ToString(), (string)item.FathersName, new { style = " width:60px;font-weight: normal;" })),
+                                 grid.Column("CNICNo", format: (item) => Html.Label("CNICNo" + (rowNum - 1).ToString(), (string)item.CNICNo, new { style = " width:60px;font-weight: normal;" })),
+                                 
+                                grid.Column("Gender ", format: (item) => Html.TextBox("Gender" + (rowNum - 1).ToString(), (object)item.Gender, new { style = " width:40px;" })),
+                                    grid.Column("BloodGroup", format: (item) => Html.Label("BloodGroup" + (rowNum - 1).ToString(), (string)item.BloodGroup, new { style = " width:50px;font-weight: normal;" })),
+                                    grid.Column("MaritalStatus", format: (item) => Html.Label("MaritalStatus" + (rowNum - 1).ToString(), (string)item.MaritalStatus, new { style = " width:50px;font-weight: normal;" }))
+                            ), mode: WebGridPagerModes.Numeric)
+                    </div>
+                    }
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12"><br /></div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <label for="email">Submitted To:</label>
+                        @*@Html.DropDownList("SupervisorID", null, new { @class = "btn btn-default dropdown-toggle dropdown" })*@
+                      <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

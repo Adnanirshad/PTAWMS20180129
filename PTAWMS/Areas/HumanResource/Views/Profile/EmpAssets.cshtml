@@ -1,0 +1,116 @@
+﻿@model IEnumerable<object>
+@{
+
+    //List<AMS2ESSP> approvedList = Model.ToList()[0] as List<AMS2ESSP>;
+    PTAWMS.Models.ViewUserEmp user = (PTAWMS.Models.ViewUserEmp)HttpContext.Current.Session["LoggedUser"];
+    int Counter = 1;
+    string className = string.Empty;
+    //bool comments = false;
+    //bool edit = false;
+}
+<div class="label label-lg label-info arrowed-right">
+    <b><strong>Note: </strong> For any change in this section, you are requested to kindly email to HR Directorate.</b>
+</div>
+<br />
+<div class="modal fade bs-example-modal-lg in" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
+            <div id="divDependent" style="display: block;border:groove;">
+            </div>
+            <div id="divDependentRemarks" style="display: block; ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-header">
+    <h1>
+
+        <small>
+            <div class="pull-right tableTools-container"></div>
+            <div class="pull-right">
+
+            </div>
+        </small>
+    </h1>
+</div>
+
+<table id="dynamic-table" class="table table-striped table-bordered dataTable no-footer dtr-inline">
+    <thead>
+        <tr role="row">
+            <th>
+                #
+            </th>
+            <th>
+                Barcode
+            </th>
+            <th>
+                Assets
+            </th>
+            <th>
+                Allocation Date
+            </th>
+
+        </tr>
+    </thead>
+
+
+    <tr>
+        <td>
+            @Counter
+            @{
+                Counter = Counter + 1;
+            }
+        </td>
+        <td>
+            <span>01001204</span>
+        </td>
+        <td>
+            <span>Scanner Canon DR-C130 with FB 101 ADF + FB"</span>
+        </td>
+        <td>
+            <span>12-10-2013</span>
+        </td>
+
+
+    </tr>
+
+    @*@foreach (var item in approvedList)
+        {
+
+            <tr>
+                <td>
+                    @Counter
+                    @{
+                        Counter = Counter + 1;
+                    }
+                </td>
+                <td>
+                    @item.BarCode
+                </td>
+                <td>
+                    @item.Asset
+                </td>
+                <td>
+                    @item.Allocation_Date.ToShortDateString()
+                </td>
+
+
+            </tr>
+                        }*@
+
+</table>
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#breadcrumbs").html("<ul class='breadcrumb'><li><i class='ace-icon fa fa-user home-icon'></i><a href='" + LoadUrl("Home/Index")+"'>Home</a></li><li class='active'>Assets</li></ul>");
+        $("#printable").click(function () {
+            print()
+        });
+       
+
+    });
+</script>
+<script src="~/Scripts/gridFeatures.js"></script>
