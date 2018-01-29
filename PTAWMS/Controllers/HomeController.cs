@@ -936,7 +936,7 @@ namespace PTAWMS.Controllers
         {
             dateS = Convert.ToDateTime(Session["DateStart"].ToString());
             dateE = Convert.ToDateTime(Session["DateEnd"].ToString());
-            ViewBag.SubHeader = " for " + FullName + " from " + dateS.ToString("dd-MMM-yyyy") + " to " + dateS.ToString("dd-MMM-yyyy");
+            ViewBag.SubHeader = " for " + FullName;
             List<ViewAttData> tAttData = new List<ViewAttData>();
             List<ViewAttData> attData = new List<ViewAttData>();
             ViewUserEmp LoggedInUser = Session["LoggedUser"] as ViewUserEmp;

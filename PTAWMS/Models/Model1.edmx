@@ -1618,7 +1618,7 @@ warning 6013: The table/view 'TAS17PTA.dbo.Audit_Operation' does not have a prim
           <Property Name="CDateTime" Type="datetime" />
           <Property Name="ApprovedDate" Type="date" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="ArrivalTime" Type="datetime" />
+          <Property Name="ArrivalTime" Type="datetime" Nullable="false" />
           <Property Name="Arrival Date" Type="date" />
           <Property Name="VisitTypeID" Type="int" />
           <Property Name="ReasonID" Type="int" />
@@ -3160,7 +3160,7 @@ warning 6002: The table/view 'TAS17PTA.dbo.ViewSVisitorEmp' does not have a prim
           <Property Name="DesignationName" Type="nvarchar" MaxLength="500" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="ArrivalTime" Type="time" Precision="7" />
+          <Property Name="ArrivalTime" Type="datetime" />
           <Property Name="Arrival Date" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -7596,7 +7596,7 @@ FROM [dbo].[ViewVisitorsVisit] AS [ViewVisitorsVisit]</DefiningQuery>
           <Property Name="CDateTime" Type="DateTime" Precision="3" />
           <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ArrivalTime" Type="DateTime" Precision="3" />
+          <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Arrival_Date" Type="DateTime" Precision="0" />
           <Property Name="VisitTypeID" Type="Int32" />
           <Property Name="ReasonID" Type="Int32" />
@@ -9083,7 +9083,7 @@ FROM [dbo].[ViewVisitorsVisit] AS [ViewVisitorsVisit]</DefiningQuery>
           <Property Name="DesignationName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="ArrivalTime" Type="Time" Precision="7" />
+          <Property Name="ArrivalTime" Type="DateTime" Precision="3" />
           <Property Name="Arrival_Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="ViewUserEmp">

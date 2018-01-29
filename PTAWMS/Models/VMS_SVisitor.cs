@@ -23,7 +23,7 @@ namespace PTAWMS.Models
         public Nullable<System.DateTime> CDateTime { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public string Status { get; set; }
-        public Nullable<System.DateTime> ArrivalTime { get; set; }
+        public System.DateTime ArrivalTime { get; set; }
         public Nullable<System.DateTime> Arrival_Date { get; set; }
         public Nullable<int> VisitTypeID { get; set; }
         public Nullable<int> ReasonID { get; set; }

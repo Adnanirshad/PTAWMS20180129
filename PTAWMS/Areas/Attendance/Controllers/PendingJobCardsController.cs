@@ -87,14 +87,17 @@ namespace PTAWMS.Areas.Attendance.Controllers
         public ActionResult CheckExpireEntries()
         {
             List<Att_JobCardApp> jb = new List<Att_JobCardApp>();
-            jb = db.Att_JobCardApp.Where(aa => aa.StatusID == "Pending").ToList();
-            foreach (var item in jb)
+            if (db.Att_JobCardApp.Where(aa => aa.StatusID == "Pending").ToList().Count > 0)
             {
-                DateTime CurrentTime = DateTime.Today;
-                if (item.DateStarted < DateTime.Today)
+                jb = db.Att_JobCardApp.Where(aa => aa.StatusID == "Pending").ToList();
+                foreach (var item in jb)
                 {
-                    item.StatusID = "Rejected";
-                    db.SaveChanges();
+                    DateTime CurrentTime = DateTime.Today;
+                    if (item.DateStarted < DateTime.Today)
+                    {
+                        item.StatusID = "Rejected";
+                        db.SaveChanges();
+                    }
                 }
             }
             return View();

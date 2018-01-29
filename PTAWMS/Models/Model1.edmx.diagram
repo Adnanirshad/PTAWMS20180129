@@ -6,43 +6,43 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e8e9c38db7bd4907826267e7349db1c5" Name="Diagram1">
         <EntityTypeShape EntityType="TAS17PTAModel.AccessUser" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_DailyAttendance" Width="1.5" PointX="10.5" PointY="93.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_DailyAttendance" Width="1.5" PointX="13.5" PointY="101" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_DaysName" Width="1.5" PointX="0.75" PointY="54.375" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_DeviceData" Width="1.5" PointX="13.5" PointY="53.5" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_DeviceData" Width="1.5" PointX="13.5" PointY="47.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_DeviceDataError" Width="1.5" PointX="5.75" PointY="3.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_DownloadTime" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_EmpFace" Width="1.5" PointX="10.5" PointY="90.125" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_EmpFP" Width="1.5" PointX="10.5" PointY="109.625" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_EmpFace" Width="1.5" PointX="13.5" PointY="37.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_EmpFP" Width="1.5" PointX="13.5" PointY="90.375" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_Holiday" Width="1.5" PointX="7.75" PointY="3.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_JobCard" Width="1.5" PointX="0.75" PointY="6.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_JobCardApp" Width="1.5" PointX="3" PointY="5.125" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_JobCardDetail" Width="1.5" PointX="10.5" PointY="113.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_JobCardDetail" Width="1.5" PointX="13.5" PointY="32.625" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_Leave" Width="1.5" PointX="5.75" PointY="7.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_ManualEdit" Width="1.5" PointX="7.75" PointY="6.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_MonthData" Width="1.5" PointX="16.5" PointY="41.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_MonthDataEdit" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_MonthlyOTEntry" Width="1.5" PointX="16.5" PointY="36.375" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_MonthlyOTEntry" Width="1.5" PointX="16.5" PointY="70.375" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_OPName" Width="1.5" PointX="9.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_OTDailyEntry" Width="1.5" PointX="10.5" PointY="71.625" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_OTDailyEntry" Width="1.5" PointX="13.5" PointY="40" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_OTDForward" Width="1.5" PointX="9.75" PointY="9.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_OTPolicy" Width="1.5" PointX="6" PointY="58.5" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_OTPolicy" Width="1.5" PointX="9" PointY="45.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_OTStatus" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_OutPass" Width="1.5" PointX="10.5" PointY="83" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_OutPass" Width="1.5" PointX="13.5" PointY="93.875" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_ProcessDate" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_ProcessRequest" Width="1.5" PointX="11.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_Reader" Width="1.5" PointX="11.25" PointY="35.25" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_ReaderDutyCode" Width="1.5" PointX="9" PointY="37.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_ReaderType" Width="1.5" PointX="9" PointY="35.25" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_Reader" Width="1.5" PointX="11.25" PointY="37.25" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_ReaderDutyCode" Width="1.5" PointX="9" PointY="37.25" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_ReaderType" Width="1.5" PointX="9" PointY="39.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_Remark" Width="1.5" PointX="4.75" PointY="11.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_RFIDCard" Width="1.5" PointX="8.25" PointY="40.25" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterApplication" Width="1.5" PointX="5.25" PointY="53.25" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterDetail" Width="1.5" PointX="7.5" PointY="63.875" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterType" Width="1.5" PointX="3" PointY="48.375" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_RFIDCard" Width="1.5" PointX="11.25" PointY="34.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterApplication" Width="1.5" PointX="8.25" PointY="53.25" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterDetail" Width="1.5" PointX="10.5" PointY="63.875" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_RosterType" Width="1.5" PointX="6" PointY="51.375" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_ServiceLog" Width="1.5" PointX="11.75" PointY="5.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_Setting" Width="1.5" PointX="11.75" PointY="8.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_Shift" Width="1.5" PointX="3" PointY="51.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_ShiftChanged" Width="1.5" PointX="5.25" PointY="106.25" />
-        <EntityTypeShape EntityType="TAS17PTAModel.Att_ShiftChngedEmp" Width="1.5" PointX="10.5" PointY="54" />
+        <EntityTypeShape EntityType="TAS17PTAModel.Att_ShiftChngedEmp" Width="1.5" PointX="5.25" PointY="54" />
         <EntityTypeShape EntityType="TAS17PTAModel.Att_TemplatesFP" Width="1.5" PointX="11.75" PointY="11.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Audit_Form" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.Audit_Log" Width="1.5" PointX="0.75" PointY="13.75" />
@@ -51,8 +51,8 @@
         <EntityTypeShape EntityType="TAS17PTAModel.BG_OTDivision" Width="1.5" PointX="6.75" PointY="13.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.FocalUser" Width="1.5" PointX="13.75" PointY="9.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_City" Width="1.5" PointX="13.75" PointY="12.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Department" Width="1.5" PointX="6" PointY="73.875" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Designation" Width="1.5" PointX="6" PointY="71.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Department" Width="1.5" PointX="9" PointY="42.5" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Designation" Width="1.5" PointX="9" PointY="58.5" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_Emp_Communication" Width="1.5" PointX="2.75" PointY="14.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_Emp_Dependents" Width="1.5" PointX="8.75" PointY="14.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_Emp_Experience" Width="1.5" PointX="10.75" PointY="14.75" />
@@ -64,7 +64,7 @@
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpChange" Width="1.5" PointX="4.75" PointY="16.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpGender" Width="1.5" PointX="16.75" PointY="15.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpImage" Width="1.5" PointX="17.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Employee" Width="1.5" PointX="8.25" PointY="47.625" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Employee" Width="1.5" PointX="11.25" PointY="47.625" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmployeeHistory" Width="1.5" PointX="17.75" PointY="3.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpPromotions" Width="1.5" PointX="17.75" PointY="9.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpStatus" Width="1.5" PointX="17.75" PointY="13.75" />
@@ -72,7 +72,7 @@
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpTranfers" Width="1.5" PointX="16.75" PointY="17.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpType" Width="1.5" PointX="0.75" PointY="18.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_EmpWarnings" Width="1.5" PointX="18.75" PointY="15.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Grade" Width="1.5" PointX="6" PointY="48.5" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Grade" Width="1.5" PointX="9" PointY="74.625" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_GradeHistory" Width="1.5" PointX="19.75" PointY="0.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_LeaveModule" Width="1.5" PointX="19.75" PointY="4.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_LeaveRec" Width="1.5" PointX="19.75" PointY="8.75" />
@@ -81,41 +81,41 @@
         <EntityTypeShape EntityType="TAS17PTAModel.HR_LeaveType" Width="1.5" PointX="8.75" PointY="20.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_ListEntry" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_ListType" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Location" Width="1.5" PointX="6" PointY="45.5" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Location" Width="1.5" PointX="9" PointY="68.25" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_MartialStatus" Width="1.5" PointX="10.75" PointY="20.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_OracleDB" Width="1.5" PointX="20.75" PointY="15.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.HR_Section" Width="1.5" PointX="6" PointY="67.625" />
+        <EntityTypeShape EntityType="TAS17PTAModel.HR_Section" Width="1.5" PointX="9" PointY="71.125" />
         <EntityTypeShape EntityType="TAS17PTAModel.HR_SMTP" Width="1.5" PointX="20.75" PointY="18.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.PR_FinYear" Width="1.5" PointX="21.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.PR_PayrollPeriod" Width="1.5" PointX="14.25" PointY="48.625" />
+        <EntityTypeShape EntityType="TAS17PTAModel.PR_PayrollPeriod" Width="1.5" PointX="14.25" PointY="59.625" />
         <EntityTypeShape EntityType="TAS17PTAModel.sysdiagram" Width="1.5" PointX="0.75" PointY="21.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.TBLLOG" Width="1.5" PointX="21.75" PointY="3.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.TBLLOG_TYPE" Width="1.5" PointX="21.75" PointY="7.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.User" Width="1.5" PointX="10.5" PointY="78.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.User" Width="1.5" PointX="13.5" PointY="86.125" />
         <EntityTypeShape EntityType="TAS17PTAModel.UserRoleData" Width="1.5" PointX="21.75" PointY="10.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.UserType" Width="1.5" PointX="16.75" PointY="21.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_BanCNIC" Width="1.5" PointX="18.75" PointY="21.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_CreateVisitorSMS" Width="1.5" PointX="20.75" PointY="21.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.VMS_Floor" Width="1.5" PointX="6" PointY="40.375" />
+        <EntityTypeShape EntityType="TAS17PTAModel.VMS_Floor" Width="1.5" PointX="9" PointY="34.375" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_Reason" Width="1.5" PointX="10.75" PointY="22.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_SMSSend" Width="1.5" PointX="22.75" PointY="13.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_SpecialVisitor" Width="1.5" PointX="22.75" PointY="16.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_SVisitor" Width="1.5" PointX="22.75" PointY="19.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitDevice" Width="1.5" PointX="23.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitInfo" Width="1.5" PointX="10.5" PointY="46.125" />
-        <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitorInfo" Width="1.5" PointX="8.25" PointY="43.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitInfo" Width="1.5" PointX="13.5" PointY="52.125" />
+        <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitorInfo" Width="1.5" PointX="11.25" PointY="43" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitorPhoto" Width="1.5" PointX="23.75" PointY="3.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitSMS" Width="1.5" PointX="23.75" PointY="6.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.VMS_VisitType" Width="1.5" PointX="12.75" PointY="23.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ZData" Width="1.5" PointX="0.75" PointY="24.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.EmpView" Width="1.5" PointX="24.75" PointY="11.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewAttData" Width="1.5" PointX="26.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewAttDataDetail" Width="1.5" PointX="13.75" PointY="26.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewAttMonthlySummary" Width="1.5" PointX="26.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewAttDataDetail" Width="1.5" PointX="26.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewAttMonthlySummary" Width="1.5" PointX="18.75" PointY="26.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewAttOTForward" Width="1.5" PointX="6.75" PointY="25.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewAttShiftChngeEmp" Width="1.5" PointX="8.75" PointY="25.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewAuditLog" Width="1.5" PointX="10.75" PointY="26.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewBGCredit" Width="1.5" PointX="18.75" PointY="26.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewBGCredit" Width="1.5" PointX="12.75" PointY="26.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewBGOTDebit" Width="1.5" PointX="20.75" PointY="26.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewBGOTDivision" Width="1.5" PointX="0.75" PointY="27.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewDailyOTEntry" Width="1.5" PointX="28.75" PointY="0.75" />
@@ -124,24 +124,24 @@
         <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpCommunication" Width="1.5" PointX="28.75" PointY="28.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpDependent" Width="1.5" PointX="30.75" PointY="0.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpHistory" Width="1.5" PointX="30.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpPreJobHistory" Width="1.5" PointX="18.75" PointY="30.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpQualification" Width="1.5" PointX="30.75" PointY="30.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpPreJobHistory" Width="1.5" PointX="30.75" PointY="30.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpQualification" Width="1.5" PointX="24.75" PointY="31.75" />
         <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpTraining" Width="1.5" PointX="32.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpTrainingReport" Width="1.5" PointX="32.75" PointY="6.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewEMPTransfer" Width="1.5" PointX="0.75" PointY="32.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpWarning" Width="1.5" PointX="2.75" PointY="32.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewHREmpChange" Width="1.5" PointX="32.75" PointY="25.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewHRSection" Width="1.5" PointX="8.75" PointY="31.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewJobCard" Width="1.5" PointX="4.75" PointY="32.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewJobCardEmp" Width="1.5" PointX="20.75" PointY="33.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewOTMonthlySummary" Width="1.5" PointX="22.75" PointY="33.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewPollData" Width="1.5" PointX="34.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewReportQualification" Width="1.5" PointX="34.75" PointY="7.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewSVisitorEmp" Width="1.5" PointX="24.75" PointY="34.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewUserEmp" Width="1.5" PointX="34.75" PointY="25.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewUserEmpSimple" Width="1.5" PointX="10.75" PointY="31.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewVisitEmp" Width="1.5" PointX="26.75" PointY="34.75" />
-        <EntityTypeShape EntityType="TAS17PTAModel.ViewVisitorsVisit" Width="1.5" PointX="36.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpTrainingReport" Width="1.5" PointX="0.75" PointY="32.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewEMPTransfer" Width="1.5" PointX="2.75" PointY="32.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewEmpWarning" Width="1.5" PointX="4.75" PointY="32.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewHREmpChange" Width="1.5" PointX="32.75" PointY="6.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewHRSection" Width="1.5" PointX="15.75" PointY="32.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewJobCard" Width="1.5" PointX="32.75" PointY="17.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewJobCardEmp" Width="1.5" PointX="32.75" PointY="24.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewOTMonthlySummary" Width="1.5" PointX="20.75" PointY="33.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewPollData" Width="1.5" PointX="26.75" PointY="33.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewReportQualification" Width="1.5" PointX="34.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewSVisitorEmp" Width="1.5" PointX="34.75" PointY="18.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewUserEmp" Width="1.5" PointX="34.75" PointY="23.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewUserEmpSimple" Width="1.5" PointX="15.75" PointY="35.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewVisitEmp" Width="1.5" PointX="36.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TAS17PTAModel.ViewVisitorsVisit" Width="1.5" PointX="36.75" PointY="17.75" />
         <AssociationConnector Association="TAS17PTAModel.FK_Att_DailyAttendance_HR_Employee" />
         <AssociationConnector Association="TAS17PTAModel.FK_Att_Shift_Att_DaysName" />
         <AssociationConnector Association="TAS17PTAModel.FK_Att_Shift_Att_DaysName1" />

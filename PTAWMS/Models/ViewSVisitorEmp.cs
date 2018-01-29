@@ -25,7 +25,7 @@ namespace PTAWMS.Models
         public string DesignationName { get; set; }
         public string FullName { get; set; }
         public int ID { get; set; }
-        public Nullable<System.TimeSpan> ArrivalTime { get; set; }
+        public Nullable<System.DateTime> ArrivalTime { get; set; }
         public Nullable<System.DateTime> Arrival_Date { get; set; }
     }
 }

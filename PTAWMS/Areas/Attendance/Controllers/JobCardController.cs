@@ -90,10 +90,12 @@ namespace PTAWMS.Areas.Attendance.Controllers
                             ModelState.AddModelError("DateEnded", "End Date must be greater than Start Date");
                         // Check for Duplication
                         if (CheckForValidation(db.Att_JobCardApp.Where(aa => aa.EmpID == LoggedInUser.EmployeeID || aa.StatusID == "Approved" || aa.StatusID == "Pending").ToList(), att_jobcardapp))
+                        {
+                            ViewBag.SupervisorID = new SelectList(db.ViewUserEmps.Where(aa => aa.DepartmentID == LoggedInUser.DepartmentID).OrderByDescending(aa => aa.FullName).ToList(), "UserID", "FullName");
                             ViewBag.JCTypeID = new SelectList(db.Att_JobCard, "JCID", "JCName", att_jobcardapp.JCTypeID);
-                        ViewBag.SupervisorID = new SelectList(db.ViewUserEmps.Where(aa => aa.DepartmentID == LoggedInUser.DepartmentID).OrderByDescending(aa => aa.FullName).ToList(), "UserID", "FullName");
-                        ModelState.AddModelError("DateStarted", "You already have applied on this date");
-                        return View(att_jobcardapp);
+                            ModelState.AddModelError("DateStarted", "You already have applied on this date");
+                            return View(att_jobcardapp);
+                        }
                     }
                 }
                 else

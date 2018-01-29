@@ -273,7 +273,7 @@ namespace PTAWMS.Areas.Attendance.Controllers
                 {
                     Name = "Name: " + emp.FirstOrDefault().FullName;
                     Designation = "Designation: " + emp.FirstOrDefault().DesignationName;
-                    Section = "Section: " + emp.FirstOrDefault().SectionName;
+                    Section = "Department: " + emp.FirstOrDefault().SectionName;
                     Type = "Type: " + emp.FirstOrDefault().TypeName;
                     if (emp.FirstOrDefault().DOJ != null)
                         DOJ = "Join Date: " + emp.FirstOrDefault().DOJ.Value.ToString("dd-MMM-yyyy");
@@ -286,7 +286,7 @@ namespace PTAWMS.Areas.Attendance.Controllers
                 {
                     Name = "Name: Not found";
                     Designation = "Designation: Not found";
-                    Section = "Section: Not found";
+                    Section = "Department: Not found";
                     Type = "Type: Not found";
                     DOJ = "Join Date: Not found";
                     if (HttpContext.Request.IsAjaxRequest())

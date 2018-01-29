@@ -101,23 +101,26 @@ namespace PTAWMS.Areas.Attendance.Controllers
         public ActionResult CheckVisitorExpireEntries()
         {
             List<VMS_SVisitor> sv = new List<VMS_SVisitor>();
-            sv = db.VMS_SVisitor.Where(aa => aa.Status == "Pending").ToList();
-            foreach (var item in sv)
+            if (db.VMS_SVisitor.Where(aa => aa.Status == "Pending").ToList().Count > 0)
             {
-                DateTime CurrentTime = DateTime.Today;
-                DateTime Time = DateTime.Now;
-                if (item.Arrival_Date <= DateTime.Today)
+                sv = db.VMS_SVisitor.Where(aa => aa.Status == "Pending").ToList();
+                foreach (var item in sv)
                 {
-                    if (item.ArrivalTime < Time)
+                    DateTime CurrentTime = DateTime.Today;
+                    DateTime Time = DateTime.Now;
+                    if (item.Arrival_Date <= DateTime.Today)
                     {
-                        item.Status = "Rejected";
-                        db.SaveChanges();
-                        //var EName = db.EmpViews.First(aa => aa.EmployeeID == item.EmpID).FullName;
-                        var EName = item.EmpID;
-                        string Toadd = "madnan.cns@gmail.com";
-                        string subject = "Pending Visitor's Vehicle Access for Employee" + EName;
-                        string body = "Dear Concerned, <br/> your pending visitor request has been rejected for time expire . <br/> Employee Name: " + EName + "<br/> Visitor Name: " + item.VisitorName + "<br/> Vehicle No: " + item.VehicleNo + "<br/> Date Time: " + item.Arrival_Date.Value.ToShortDateString() + item.ArrivalTime + "<br/> Please Click on below link to procced further <a href='http://192.168.0.21/wms'>http://192.168.0.21/ESSP</a>";
-                        EmailManager.SendEmail(Toadd, subject, body);
+                        if (item.ArrivalTime < Time)
+                        {
+                            item.Status = "Rejected";
+                            db.SaveChanges();
+                            //var EName = db.EmpViews.First(aa => aa.EmployeeID == item.EmpID).FullName;
+                            var EName = item.EmpID;
+                            string Toadd = "madnan.cns@gmail.com";
+                            string subject = "Pending Visitor's Vehicle Access for Employee" + EName;
+                            string body = "Dear Concerned, <br/> your pending visitor request has been rejected for time expire . <br/> Employee Name: " + EName + "<br/> Visitor Name: " + item.VisitorName + "<br/> Vehicle No: " + item.VehicleNo + "<br/> Date Time: " + item.Arrival_Date.Value.ToShortDateString() + item.ArrivalTime + "<br/> Please Click on below link to procced further <a href='http://192.168.0.21/wms'>http://192.168.0.21/ESSP</a>";
+                            EmailManager.SendEmail(Toadd, subject, body);
+                        }
                     }
                 }
             }
@@ -155,108 +158,137 @@ namespace PTAWMS.Areas.Attendance.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmpID,VisitorName,Company,VehicleAccess,VehicleNo,CDateTime,ApprovedDate,Status,ArrivalTime,Arrival_Date,VisitTypeID,ReasonID,Remarks")] VMS_SVisitor vms_svisitor)
         {
-            var AM = DateTime.Now.ToString("08:30:00");
-            var PM = DateTime.Now.ToString("16:30:00");
-            if (vms_svisitor.ArrivalTime >= Convert.ToDateTime(AM) && vms_svisitor.ArrivalTime <= Convert.ToDateTime(PM))
+            ViewUserEmp LoggedInUser = Session["LoggedUser"] as ViewUserEmp;
+            if (CheckForValidations(db.VMS_SVisitor.Where(aa => aa.EmpID == LoggedInUser.EmployeeID || aa.Status == "Approved" || aa.Status == "Pending").ToList(), vms_svisitor))
             {
-                DateTime CurrentTime = DateTime.Today;
-                DateTime time = DateTime.Now;
-                if (vms_svisitor.ArrivalTime >= time)
+                ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
+                ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
+                ModelState.AddModelError("DateStarted", "You already have applied on this date");
+                return View(vms_svisitor);
+            }
+            else
+            {
+                var AM = DateTime.Now.ToString("08:30:00");
+                var PM = DateTime.Now.ToString("16:30:00");
+                if (vms_svisitor.ArrivalTime >= Convert.ToDateTime(AM) && vms_svisitor.ArrivalTime <= Convert.ToDateTime(PM))
                 {
-                    VMS_SVisitor obj = new VMS_SVisitor();
-                    List<VMS_SVisitor> vms = db.VMS_SVisitor.Where(aa => aa.VisitorName == obj.VisitorName && aa.Arrival_Date == obj.Arrival_Date && aa.Company == obj.Company).ToList();
-                    if (vms.Count() > 0)
-                        ModelState.AddModelError("VisitorName", "Visitor name must be unique");
-                    int RecordID = 0;
-                    //var time = DateTime.Now.TimeOfDay;
-                    //vms_svisitor.ArrivalTime = time;
-                    //if (ModelState.IsValid)
+                    DateTime CurrentTime = DateTime.Today;
+                    DateTime time = DateTime.Now;
+                    if (vms_svisitor.ArrivalTime >= time)
                     {
 
-                        DateTime date = DateTime.Today;
-                        if (vms_svisitor.Arrival_Date >= date)
+                        VMS_SVisitor obj = new VMS_SVisitor();
+                        List<VMS_SVisitor> vms = db.VMS_SVisitor.Where(aa => aa.VisitorName == obj.VisitorName && aa.Arrival_Date == obj.Arrival_Date && aa.Company == obj.Company).ToList();
+                        if (vms.Count() > 0)
+                            ModelState.AddModelError("VisitorName", "Visitor name must be unique");
+                        int RecordID = 0;
+                        //var time = DateTime.Now.TimeOfDay;
+                        //vms_svisitor.ArrivalTime = time;
+                        //if (ModelState.IsValid)
                         {
-                            ViewUserEmp LoggedInUser = Session["LoggedUser"] as ViewUserEmp;
-                            if (string.IsNullOrEmpty(vms_svisitor.VisitorName))
+
+                            DateTime date = DateTime.Today;
+                            if (vms_svisitor.Arrival_Date >= date)
                             {
-                                ModelState.AddModelError("VisitorName", "Visitor Name is required!");
-                            }
-                            else
-                            {
-                                vms_svisitor.EmpID = LoggedInUser.EmployeeID;
-                                if (vms_svisitor.VehicleAccess == "true")
+                                // ViewUserEmp LoggedInUser = Session["LoggedUser"] as ViewUserEmp;
+                                if (string.IsNullOrEmpty(vms_svisitor.VisitorName))
                                 {
-                                    vms_svisitor.Status = "Pending";
+                                    ModelState.AddModelError("VisitorName", "Visitor Name is required!");
                                 }
                                 else
                                 {
-                                    vms_svisitor.Status = "Approved";
-                                }
-                                if (LoggedInUser.UserType == "S")
-                                {
-                                    vms_svisitor.Status = "Approved";
-                                }
-                                //ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName", vms_svisitor.VisitTypeID);
-                                //ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName", vms_svisitor.ReasonID);
-                                if (ModelState.IsValid)
-                                {
-                                    vms_svisitor.CDateTime = DateTime.Now;
-                                    db.VMS_SVisitor.Add(vms_svisitor);
-                                    db.SaveChanges();
+                                    vms_svisitor.EmpID = LoggedInUser.EmployeeID;
                                     if (vms_svisitor.VehicleAccess == "true")
                                     {
-                                        var EName = db.EmpViews.First(aa => aa.EmployeeID == vms_svisitor.EmpID).FullName;
-                                        string Toadd = "madnan.cns@gmail.com";
-                                        string subject = "Pending Visitor's Vehicle Access for Employee" + EName;
-                                        string body = "Dear Sir/Madam, <br/> A new visitor entry is awaited for your approval. Details are Listed below <br/> Employee Name: " + EName + "<br/> Visitor Name: " + vms_svisitor.VisitorName + "<br/> Vehicle No: " + vms_svisitor.VehicleNo + "<br/> Date Time: " + vms_svisitor.Arrival_Date.Value.ToShortDateString() + vms_svisitor.ArrivalTime + "<br/> Please Click on below link to procced further <a href='http://192.168.0.21/wms'>http://192.168.0.21/ESSP</a>";
-                                        EmailManager.SendEmail(Toadd, subject, body);
+                                        vms_svisitor.Status = "Pending";
                                     }
-                                    RecordID = vms_svisitor.ID;
-                                    int TypeID = Convert.ToInt16(Utilities.NotificationType.PendingVisitorEntry);
-                                    string TypeName = Utilities.NotificationType.PendingVisitorEntry.ToString().Replace("_", " ");
-                                    int EmployeeID = LoggedInUser.EmpID ?? 0;
-                                    int Sid = 13479;
-                                    Utilities.InsertEMPNotification(TypeID, TypeName, EmployeeID, RecordID, Sid, BaseURL + "Attendance/ScheduleVisitor/ListOfPendingVisitor");
-                                    ViewUserEmp loggedUser = Session["LoggedUser"] as ViewUserEmp;
-                                    AuditManager.SaveAuditLog(loggedUser.UserID, Convert.ToInt16(AuditManager.AuditForm.Visitor_Entry), Convert.ToInt16(AuditManager.AuditOperation.Add), DateTime.Now, (int)vms_svisitor.ID);
-                                    if (vms_svisitor.VehicleAccess == "true")
+                                    else
                                     {
-                                        string Subject = "Pending Visitor's Vehicle Access";
-                                        string Body = "";
+                                        vms_svisitor.Status = "Approved";
                                     }
+                                    if (LoggedInUser.UserType == "E")
+                                    {
+                                        vms_svisitor.Status = "Approved";
+                                    }
+                                    //ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName", vms_svisitor.VisitTypeID);
+                                    //ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName", vms_svisitor.ReasonID);
+                                    if (ModelState.IsValid)
+                                    {
+                                        vms_svisitor.CDateTime = DateTime.Now;
+                                        db.VMS_SVisitor.Add(vms_svisitor);
+                                        db.SaveChanges();
+                                        if (vms_svisitor.VehicleAccess == "true")
+                                        {
+                                            var EName = db.EmpViews.First(aa => aa.EmployeeID == vms_svisitor.EmpID).FullName;
+                                            string Toadd = "madnan.cns@gmail.com";
+                                            string subject = "Pending Visitor's Vehicle Access for Employee" + EName;
+                                            string body = "Dear Sir/Madam, <br/> A new visitor entry is awaited for your approval. Details are Listed below <br/> Employee Name: " + EName + "<br/> Visitor Name: " + vms_svisitor.VisitorName + "<br/> Vehicle No: " + vms_svisitor.VehicleNo + "<br/> Date Time: " + vms_svisitor.Arrival_Date.Value.ToShortDateString() + vms_svisitor.ArrivalTime + "<br/> Please Click on below link to procced further <a href='http://192.168.0.21/wms'>http://192.168.0.21/ESSP</a>";
+                                            EmailManager.SendEmail(Toadd, subject, body);
+                                        }
+                                        RecordID = vms_svisitor.ID;
+                                        int TypeID = Convert.ToInt16(Utilities.NotificationType.PendingVisitorEntry);
+                                        string TypeName = Utilities.NotificationType.PendingVisitorEntry.ToString().Replace("_", " ");
+                                        int EmployeeID = LoggedInUser.EmpID ?? 0;
+                                        int Sid = 13479;
+                                        Utilities.InsertEMPNotification(TypeID, TypeName, EmployeeID, RecordID, Sid, BaseURL + "Attendance/ScheduleVisitor/ListOfPendingVisitor");
+                                        ViewUserEmp loggedUser = Session["LoggedUser"] as ViewUserEmp;
+                                        AuditManager.SaveAuditLog(loggedUser.UserID, Convert.ToInt16(AuditManager.AuditForm.Visitor_Entry), Convert.ToInt16(AuditManager.AuditOperation.Add), DateTime.Now, (int)vms_svisitor.ID);
+                                        if (vms_svisitor.VehicleAccess == "true")
+                                        {
+                                            string Subject = "Pending Visitor's Vehicle Access";
+                                            string Body = "";
+                                        }
+                                    }
+                                    return RedirectToAction("Index");
                                 }
-                                return RedirectToAction("Index");
                             }
-                        }
-                        else
-                        {
+                            else
+                            {
 
-                            ViewBag.Date = "can not insert previous date";
+                                ViewBag.Date = "can not insert previous date";
+                            }
+
                         }
 
+                        ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
+                        ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
+                        return View(vms_svisitor);
                     }
-
-                    ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
-                    ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
-                    return View(vms_svisitor);
+                    else
+                    {
+                        ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
+                        ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
+                        ViewBag.TimeError = "Time increment must be greater than current time";
+                        return View(vms_svisitor);
+                    }
                 }
                 else
                 {
                     ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
                     ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
-                    ViewBag.TimeError = "Time increment must be greater than current time";
+                    ViewBag.TimeError = "Incorrenct Time";
                     return View(vms_svisitor);
                 }
             }
-            else
-            {
-                ViewBag.VisitTypeID = new SelectList(db.VMS_VisitType, "PVisitTypeID", "PVisitTypeName");
-                ViewBag.ReasonID = new SelectList(db.VMS_Reason, "PReasonID", "ReasonName");
-                ViewBag.TimeError = "Incorrenct Time";
-                return View(vms_svisitor);
-            }
         }
-
+        private bool CheckForValidations(List<VMS_SVisitor> queryable, VMS_SVisitor vms_svisitor)
+        {
+            bool check = false;
+            foreach (var item in queryable)
+            {
+                DateTime dts = new DateTime();
+                DateTime dte = new DateTime();
+                while (dts <= dte)
+                {
+                    if (dts == vms_svisitor.Arrival_Date.Value)
+                    {
+                        check = true;
+                    }
+                    dts = dts.AddDays(1);
+                }
+            }
+            return check;
+        }
         // GET: /Attendance/ScheduleVisitor/Edit/5
         public ActionResult Edit(int? id)
         {

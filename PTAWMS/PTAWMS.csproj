@@ -469,6 +469,7 @@
     <Content Include="Areas\Attendance\Views\Settings\Details.cshtml" />
     <Content Include="Areas\Attendance\Views\Settings\Edit.cshtml" />
     <Content Include="Areas\Attendance\Views\Settings\Index.cshtml" />
+    <Content Include="Scripts\Attendance\Jobcard\Modal.js" />
     <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Models\Assets.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
